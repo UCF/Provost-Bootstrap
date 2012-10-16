@@ -112,9 +112,7 @@ define('CB_DOMAIN', $theme_options['cb_domain']);
  * object.
  **/
 Config::$custom_post_types = array(
-	'Video',
 	'Document',
-	'Publication',
 	'Page',
 	'Person',
 	'Post'
