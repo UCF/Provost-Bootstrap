@@ -353,4 +353,46 @@ function sc_post_type_search($params=array(), $content='') {
 	return ob_get_clean();
 }
 add_shortcode('post-type-search', 'sc_post_type_search');
+
+function sc_faculty_award_programs($attrs) {
+	$provost_award_program = new AwardProgram();
+	$programs = get_posts(array(
+		'numberposts' => -1,
+		'orderby'     => $orderby,
+		'order'       => 'ASC',
+		'post_type'   => $provost_award_program->options('name'),
+	));
+	ob_start();
+	?>
+	<div class="faculty-award-programs">
+		<h3>Faculty Award Programs</h3>
+		<div class="row">
+		<?php 
+			$count = 0;
+			foreach($programs as $program) {
+				if($count > 0 && ($count % 4) == 0 ) {
+					echo '</div><div class="row">';
+				}
+		?>
+				<div class="span2">
+					<?php
+						$url = get_post_meta($program->ID, 'provost_award_url', True);
+						if($url[0] == "/") $url = site_url() . $url;
+						printf('<a href="%s">%s<span class="caption">%s</span></a>',
+							$url,
+							get_the_post_thumbnail($program->ID),
+							$program->post_title
+						);
+					?>
+				</div>
+		<?php 
+				$count++;
+			} 
+		?>
+		</div>
+	</div>
+	<?
+	return ob_get_clean();
+}
+add_shortcode('sc-faculty-award-programs', 'sc_faculty_award_programs');
 ?>

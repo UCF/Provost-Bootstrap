@@ -35,6 +35,8 @@ select#UCFHBHeaderLinks {
 }
 
 
+.page-content p {font-size:15px;line-height:22px;}
+
 /* Header */
 #header {margin-bottom: .5em;margin-top:20px;}
 #header h1 a {font-family:"Georgia", serif;font-size:37px;font-weight: normal;color:#313130;}
@@ -48,6 +50,9 @@ select#UCFHBHeaderLinks {
 
 /* Faculty Resources */
 #faculty-resources .resource {margin-bottom:60px;}
+#faculty-resources .faculty-award-programs {margin-bottom:60px;}
+#faculty-resources .faculty-award-programs h3 {margin-bottom:10px;}
+#faculty-resources .faculty-award-programs .caption {color:#000;font-size:13px;font-weight:bold;}
 
 /* Events */
 .events,
