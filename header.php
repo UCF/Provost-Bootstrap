@@ -48,6 +48,10 @@
 			}
 		</script>
 		
+		<script type="text/javascript">
+			var PROVOST_STATIC_URL = '<?php echo THEME_STATIC_URL; ?>';
+		</script>
+
 	</head>
 	<body class="<?=body_classes()?>">
 		<div class="container">

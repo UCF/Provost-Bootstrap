@@ -41,5 +41,26 @@ select#UCFHBHeaderLinks {
 #header-menu {margin-bottom:0;margin-top:10px;}
 #header-menu li {margin-bottom:0;}
 
+/* Sidebar */
+#sidebar h2 {font-size:16px;font-weight: normal;color:#C14D00;margin-bottom:0;}
+#sidebar ul {margin-left:0;}
+#sidebar ul li {list-style-type:none;margin-bottom:7px;}
+
 /* Faculty Resources */
 #faculty-resources .resource {margin-bottom:60px;}
+
+/* Events */
+.events,
+.events .date,
+.events .title,
+.events .title a{font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
+.events{border-spacing: 16px; border-collapse:separate; padding: 0; margin: 0; position: relative; left: -7px;}
+.events .date{text-align: center; width: 1px; padding: 8px 12px; background-color: #fef7c8; color: #666; font-weight: bold; border: 1px solid #ded7a8;
+	-moz-box-shadow: 1px 1px 6px rgba(0, 0, 0, .2);
+	-webkit-box-shadow: 1px 1px 6px rgba(0, 0, 0, .2);
+	box-shadow: 1px 1px 6px rgba(0, 0, 0, .2);
+}
+.events .month{font-size: 18px;}
+.events .day{font-size: 16px;}
+.events .title{font-size: 14px; text-align: left; padding-left:10px;}
+.events .title .wrap{display: block; max-height: 50px; overflow: hidden;}
