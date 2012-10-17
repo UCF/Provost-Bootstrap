@@ -419,39 +419,9 @@ class Person extends CustomPostType
 		public function fields(){
 			$fields = array(
 				array(
-					'name'    => __('Title Prefix'),
-					'desc'    => '',
-					'id'      => $this->options('name').'_title_prefix',
-					'type'    => 'text',
-				),
-				array(
-					'name'    => __('Title Suffix'),
-					'desc'    => __('Be sure to include leading comma or space if neccessary.'),
-					'id'      => $this->options('name').'_title_suffix',
-					'type'    => 'text',
-				),
-				array(
-					'name'    => __('Job Title'),
-					'desc'    => __(''),
-					'id'      => $this->options('name').'_jobtitle',
-					'type'    => 'text',
-				),
-				array(
-					'name'    => __('Phone'),
-					'desc'    => __('Separate multiple entries with commas.'),
-					'id'      => $this->options('name').'_phones',
-					'type'    => 'text',
-				),
-				array(
-					'name'    => __('Email'),
-					'desc'    => __(''),
-					'id'      => $this->options('name').'_email',
-					'type'    => 'text',
-				),
-				array(
-					'name'    => __('Order By Name'),
-					'desc'    => __('Name used for sorting. Leaving this field blank may lead to an unexpected sort order.'),
-					'id'      => $this->options('name').'_orderby_name',
+					'name'    => 'Description',
+					'desc'    => 'Position, title, etc.',
+					'id'      => $this->options('name').'_description',
 					'type'    => 'text',
 				),
 			);
