@@ -42,11 +42,14 @@ select#UCFHBHeaderLinks {
 #header h1 a {font-family:"Georgia", serif;font-size:37px;font-weight: normal;color:#313130;}
 #header-menu {margin-bottom:0;margin-top:10px;}
 #header-menu li {margin-bottom:0;}
+#header-menu li a,
+#footer-menu li a {font-family:"Georgia",serif;color:#333;}
 
 /* Sidebar */
 #sidebar h2 {font-size:16px;font-weight: normal;color:#C14D00;margin-bottom:0;}
 #sidebar ul {margin-left:0;}
 #sidebar ul li {list-style-type:none;margin-bottom:7px;}
+#sidebar a {color:#333;}
 
 /* Faculty Resources */
 #faculty-resources .resource {margin-bottom:60px;}
@@ -58,7 +61,7 @@ select#UCFHBHeaderLinks {
 .events,
 .events .date,
 .events .title,
-.events .title a{font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
+.events .title a{font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";color:#333;}
 .events{border-spacing: 16px; border-collapse:separate; padding: 0; margin: 0; position: relative; left: -7px;}
 .events .date{text-align: center; width: 1px; padding: 8px 12px; background-color: #fef7c8; color: #666; font-weight: bold; border: 1px solid #ded7a8;
 	-moz-box-shadow: 1px 1px 6px rgba(0, 0, 0, .2);
