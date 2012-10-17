@@ -36,7 +36,7 @@ select#UCFHBHeaderLinks {
 
 
 /* Header */
-#header{margin-bottom: .5em;margin-top:20px;}
-#header .social{}
-#header .social.menu.horizontal a{text-indent: -1024px;}
-#header .social.menu.horizontal li:after{content: "";}
+#header {margin-bottom: .5em;margin-top:20px;}
+#header h1 a {font-family:"Georgia", serif;font-size:37px;font-weight: normal;color:#313130;}
+#header-menu {margin-bottom:0;margin-top:10px;}
+#header-menu li {margin-bottom:0;}
