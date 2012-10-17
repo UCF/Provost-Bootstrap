@@ -246,7 +246,7 @@ abstract class CustomPostType{
 
 class Document extends CustomPostType{
 	public
-		$name           = 'document',
+		$name           = 'provost_form',
 		$plural_name    = 'Documents',
 		$singular_name  = 'Document',
 		$add_new_item   = 'Add New Document',
@@ -421,7 +421,7 @@ class Person extends CustomPostType
 	*/
 
 	public
-		$name           = 'person',
+		$name           = 'profile',
 		$plural_name    = 'People',
 		$singular_name  = 'Person',
 		$add_new_item   = 'Add Person',
@@ -574,4 +574,55 @@ class Post extends CustomPostType {
 		);
 	}
 }
+
+class Help extends CustomPostType {
+	public
+		$name           = 'provost_help',
+		$plural_name    = 'Help',
+		$singular_name  = 'Help',
+		$add_new_item   = 'Add New Help',
+		$edit_item      = 'Edit Help',
+		$new_item       = 'New Help';
+}
+
+class Update extends CustomPostType {
+	public
+		$name           = 'provost_update',
+		$plural_name    = 'Updates',
+		$singular_name  = 'Update',
+		$add_new_item   = 'Add New Update',
+		$edit_item      = 'Edit Update',
+		$new_item       = 'New Update';
+}
+
+class HomeImage extends CustomPostType {
+	public
+		$name           = 'provost_home_images',
+		$plural_name    = 'Home Images',
+		$singular_name  = 'Home Imge',
+		$add_new_item   = 'Add New Home Image',
+		$edit_item      = 'Edit Home Image',
+		$new_item       = 'New Home Image';
+}
+
+class Unit extends CustomPostType {
+	public
+		$name           = 'provost_unit',
+		$plural_name    = 'Colleges/Units',
+		$singular_name  = 'College/Unit',
+		$add_new_item   = 'Add New College/Unit',
+		$edit_item      = 'Edit College/Unit',
+		$new_item       = 'New College/Unit';
+}
+
+class AwardProgram extends CustomPostType {
+	public
+		$name           = 'provost_award',
+		$plural_name    = 'Award Programs',
+		$singular_name  = 'Award Program',
+		$add_new_item   = 'Add New Award Program',
+		$edit_item      = 'Edit Award Program',
+		$new_item       = 'New Award Program';
+}
+
 ?>

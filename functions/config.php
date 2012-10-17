@@ -115,7 +115,12 @@ Config::$custom_post_types = array(
 	'Document',
 	'Page',
 	'Person',
-	'Post'
+	'Post',
+	'Help',
+	'Update',
+	'HomeImage',
+	'Unit',
+	'AwardProgram'
 );
 
 Config::$custom_taxonomies = array(
