@@ -40,3 +40,6 @@ select#UCFHBHeaderLinks {
 #header h1 a {font-family:"Georgia", serif;font-size:37px;font-weight: normal;color:#313130;}
 #header-menu {margin-bottom:0;margin-top:10px;}
 #header-menu li {margin-bottom:0;}
+
+/* Faculty Resources */
+#faculty-resources .resource {margin-bottom:60px;}
