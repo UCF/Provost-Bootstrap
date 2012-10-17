@@ -15,7 +15,4 @@
 			<?=get_sidebar();?>
 		</div>
 	</div>
-		
-	<?php get_template_part('includes/below-the-fold'); ?>
-
 <?php get_footer();?>
