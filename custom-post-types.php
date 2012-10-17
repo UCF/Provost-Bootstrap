@@ -582,7 +582,33 @@ class Help extends CustomPostType {
 		$singular_name  = 'Help',
 		$add_new_item   = 'Add New Help',
 		$edit_item      = 'Edit Help',
-		$new_item       = 'New Help';
+		$new_item       = 'New Help',
+		$use_metabox    = True,
+		$use_editor     = False,
+		$use_thumbnails = False,
+		$use_order      = False,
+		$taxonomies     = array();
+
+
+	public function fields() {
+		$id_prefix  = $this->options('name');
+		$documents  = new Document();
+		return array(
+			array(
+				'name' => 'url',
+				'desc' => 'URL',
+				'id'   => $id_prefix.'_url',
+				'type' => 'text',
+			),
+			array(
+				'name'    => 'forms',
+				'desc'    => 'You can define a url or select an existing form.',
+				'id'      => $id_prefix.'_forms',
+				'type'    => 'select',
+				'options' => $documents->get_objects_as_options()
+			)
+		);
+	}
 }
 
 class Update extends CustomPostType {
