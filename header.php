@@ -52,7 +52,7 @@
 	<body class="<?=body_classes()?>">
 		<div class="container">
 			<div class="row">
-				<div id="header" class="row-border-bottom-top">
+				<div id="header" class="span12">
 					<h1><a href="<?=bloginfo('url')?>"><?=bloginfo('name')?></a></h1>
 					<?php $options = get_option(THEME_OPTIONS_NAME);?>
 					<?php if($options['facebook_url'] or $options['twitter_url']):?>
@@ -64,10 +64,7 @@
 						<li><a class="ignore-external twitter" href="<?=$options['twitter_url']?>">Twitter</a></li>
 						<?php endif;?>
 					</ul>
-					<?php else:?>
-					<div class="social span3">&nbsp;</div>
 					<?php endif;?>
-					<div class="end"><!-- --></div>
 				</div>
 			</div>
 			<?=wp_nav_menu(array(
