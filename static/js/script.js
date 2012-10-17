@@ -386,5 +386,9 @@ if (typeof jQuery != 'undefined'){
 		Generic.PostTypeSearch($);
 
 		$('.events').each(function(){Generic.eventsCallback($, $(this));});
+		$('.slideshow').slideShow({
+			'transition_length' : 2000,
+			'cycle_length': 4000
+		});
 	});
 }else{console.log('jQuery dependancy failed to load');}
