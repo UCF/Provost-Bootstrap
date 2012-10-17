@@ -402,24 +402,6 @@ class Page extends CustomPostType {
  **/
 class Person extends CustomPostType
 {
-	/*
-	The following query will pre-populate the person_orderby_name
-	meta field with a guess of the last name extracted from the post title.
-	
-	>>>BE SURE TO REPLACE wp_<number>_... WITH THE APPROPRIATE SITE ID<<<
-	
-	INSERT INTO wp_29_postmeta(post_id, meta_key, meta_value) 
-	(	SELECT	id AS post_id, 
-						'person_orderby_name' AS meta_key, 
-						REVERSE(SUBSTR(REVERSE(post_title), 1, LOCATE(' ', REVERSE(post_title)))) AS meta_value
-		FROM		wp_29_posts AS posts
-		WHERE		post_type = 'person' AND
-						(	SELECT meta_id 
-							FROM wp_29_postmeta 
-							WHERE post_id = posts.id AND
-										meta_key = 'person_orderby_name') IS NULL)
-	*/
-
 	public
 		$name           = 'profile',
 		$plural_name    = 'People',
