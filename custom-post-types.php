@@ -579,7 +579,8 @@ class HomeImage extends CustomPostType {
 		$singular_name  = 'Home Imge',
 		$add_new_item   = 'Add New Home Image',
 		$edit_item      = 'Edit Home Image',
-		$new_item       = 'New Home Image';
+		$new_item       = 'New Home Image',
+		$use_thumbnails = True;
 }
 
 class Unit extends CustomPostType {
@@ -589,7 +590,9 @@ class Unit extends CustomPostType {
 		$singular_name  = 'College/Unit',
 		$add_new_item   = 'Add New College/Unit',
 		$edit_item      = 'Edit College/Unit',
-		$new_item       = 'New College/Unit';
+		$new_item       = 'New College/Unit',
+		$use_thumbnails = True,
+		$taxonomies     = array('category');
 }
 
 class AwardProgram extends CustomPostType {
