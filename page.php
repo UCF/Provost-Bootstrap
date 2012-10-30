@@ -4,12 +4,10 @@
  **/
 ?>
 <?php get_header(); the_post();?>
-	<div class="row page-content" id="<?=$post->post_name?>">
-		<div class="span9">
-			<article>
-				<h2 class="page-header"><?php the_title();?></h2>
-				<?php the_content();?>
-			</article>
+	<div class="row" id="<?=$post->post_name?>">
+		<div class="span9 page-content">
+			<h2 class="page-header"><?php the_title();?></h2>
+			<?php the_content();?>
 		</div>
 		
 		<div id="sidebar" class="span3">
