@@ -13,7 +13,7 @@
 		</div>
 		
 		<div id="sidebar" class="span3">
-			<?=get_sidebar();?>
+			<?php get_template_part('includes/sidebar') ?>
 		</div>
 	</div>
 <?php get_footer();?>
