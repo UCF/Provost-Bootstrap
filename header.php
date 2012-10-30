@@ -38,28 +38,21 @@
 
 	</head>
 	<body>
-		<div class="container">
-			<div class="row"  id="header">
-				<h1 class="span9"><a href="<?=bloginfo('url')?>"><?=bloginfo('name')?></a></h1>
-				<div class="span3">
-					<?php $options = get_option(THEME_OPTIONS_NAME);?>
-					<?php if($options['facebook_url'] or $options['twitter_url']):?>
-						<ul class="social">
-							<?php if($options['facebook_url']):?>
-							<li><a class="ignore-external facebook" href="<?=$options['facebook_url']?>">Facebook</a></li>
-							<?php endif;?>
-							<?php if($options['twitter_url']):?>
-							<li><a class="ignore-external twitter" href="<?=$options['twitter_url']?>">Twitter</a></li>
-							<?php endif;?>
-						</ul>
-					<?php endif;?>
+		<div class="container" id="header">
+			<section>
+				<div class="row">
+						<h1 class="span5"><a href="<?=bloginfo('url')?>"><?=bloginfo('name')?></a></h1>
+						<div class="span7">
+							<?=wp_nav_menu(array(
+								'theme_location' => 'header-menu', 
+								'container'      => 'false', 
+								'menu_class'     => 'nav nav-pills pull-right', 
+								'menu_id'        => 'header-menu', 
+								'walker'         => new Bootstrap_Walker_Nav_Menu()
+								));
+							?>
+						</div>
 				</div>
-			</div>
-			<?=wp_nav_menu(array(
-				'theme_location' => 'header-menu', 
-				'container'      => 'false', 
-				'menu_class'     => 'nav nav-pills', 
-				'menu_id'        => 'header-menu', 
-				'walker'         => new Bootstrap_Walker_Nav_Menu()
-				));
-			?>
+			</section>
+		</div>
+		<div class="container">
