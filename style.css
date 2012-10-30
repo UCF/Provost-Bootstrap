@@ -1,88 +1,15 @@
 /*   
-Theme Name: Provost Bootstrap
+Theme Name: UCF Generic Wordpress Theme Bootstrap - Minimal
 Author: UCF Web Communications
-Github Theme URI: https://github.com/UCF/Provost-Bootstrap
-Version: v0.0.1
+Github Theme URI: https://github.com/UCF/Wordpress-Generic-Theme
+Version: v0.0.0
 */
 
-/* UCF Header Styles */
-
-#UCFHBSearch_ucf fieldset #q {
-	line-height: 11px;
-	color: #000000;
-	padding: 2px!important;
-	font-size: 11px;
-	font-family: 'Lucida Grande',sans-serif;
-	height: 13px;
-	border-radius: 0;
-	webkit-border-radius: 0;
-	moz-border-radius: 0;
-	margin-bottom: 0;
-	margin-top: 1px;
-}
-
-select#UCFHBHeaderLinks {
-	height: 18px;
-	font-size: 11px;
-	color: #000000;
-	font-family: 'Lucida Grande', sans-serif;
-	border-radius: 0;
-	webkit-border-radius: 0;
-	moz-border-radius: 0;
-	margin-bottom: 0;
-	margin-top: 1px;
-	padding: 0;
-}
-
-
-.page-content p {font-size:15px;line-height:22px;}
-.page-content article a {color:#953801;}
 /* Header */
-#header {margin-bottom: .5em;margin-top:20px;}
-#header h1 a {font-family:"Georgia", serif;font-size:37px;font-weight: normal;color:#313130;}
-#header-menu {margin-bottom:0;margin-top:10px;}
-#header-menu li {margin-bottom:0;}
-#header-menu li a,
-#footer-menu li a {font-family:"Georgia",serif;color:#333;}
+#header {margin-top:20px;}
 
-/* Sidebar */
-#sidebar h2 {font-size:16px;font-weight: normal;color:#C14D00;margin-bottom:0;}
-#sidebar ul {margin-left:0;}
-#sidebar ul li {list-style-type:none;margin-bottom:7px;}
-#sidebar a {color:#333;}
+/* Header Menu */
+#header-menu {margin-bottom:0;}
 
-/* Faculty Resources */
-#faculty-resources .resource {margin-bottom:60px;}
-#faculty-resources .faculty-award-programs {margin-bottom:60px;}
-#faculty-resources .faculty-award-programs h3 {margin-bottom:10px;}
-#faculty-resources .faculty-award-programs .caption {color:#000;font-size:13px;font-weight:bold;}
-
-/* Events */
-.events,
-.events .date,
-.events .title,
-.events .title a{font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";color:#333;}
-.events{border-spacing: 16px; border-collapse:separate; padding: 0; margin: 0; position: relative; left: -7px;}
-.events .date{text-align: center; width: 1px; padding: 8px 12px; background-color: #fef7c8; color: #666; font-weight: bold; border: 1px solid #ded7a8;
-	-moz-box-shadow: 1px 1px 6px rgba(0, 0, 0, .2);
-	-webkit-box-shadow: 1px 1px 6px rgba(0, 0, 0, .2);
-	box-shadow: 1px 1px 6px rgba(0, 0, 0, .2);
-}
-.events .month{font-size: 18px;}
-.events .day{font-size: 16px;}
-.events .title{font-size: 14px; text-align: left; padding-left:10px;}
-.events .title .wrap{display: block; max-height: 50px; overflow: hidden;}
-
-/* Org Chart */
-#org-chart {}
-#org-chart h3 {margin-bottom:0;margin-top:20px;}
-#org-chart .row {margin-top:20px;}
-#org-chart .name,
-#org-chart .description{font-family: "Helvetica Neue", "Helvetica", "sans-serif"; font-size: 14px; display: block;}
-#org-chart .name{font-weight: bold; margin-top: 10px;}
-
-/* Home */
-#home .slideshow {height:500px;}
-#home #quote p {font-size:25px;line-height:32px;text-align:right;margin-top:20px;}
-#home #announcements {margin-top:40px;margin-bottom:40px;}
-#home #announcements a {font-size:16px;line-height:25px;color:#333;text-decoration:underline}
+/* Footer Menu */
+#footer-menu {margin-top:20px;}

@@ -11,66 +11,9 @@
 function __init__(){
 	add_theme_support('menus');
 	add_theme_support('post-thumbnails');
-	add_image_size('homepage', 620);
-	add_image_size('homepage-secondary', 540);
 	register_nav_menu('header-menu', __('Header Menu'));
 	register_nav_menu('footer-menu', __('Footer Menu'));
-	register_sidebar(array(
-		'name'          => __('Sidebar'),
-		'id'            => 'sidebar',
-		'description'   => 'Sidebar found on two column page templates and search pages',
-		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</div>',
-	));
-	register_sidebar(array(
-		'name'          => __('Below the Fold - Left'),
-		'id'            => 'bottom-left',
-		'description'   => 'Left column on the bottom of pages, after flickr images if enabled.',
-		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</div>',
-	));
-	register_sidebar(array(
-		'name'          => __('Below the Fold - Center'),
-		'id'            => 'bottom-center',
-		'description'   => 'Center column on the bottom of pages, after news if enabled.',
-		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</div>',
-	));
-	register_sidebar(array(
-		'name'          => __('Below the Fold - Right'),
-		'id'            => 'bottom-right',
-		'description'   => 'Right column on the bottom of pages, after events if enabled.',
-		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</div>',
-	));
-	register_sidebar(array(
-		'name' => __('Footer - Column One'),
-		'id' => 'bottom-one',
-		'description' => 'Far left column in footer on the bottom of pages.',
-		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		'after_widget' => '</div>',
-	));
-	register_sidebar(array(
-		'name' => __('Footer - Column Two'),
-		'id' => 'bottom-two',
-		'description' => 'Second column from the left in footer, on the bottom of pages.',
-		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		'after_widget' => '</div>',
-	));
-	register_sidebar(array(
-		'name' => __('Footer - Column Three'),
-		'id' => 'bottom-three',
-		'description' => 'Third column from the left in footer, on the bottom of pages.',
-		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		'after_widget' => '</div>',
-	));
-	register_sidebar(array(
-		'name' => __('Footer - Column Four'),
-		'id' => 'bottom-four',
-		'description' => 'Far right in footer on the bottom of pages.',
-		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		'after_widget' => '</div>',
-	));
+	
 	foreach(Config::$styles as $style){Config::add_css($style);}
 	foreach(Config::$scripts as $script){Config::add_script($script);}
 	
@@ -112,22 +55,10 @@ define('CB_DOMAIN', $theme_options['cb_domain']);
  * object.
  **/
 Config::$custom_post_types = array(
-	'Document',
-	'Page',
-	'Person',
-	'Post',
-	'Help',
-	'Update',
-	'HomeImage',
-	'Unit',
-	'AwardProgram'
 );
 
 Config::$custom_taxonomies = array(
-	'OrganizationalGroups'
 );
-
-Config::$body_classes = array('default',);
 
 /**
  * Configure theme settings, see abstract class Field's descendants for
@@ -358,79 +289,65 @@ Config::$theme_settings = array(
 				'Off' => 0,
 			),
 			'value'       => $theme_options['bootstrap_enable_responsive'],
-	    )),
-		new SelectField(array(
-			'name'        => 'Header Menu Styles',
-			'id'          => THEME_OPTIONS_NAME.'[bootstrap_menu_styles]',
-			'description' => 'Adjust the styles that the header menu links will use.  Non-default options Twitter Bootstrap navigation components for sub-navigation support.',
-			'default'     => 'default',
-			'choices'     => array(
-				'Default (list of links with dropdowns)'  => 'default',
-				'Tabs with dropdowns' => 'nav-tabs',
-				'Pills with dropdowns' => 'nav-pills'
-			),
-			'value'       => $theme_options['bootstrap_menu_styles'],
-	    )),
+	    ))
 	),
 );
 
+# Header links
 Config::$links = array(
 	array('rel' => 'shortcut icon', 'href' => THEME_IMG_URL.'/favicon.ico',),
 	array('rel' => 'alternate', 'type' => 'application/rss+xml', 'href' => get_bloginfo('rss_url'),),
 );
 
-
+# Header styles
 Config::$styles = array(
 	array('admin' => True, 'src' => THEME_CSS_URL.'/admin.css',),
 	'http://universityheader.ucf.edu/bar/css/bar.css',
-	THEME_STATIC_URL.'/bootstrap/build/css/bootstrap.css',
+	THEME_STATIC_URL.'/bootstrap/bootstrap/css/bootstrap.css',
 );
 
 if ($theme_options['bootstrap_enable_responsive'] == 1) {
 	array_push(Config::$styles, 
-		THEME_STATIC_URL.'/bootstrap/build/css/bootstrap-responsive.css'
+		THEME_STATIC_URL.'/bootstrap/bootstrap/css/bootstrap-responsive.css'
 	);		
 }
 
-array_push(Config::$styles,	
-	plugins_url( 'gravityforms/css/forms.css' ),
-	THEME_CSS_URL.'/webcom-base.css', 
+# Only include gravity forms styles if the plugin is active
+include_once(ABSPATH.'wp-admin/includes/plugin.php' );
+if(is_plugin_active('gravityforms/gravityforms.php')) {
+	array_push(Config::$styles,
+		plugins_url( 'gravityforms/css/forms.css' )
+	);
+}
+
+array_push(Config::$styles,
+	THEME_STATIC_URL.'/css/base.css',
 	get_bloginfo('stylesheet_url')
 );
 
+# Must be loaded after style.css
 if ($theme_options['bootstrap_enable_responsive'] == 1) {
 	array_push(Config::$styles, 
 		THEME_URL.'/style-responsive.css'
-	);	
+	);
 }
 
+# Scripts (output in footer)
 Config::$scripts = array(
+	array('name' => 'jquery', 'src' => 'http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js',),
 	array('admin' => True, 'src' => THEME_JS_URL.'/admin.js',),
 	'http://universityheader.ucf.edu/bar/js/university-header.js',
-	'http://events.ucf.edu/tools/script.js',
-	//array('name' => 'jquery', 'src' => 'http://code.jquery.com/jquery-1.7.1.min.js',),
-	THEME_STATIC_URL.'/bootstrap/build/js/bootstrap.js',
-	//THEME_JS_URL.'/jquery-extras.js',
-	array('name' => 'base-script',  'src' => THEME_JS_URL.'/webcom-base.js',),
-	array('name' => 'theme-script', 'src' => THEME_JS_URL.'/script.js',),
+	THEME_STATIC_URL.'/bootstrap/bootstrap/js/bootstrap.js',
 );
 
+# Header Meta
 Config::$metas = array(
 	array('charset' => 'utf-8',),
 );
+
 if ($theme_options['gw_verify']){
 	Config::$metas[] = array(
 		'name'    => 'google-site-verification',
 		'content' => htmlentities($theme_options['gw_verify']),
 	);
 }
-
-
-
-function jquery_in_header() {
-    wp_deregister_script( 'jquery' );
-    wp_register_script( 'jquery', 'http://code.jquery.com/jquery-1.7.1.min.js');
-    wp_enqueue_script( 'jquery' );
-}    
- 
-add_action('wp_enqueue_scripts', 'jquery_in_header');
