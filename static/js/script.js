@@ -10,4 +10,5 @@ $().ready(function() {
 				}
 			}
 		});
+	$('#home-images-carousel').carousel('cycle');
 });
