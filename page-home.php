@@ -61,12 +61,16 @@
 			</div>
 		</div>
 		<div class="row" id="middle">
-			<?php foreach(get_menu_pages('home-menu') as $i=>$page):?>
-				<div class="span3"><a href="<?=get_page_link($page->ID)?>">
-					<?=get_the_post_thumbnail($page->ID)?>
-					<span class="title"><?=$page->post_title?></span>
-				</a></div>
-			<?php endforeach;?>
+			<div class="span12">
+				<div class="row">
+					<?php foreach(get_menu_pages('home-menu') as $i=>$page):?>
+						<div class="span3"><a href="<?=get_page_link($page->ID)?>">
+							<?=get_the_post_thumbnail($page->ID)?>
+							<span class="title"><?=$page->post_title?></span>
+						</a></div>
+					<?php endforeach;?>
+				</div>
+			</div>
 		</div>
 		<div id="bottom" class="row">
 			<div class="span12">
