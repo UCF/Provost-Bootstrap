@@ -10,7 +10,11 @@ Version: v0.0.0
 #header section {border-bottom: 1px dotted black;}
 
 /* Header Menu */
-#header-menu {margin-bottom:0;margin-top:20px;}
+#header-menu {margin-bottom:0;margin-top:20px;font-size:16px;}
+#header-menu a {padding-left:0;margin-left:0;}
+#header-menu a:hover {background-color:inherit;}
+#header-menu li {list-style-type:disc;margin-left:15px;}
+#header-menu li:first-child {list-style-type:none;margin-top:3px;}
 
 /* Footer Menu */
 #footer-menu {margin-top:20px;}

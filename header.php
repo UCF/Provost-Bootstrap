@@ -41,8 +41,8 @@
 		<div class="container" id="header">
 			<section>
 				<div class="row">
-						<h1 class="span5"><a href="<?=bloginfo('url')?>"><?=bloginfo('name')?></a></h1>
-						<div class="span7">
+						<h1 class="span4"><a href="<?=bloginfo('url')?>"><?=bloginfo('name')?></a></h1>
+						<div class="span8">
 							<?=wp_nav_menu(array(
 								'theme_location' => 'header-menu', 
 								'container'      => 'false', 
