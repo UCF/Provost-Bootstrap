@@ -1,0 +1,120 @@
+<img class="alignnone size-full wp-image-794 aligncenter" src="http://webcom.dev.smca.ucf.edu/wp3/provost-bootstrap/files/2011/02/FoundersDay2011.jpg" width="950" height="361" />
+
+<p>This year the university plans to continue its annual program for the excellence awards listed below. Please see the individual award announcement for eligibility, criteria, deadlines, and the application process for each program.</p>
+
+<hr />
+
+<table class="table table-striped table-bordered">
+	<thead>
+		<tr>
+			<th>Number of Awards</th>
+			<th>Award</th>
+			<th>PDF</th>
+			<th>Award Amount</th>
+			<th>Chair of University Committee</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>20</td>
+			<td>Excellence in Undergraduate Teaching</td>
+			<td><a href="https://provost.ucf.edu/files/2011/11/UndergraduateTeachingAward-2011.pdf">PDF</a></td>
+			<td>$2,000</td>
+			<td> -</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>University Excellence in Undergraduate Teaching</td>
+			<td><a href="https://provost.ucf.edu/files/2011/11/UndergraduateTeachingAward-2011.pdf">PDF</a></td>
+			<td>$2,000</td>
+			<td>Melody Bowdon, FCTL, CL1, 207</td>
+		</tr>
+		<tr>
+			<td>10</td>
+			<td>Excellence in Graduate Teaching</td>
+			<td><a href="https://provost.ucf.edu/files/2011/10/GraduateTeaching2011.pdf">PDF</a></td>
+			<td>$2,000</td>
+			<td> -</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>University Excellence in Graduate Teaching</td>
+			<td><a href="https://provost.ucf.edu/files/2011/10/GraduateTeaching2011.pdf">PDF</a></td>
+			<td>$2,000</td>
+			<td>Ross Hinkle, College of Graduate Studies, MH 230</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>University Excellence in Undergraduate Faculty Academic Advising</td>
+			<td><a href="https://provost.ucf.edu/files/2011/10/FacultyAcademicAdvising2011.pdf">PDF</a></td>
+			<td>$2,000</td>
+			<td>Melody Bowdon, FCTL, CL1, 207</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>University Excellence in Professional Academic Advising</td>
+			<td><a href="https://provost.ucf.edu/files/2011/10/ProfessionalAcademicAdvising2011.pdf">PDF</a></td>
+			<td>$2,000</td>
+			<td>DeLaine Priest, Student Development and Enrollment Services, MH 282</td>
+		</tr>
+		<tr>
+			<td>11</td>
+			<td>Excellence in Research</td>
+			<td><a href="https://provost.ucf.edu/files/2011/10/DistinguishedResearcher2011.pdf">PDF</a></td>
+			<td>$2,000</td>
+			<td> -</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>University Excellence in Research</td>
+			<td><a href="https://provost.ucf.edu/files/2011/10/DistinguishedResearcher2011.pdf">PDF</a></td>
+			<td>$2,000</td>
+			<td>M.J. Soileau, Division of Research, MH 243</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>University Excellence in Professional Service</td>
+			<td><a href="https://provost.ucf.edu/files/2011/10/ProfessionalService2011.pdf">PDF</a></td>
+			<td>$2,000</td>
+			<td>Ida Cook, Faculty Senate, PH 207</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>Excellence in Librarianship</td>
+			<td><a href="https://provost.ucf.edu/files/2011/10/Librarianship2011.pdf">PDF</a></td>
+			<td>$2,000</td>
+			<td>Barry Baker, Library, Room 512</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<h3>Deadlines:</h3>
+
+<p>Applications due to colleges (where applicable): <strong>January 13, 2012</strong></p>
+
+<p>College-level awardees due to university-level committee: <strong>February 3, 2012</strong></p>
+
+<p>University committees are to notify Chris Morgan of their selection on or before: <strong>March 2, 2012</strong></p>
+
+<hr />
+
+<h3>Past Award Honorees</h3>
+<div class="row">
+	<div class="span3">
+		<h4>Founders' Day Honorees</h4>
+		[provost_form-list categories='founders-day' order='DESC' orderby='title']
+	</div>
+	<div class="span3">
+		<h4>TIP Award Recipients</h4>
+		[provost_form-list categories='tip' order='DESC' orderby='title']
+	</div>
+	<div class="span3">
+		<h4>RIA Award Recipients</h4>
+		[provost_form-list categories='ria' order='DESC' orderby='title']
+	</div>
+	<div class="span3">
+		<h4>SoTL Award Recipients</h4>
+		[provost_form-list categories='stla' order='DESC' orderby='title']
+	</div>
+</div>
