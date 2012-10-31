@@ -141,7 +141,7 @@
 						</div>
 					</div>
 					<div id="sidebar" class="span2">
-						<?php get_template_part('includes/sidebar'); ?>
+						<?php $sidebar_width = 2; get_template_part('includes/sidebar'); ?>
 					</div>
 				</div>
 			</div>
