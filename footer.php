@@ -11,7 +11,7 @@
 			<div id="footer">
 				<div class="row">
 					<div class="span3">
-						<a class="ignore-external" href="http://www.ucf.edu"><img src="<?=THEME_IMG_URL?>/logo.png" alt="" title="" /></a>
+						<a class="ignore-external" href="http://www.ucf.edu"><img src="<?=THEME_IMG_URL?>/ucf-large.png" alt="" title="" /></a>
 					</div>
 					<div class="span9" id="info">
 						<?php $options = get_option(THEME_OPTIONS_NAME);?>

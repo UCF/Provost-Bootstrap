@@ -80,73 +80,59 @@
 				</div>
 				<div class="row">
 					<!-- Colleges-->
-					<div id="home-colleges" class="span6">
-						<div class="row">
-							<h3 class="span6">Colleges</h3>
-						</div>
-						<div class="row">
-							<?php foreach(get_posts(array(
-								'numberposts' => -1,
-								'orderby'     => 'post_title',
-								'order'       => 'ASC',
-								'post_type'   => 'provost_unit',
-								'category'    => get_category_by_slug('college')->term_id,
-							)) as $i=>$college): $row = (($i % 3) == 0);?>
-								<?php if($row == True) { ?>
-								</div><div class="row">
-								<?php } ?>
-								<div class="college span2">
-									<?php $url = get_post_meta($college->ID, 'provost_unit_url', True); ;?>
-									<?php if($url):?>
-									<a href="<?=get_post_meta($college->ID, 'provost_unit_url', True)?>">
-										<?=get_the_post_thumbnail($college->ID)?>
-										<span class="name"><?=hyphenate($college->post_title)?></span>
-									</a>
-									<?php else:?>
-									<div>
-										<?=get_the_post_thumbnail($college->ID)?>
-										<span class="name"><?=hyphenate($college->post_title)?></span>
-									</div>
-									<?php endif;?>
+					<div id="home-colleges" class="span5">
+						<h3>Colleges</h3>
+						<?php foreach(get_posts(array(
+							'numberposts' => -1,
+							'orderby'     => 'post_title',
+							'order'       => 'ASC',
+							'post_type'   => 'provost_unit',
+							'category'    => get_category_by_slug('college')->term_id,
+						)) as $i=>$college): ?>
+							<div class="college">
+								<?php $url = get_post_meta($college->ID, 'provost_unit_url', True); ;?>
+								<?php if($url):?>
+								<a href="<?=get_post_meta($college->ID, 'provost_unit_url', True)?>">
+									<?=get_the_post_thumbnail($college->ID)?>
+									<span class="name"><?=hyphenate($college->post_title)?></span>
+								</a>
+								<?php else:?>
+								<div>
+									<?=get_the_post_thumbnail($college->ID)?>
+									<span class="name"><?=hyphenate($college->post_title)?></span>
 								</div>
-							<?php endforeach;?>
-						</div>
+								<?php endif;?>
+							</div>
+						<?php endforeach;?>
 					</div>
 					<!--Units -->
 					<div id="home-units" class="span4">
-						<div class="row">
-							<h3 class="span4">Academic&nbsp;Affairs&nbsp;Units</h3>
-						</div>
-						<div class="row">
-							<?php foreach(get_posts(array(
-								'numberposts' => -1,
-								'orderby'     => 'post_title',
-								'order'       => 'ASC',
-								'post_type'   => 'provost_unit',
-								'category'    => get_category_by_slug('academic-unit')->term_id,
-							)) as $i=>$unit): $row=(($i % 2) == 0);?>
-								<?php if($row == True) { ?>
-								</div><div class="row">
-								<?php } ?>
-								<div class="unit span2">
-									<?php $url = get_post_meta($unit->ID, 'provost_unit_url', True);?>
-									<?php if($url):?>
-									<a href="<?=get_post_meta($unit->ID, 'provost_unit_url', True)?>">
-										<?=get_the_post_thumbnail($unit->ID)?>
-										<span class="name"><?=hyphenate($unit->post_title)?></span>
-									</a>
-									<?php else:?>
-									<div>
-										<?=get_the_post_thumbnail($unit->ID)?>
-										<span class="name"><?=hyphenate($unit->post_title)?></span>
-									</div>
-									<?php endif;?>
+						<h3>Academic&nbsp;Affairs&nbsp;Units</h3>
+						<?php foreach(get_posts(array(
+							'numberposts' => -1,
+							'orderby'     => 'post_title',
+							'order'       => 'ASC',
+							'post_type'   => 'provost_unit',
+							'category'    => get_category_by_slug('academic-unit')->term_id,
+						)) as $i=>$unit):?>
+							<div class="unit">
+								<?php $url = get_post_meta($unit->ID, 'provost_unit_url', True);?>
+								<?php if($url):?>
+								<a href="<?=get_post_meta($unit->ID, 'provost_unit_url', True)?>">
+									<?=get_the_post_thumbnail($unit->ID)?>
+									<span class="name"><?=hyphenate($unit->post_title)?></span>
+								</a>
+								<?php else:?>
+								<div>
+									<?=get_the_post_thumbnail($unit->ID)?>
+									<span class="name"><?=hyphenate($unit->post_title)?></span>
 								</div>
-							<?php endforeach;?>
-						</div>
+								<?php endif;?>
+							</div>
+						<?php endforeach;?>
 					</div>
-					<div id="sidebar" class="span2">
-						<?php $sidebar_width = 2; get_template_part('includes/sidebar'); ?>
+					<div id="sidebar" class="span3">
+						<?php $sidebar_width = 3; get_template_part('includes/sidebar'); ?>
 					</div>
 				</div>
 			</div>

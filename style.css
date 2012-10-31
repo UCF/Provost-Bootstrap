@@ -7,6 +7,9 @@ Version: v0.0.0
 
 /* Header */
 #header {margin-top:20px;}
+#header h1 { font-size: 37px; }
+#header h1 a { }
+#header h1 a:hover { color: #333; text-decoration:none; }
 #header section {border-bottom: 1px dotted black;}
 
 /* Header Menu and Footer Menus */
@@ -19,11 +22,11 @@ Version: v0.0.0
 #header-menu .active a,
 #footer-menu .active a {color:inherit;background-color:inherit;}
 #header-menu li,
-#footer-menu li  {list-style-type:disc;margin-left:15px;}
+#footer-menu li  {list-style-type:disc;margin-left:8px;}
 #header-menu li:first-child,
-#footer-menu li:first-child {list-style-type:none;margin-top:3px;margin-left:0;}
+#footer-menu li:first-child {list-style-type:none;margin-left:0;}
 
-#footer-menu {border-top:1px dotted black;}
+#footer-menu {border-top:1px dotted black; font-size:13px; font-family: 'Helvetica-Neue', Helvetica, serif;padding:10px 0;}
 
 /* Footer */
 #footer {margin-bottom:20px;}
@@ -52,12 +55,19 @@ Version: v0.0.0
 
 /* Home */
 #home.page-content {margin-top:20px;}
-#home #quote {font-size:22px;text-align:right;line-height:35px;margin-bottom:25px;}
-#home #announcements {font-size:17px;line-height:32px;margin-bottom:25px;}
+#home #quote {font-size:20px;text-align:right;line-height:28px;margin-bottom:25px;}
+#home #announcements {font-size:14px;line-height:18px;margin-bottom:10px;}
 #home #announcements li {margin-bottom:10px;}
 #home #help-search {background-color:#E1E1E1;}
-#home #help-search section {padding:15px;}
-#home #help-search label {color:#C14D00;}
+#home #help-search section {padding:10px 10px 20px 30px;}
+#home #help-search label {
+	font-family:'Georgia', serif;
+	font-size:16px;
+	text-decoration:underline;
+	color:#C14D00; 
+	margin-bottom:2px;
+}
+#home #help-search .form-search { margin-bottom: 0; }
 #home #help {padding:15px;}
 #home #search {padding:15px;}
 #home #middle .span12 {
@@ -68,13 +78,25 @@ Version: v0.0.0
 	padding-bottom:20px;
 	margin-bottom:20px;
 }
+#home #middle img {margin-bottom:4px;}
 #home #middle a {font-size:16px;text-decoration:none;}
+#home #bottom h2 {
+	text-transform:uppercase;
+	font-size:10px;
+	line-height:15px;
+	margin-top:0;
+	margin-bottom:5px;
+	letter-spacing:1.2px;
+}
+#home #home-colleges h3,
+#home #home-units h3 {font-family:'Georgia',serif;color:#666;font-size:21px;font-weight:normal;line-height:26px;}
 #home #home-colleges .row,
 #home #home-units .row {margin-bottom:15px;}
 #home #home-colleges .row:first-child,
 #home #home-units .row:first-child {margin-bottom:0;}
+#home #home-units {margin-left:19px;border-right:1px solid #e1e1e1;}
 #home .college,
-#home .unit {position:relative;}
+#home .unit {position:relative; float: left; overflow: hidden; margin: 0 10px 10px 0;}
 #home .college .name,
 #home .unit .name {
 	position:absolute;
@@ -124,9 +146,9 @@ Version: v0.0.0
 	color:#666;
 	font-weight:bold;
 	border:1px solid #ded7a8;
-	-moz-box-shadow: 1px 1px 6px rgba(0, 0, 0, .2);
-	-webkit-box-shadow: 1px 1px 6px rgba(0, 0, 0, .2);
-	box-shadow: 1px 1px 6px rgba(0, 0, 0, .2);
+	-moz-box-shadow: 0 0 15px #CCCCCC;
+	-webkit-box-shadow: 0 0 15px #CCCCCC;
+	box-shadow: 0 0 15px #CCCCCC;
 }
 .events .month{font-size: 18px;}
 .events .day{font-size: 16px;}
