@@ -570,7 +570,8 @@ class Update extends CustomPostType {
 		$singular_name  = 'Update',
 		$add_new_item   = 'Add New Update',
 		$edit_item      = 'Edit Update',
-		$new_item       = 'New Update';
+		$new_item       = 'New Update',
+		$use_shortcode  = True;
 }
 
 class HomeImage extends CustomPostType {
