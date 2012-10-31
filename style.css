@@ -135,3 +135,7 @@ Version: v0.0.0
 #search-results #result-list li {padding:0 10px 5px 10px;}
 #search-results #result-list li.even {background-color:#e7e7e7;padding:;}
 #search-results {}
+
+/* Provost Updates */
+#provost-updates .page-content a {color:#953801;}
+#provost-updates .provost_update-list li {font-size:16px;margin-bottom:10px;margin-left:20px;}
