@@ -348,6 +348,7 @@ Config::$scripts = array(
 	array('admin' => True, 'src' => THEME_JS_URL.'/admin.js',),
 	'http://universityheader.ucf.edu/bar/js/university-header.js',
 	THEME_STATIC_URL.'/bootstrap/bootstrap/js/bootstrap.js',
+	THEME_STATIC_URL.'/js/script.js',
 );
 
 # Header Meta
