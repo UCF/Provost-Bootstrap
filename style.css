@@ -76,3 +76,25 @@ Version: v0.0.0
 	text-shadow: black 0px 0px 4px;
 	font-weight: 500;
 }
+
+/* Form, Policies, and Procedures */
+#forms-policies-and-procedures .page-content a {color:#953801;}
+
+/* Document Styling */
+.powerpoint:before,
+.missing:before,
+.excel:before,
+.word:before,
+.zip:before,
+.pdf:before,
+.html:before,
+.document:before{background: url('static/img/documents.png'); margin: 0 5px 0 0; height: 18px; width: 18px; content: ''; display: inline-block; position: relative; top: 3px;}
+.powerpoint:before{background-position: 0 -18px;}
+.pdf:before{background-position: 0 -36px;}
+.missing:before{background-position: 0 -54px;}
+.excel:before{background-position: 0 -72px;}
+.zip:before{background-position: 0 -90px;}
+.word:before{background-position: 0 -108px;}
+.html:before{background-position: 0 -126px;}
+
+.document {margin-left:30px;font-size:16px;margin-bottom:10px;}
