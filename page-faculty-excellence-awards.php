@@ -1,3 +1,4 @@
+<?php disallow_direct_load('page-faculty-excellence-awards.php');?>
 <?php get_header(); the_post();?>
 <div class="row" id="<?=$post->post_name?>">
 	<div class="span12 page-content">

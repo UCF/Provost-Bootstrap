@@ -1,3 +1,4 @@
+<?php disallow_direct_load('page.php');?>
 <?php get_header(); the_post();?>
 	<div class="row" id="<?=$post->post_name?>">
 		<div class="span9 page-content">
