@@ -384,7 +384,7 @@ function sc_org_chart($attrs) {
 				if ($img):?>
 				<?=$img?>
 				<?php else:?>
-					<img src="<?=PROVOST_IMG_URL?>/no-photo.png" alt="Photo Unavailable" />
+					<img src="<?=THEME_IMG_URL?>/no-photo.png" alt="Photo Unavailable" />
 				<?php endif;?>
 				<span class="name"><?=str_replace('', '&nbsp;', $person->post_title)?></span>
 			</a>
