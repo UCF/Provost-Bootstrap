@@ -130,3 +130,8 @@ Version: v0.0.0
 .events .title{font-size: 14px; text-align: left; padding-left:10px;padding-top:0;}
 .events .title a {text-decoration:underline;}
 .events .title .wrap{display: block; max-height: 65px;overflow:hidden}
+
+/* Search Results */
+#search-results #result-list li {padding:0 10px 5px 10px;}
+#search-results #result-list li.even {background-color:#e7e7e7;padding:;}
+#search-results {}
