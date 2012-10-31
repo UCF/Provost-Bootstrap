@@ -25,11 +25,37 @@ function get_home_images($limit=null, $orderby='menu_order'){
 	if ($images){
 		$html = '';
 		foreach($images as $image){
-			$html .= get_the_post_thumbnail($image->ID, 'full', array('class' => 'slide'));
+			$html .= '<div class="'.($html == '' ? 'active ' : '').'item">'.get_the_post_thumbnail($image->ID, 'full').'</div>';
 		}
 		return $html;
 	}else{
 		return '';
 	}
+}
+
+/**
+ * Returns pages associated with the menu defined by $c;
+ *
+ * @return array
+ * @author Jared Lang
+ **/
+function get_menu_pages($c){
+	return get_posts(array(
+		'numberposts' => -1,
+		'orderby'     => 'menu_order',
+		'order'       => 'ASC',
+		'post_type'   => 'page',
+		'category'    => get_category_by_slug($c)->term_id,
+	));
+}
+
+function hyphenate($string){
+	# Automatic hyphentation is difficult so here's a really stupid solution
+	$words = array(
+		'Commercialization' => 'Commercializ-<br>ation',
+		//'Commercialization' => 'Commercializ<wbr>ation',
+	);
+
+	return str_replace(array_keys($words), array_values($words), $string);
 }
 ?>

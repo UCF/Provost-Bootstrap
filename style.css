@@ -28,8 +28,47 @@ Version: v0.0.0
 /* Academic Affairs */
 #academic-affairs {}
 #academic-affairs #org-chart {}
+#academic-affairs #org-chart a {color:#953801;}
 #academic-affairs #org-chart .name {font-weight:bold;display:block;}
 #academic-affairs #org-chart .row {margin-bottom:25px;}
 
 /* Page Content */
-.page-content a {color:#953801;text-decoration:underline;}
+.page-content a {text-decoration:underline;}
+
+/* Home */
+#home.page-content {margin-top:20px;}
+#home #quote {font-size:22px;text-align:right;line-height:35px;margin-bottom:25px;}
+#home #announcements {font-size:17px;line-height:32px;margin-bottom:25px;}
+#home #announcements li {margin-bottom:10px;}
+#home #help-search {background-color:#E1E1E1;}
+#home #help-search section {padding:15px;}
+#home #help-search label {color:#C14D00;}
+#home #help {padding:15px;}
+#home #search {padding:15px;}
+#home #middle {
+	margin-top:20px;
+	padding-top:20px;
+	border-top: 1px solid #E1E1E1;
+	border-bottom: 1px solid #E1E1E1;
+	padding-bottom:20px;
+	margin-bottom:2;
+}
+#home #middle a {font-size:16px;text-decoration:none;}
+#home #home-colleges .row,
+#home #home-units .row {margin-bottom:15px;}
+#home #home-colleges .row:first-child,
+#home #home-units .row:first-child {margin-bottom:0;}
+#home .college,
+#home .unit {position:relative;}
+#home .college .name,
+#home .unit .name {
+	position:absolute;
+	top:0;
+	left:0;
+	display:block;
+	padding: 5px;
+	overflow: hidden;
+	color:#FFF;
+	text-shadow: black 0px 0px 4px;
+	font-weight: 500;
+}

@@ -1,10 +1,10 @@
 <div class="row">
-	<div class="span3">
+	<div class="span2">
 		<h3>Events at UCF</h3>
 	</div>
 </div>
 <div class="row">
-	<div class="span3">
+	<div class="span2">
 		<h3>Human Resource Links</h3>
 		<?=wp_nav_menu(array(
 			'menu'           => 'Human Resource Links', 
@@ -17,7 +17,7 @@
 	</div>
 </div>
 <div class="row">
-	<div class="span3">
+	<div class="span2">
 		<h3>Academic Resources and Links</h3>
 		<?=wp_nav_menu(array(
 			'menu'           => 'Academic Resources and Links', 
