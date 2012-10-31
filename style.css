@@ -36,6 +36,7 @@ Version: v0.0.0
 
 /* Faculty Resources */
 #faculty-resources .faculty-award-programs {margin-bottom:40px;}
+#faculty-resources .faculty-award-programs a {text-decoration:none;}
 #faculty-resources .faculty-award-programs .caption {font-weight:bold;}
 #faculty-resources .resource {margin-bottom:40px;}
 
