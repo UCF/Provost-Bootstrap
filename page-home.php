@@ -32,7 +32,7 @@
 								'numberposts' => -1,
 								'orderby'     => 'title',
 								'order'       => 'ASC',
-								'post_type'   => get_custom_post_type('ProvostHelp'),
+								'post_type'   => 'provost_help',
 							));?>
 							<label for="help-select">Need Help Finding:</label>
 							<select id="help-select" class="select-links">
