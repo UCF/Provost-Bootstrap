@@ -9,6 +9,7 @@
 <div class="row">
 	<div class="<?php echo $width; ?>">
 		<h3>Events at UCF</h3>
+		<?php display_events(); ?>
 	</div>
 </div>
 <div class="row">

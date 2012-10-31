@@ -108,3 +108,25 @@ Version: v0.0.0
 .html:before{background-position: 0 -126px;}
 
 .document {margin-left:30px;font-size:16px;margin-bottom:10px;}
+
+/* Events */
+.events {border-spacing: 0 10px; border-collapse:separate;margin-top:-5px;}
+.events th,
+.events td {border-top:0;}
+.events .date{
+	text-align:center;
+	width: 1px;
+	padding:8px 12px;
+	background-color:#fef7c8;
+	color:#666;
+	font-weight:bold;
+	border:1px solid #ded7a8;
+	-moz-box-shadow: 1px 1px 6px rgba(0, 0, 0, .2);
+	-webkit-box-shadow: 1px 1px 6px rgba(0, 0, 0, .2);
+	box-shadow: 1px 1px 6px rgba(0, 0, 0, .2);
+}
+.events .month{font-size: 18px;}
+.events .day{font-size: 16px;}
+.events .title{font-size: 14px; text-align: left; padding-left:10px;padding-top:0;}
+.events .title a {text-decoration:underline;}
+.events .title .wrap{display: block; max-height: 65px;overflow:hidden}
