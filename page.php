@@ -1,8 +1,3 @@
-<?php
-/**
- * Template Name: Two Column
- **/
-?>
 <?php get_header(); the_post();?>
 	<div class="row" id="<?=$post->post_name?>">
 		<div class="span9 page-content">
