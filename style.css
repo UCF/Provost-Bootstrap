@@ -60,13 +60,13 @@ Version: v0.0.0
 #home #help-search label {color:#C14D00;}
 #home #help {padding:15px;}
 #home #search {padding:15px;}
-#home #middle {
+#home #middle .span12 {
 	margin-top:20px;
 	padding-top:20px;
 	border-top: 1px solid #E1E1E1;
 	border-bottom: 1px solid #E1E1E1;
 	padding-bottom:20px;
-	margin-bottom:2;
+	margin-bottom:20px;
 }
 #home #middle a {font-size:16px;text-decoration:none;}
 #home #home-colleges .row,
