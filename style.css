@@ -9,7 +9,7 @@ Version: v0.0.0
 #header {margin-top:20px;}
 #header section {border-bottom: 1px dotted black;}
 
-/* Header Menu */
+/* Header Menu and Footer Menus */
 #header-menu,
 #footer-menu {margin-bottom:0;margin-top:20px;font-size:16px;}
 #header-menu a,
@@ -23,8 +23,7 @@ Version: v0.0.0
 #header-menu li:first-child,
 #footer-menu li:first-child {list-style-type:none;margin-top:3px;margin-left:0;}
 
-/* Footer Menu */
-#footer-menu {margin-top:20px;}
+#footer-menu {border-top:1px dotted black;}
 
 /* Sidebar */
 #sidebar h3 {font-size:16px;color:#C14D00;font-weight:normal;margin-bottom:0;}
