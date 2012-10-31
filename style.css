@@ -142,3 +142,27 @@ Version: v0.0.0
 /* Provost Updates */
 #provost-updates .page-content a {color:#953801;}
 #provost-updates .provost_update-list li {font-size:16px;margin-bottom:10px;margin-left:20px;}
+
+/* Profile */
+#profile {
+	width:120px;
+	padding:5px 25px 5px 5px;
+	float:left;
+	font-size:11px;
+	line-height:1.4;
+}
+#profile strong {
+	display:block;
+	font-size:12px;
+	padding:4px 0 2px;
+}
+#profile img { 
+	padding:5px;
+	display:block;
+	background-color:white;
+	-webkit-box-shadow:rgba(0, 0, 0, 0.3) 0px 0px 6px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 6px;
+	-moz-border-radius:5px;
+	-webkit-border-radius: 5x; border-radius:5px;
+}
+.msie #profile img { border:1px solid #C5C5C5; }
