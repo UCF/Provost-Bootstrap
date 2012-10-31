@@ -11,7 +11,7 @@ Version: v0.0.0
 
 /* Header Menu and Footer Menus */
 #header-menu,
-#footer-menu {margin-bottom:0;margin-top:20px;font-size:16px;}
+#footer-menu {margin-bottom:0;margin-top:20px;font-size:15px;}
 #header-menu a,
 #footer-menu a {padding-left:0;margin-left:0;}
 #header-menu a:hover,
