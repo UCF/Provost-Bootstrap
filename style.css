@@ -20,7 +20,7 @@ ul.menu {list-style: none; margin: 0; color: #6d6e71; padding: 10px 0 0 0; clear
 ul.menu li{display: inline-block; margin: 0 6px 16px 0; padding: 0; float: left;}
 ul.menu li:after{margin-left: 1px; font-size:20px;} 
 :root *> ul.menu li:after {content: "\2022";} /* stupid non-ie hack */
-ul.menu li:last-child:after, .last:after{content: none !important;}
+ul.menu li:last-child:after, .last:after{content: " " !important;}
 
 #header-menu {font-family:'Georgia',serif;}
 #header-menu,
