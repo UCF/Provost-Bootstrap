@@ -11,6 +11,7 @@ Version: v0.0.0
 #header h1 a { }
 #header h1 a:hover { color: #333; text-decoration:none; }
 #header section {border-bottom: 1px dotted black;}
+*+html #header section {padding-bottom:15px;} /* IE7 fix */
 
 /* Header Menu and Footer Menus */
 ul.menu a{font-weight: normal; text-decoration: none; font-size: 16px; margin-right: 5px;}
@@ -74,11 +75,11 @@ ul.menu li:last-child:after, .last:after{content: none !important;}
 
 /* Home */
 #home.page-content {margin-top:20px;}
-#home #quote {font-size:20px;text-align:right;line-height:28px;margin-bottom:25px;}
-#home #announcements {font-size:14px;line-height:18px;margin-bottom:10px;}
+#home #quote {font-size:20px;text-align:right;line-height:28px;padding-bottom:25px;}
+#home #announcements {font-size:14px;line-height:18px;padding-bottom:10px;}
 #home #announcements li {margin-bottom:10px;}
 #home #help-search {background-color:#E1E1E1;}
-#home #help-search section {padding:10px 10px 20px 30px;}
+#home #help-search section {padding:10px 10px 20px 30px; overflow:hidden;}
 #home #help-search label {
 	font-family:'Georgia', serif;
 	font-size:16px;
@@ -109,13 +110,9 @@ ul.menu li:last-child:after, .last:after{content: none !important;}
 }
 #home #home-colleges h3,
 #home #home-units h3 {font-family:'Georgia',serif;color:#666;font-size:21px;font-weight:normal;line-height:26px;}
-#home #home-colleges .row,
-#home #home-units .row {margin-bottom:15px;}
-#home #home-colleges .row:first-child,
-#home #home-units .row:first-child {margin-bottom:0;}
 #home #home-units {margin-left:19px;border-right:1px solid #e1e1e1;}
 #home .college,
-#home .unit {position:relative; float: left; overflow: hidden; margin: 0 10px 15px 0;}
+#home .unit {position:relative; float: left; overflow: hidden; margin: 0 10px 15px 0; width: 110px; height:92px;}
 #home .college .name,
 #home .unit .name {
 	position:absolute;
@@ -129,6 +126,9 @@ ul.menu li:last-child:after, .last:after{content: none !important;}
 	font-weight: 500;
 	width:90px;
 	font-size:13px;
+	text-decoration: none;
+	font-weight: bold;
+	
 }
 
 /* Form, Policies, and Procedures */

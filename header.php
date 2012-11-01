@@ -32,6 +32,10 @@
 				<link rel='stylesheet' href="<?=$stylesheet_url?>" type='text/css' media='all' />
 		<? } ?>
 		
+		<!--[if lt IE 9]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		
 		<script type="text/javascript">
 			var PROVOST_STATIC_URL = '<?php echo THEME_STATIC_URL; ?>';
 		</script>
