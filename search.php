@@ -8,7 +8,7 @@
 ?>
 <?php get_header(); ?>
 	<div class="row page-content" id="search-results">
-		<div class="span9">
+		<div class="span8">
 				<h2>Search Results for <em><?php echo htmlspecialchars($_GET['s']) ?></em></h2>
 				<?php if(count($results['items'])):?>
 				<ul class="unstyled" id="result-list">
@@ -42,7 +42,7 @@
 				<?php endif;?>
 		</div>
 		
-		<div id="sidebar" class="span3">
+		<div id="sidebar" class="span3 offset1">
 			<?php get_template_part('includes/sidebar'); ?>
 		</div>
 	</div>
@@ -52,7 +52,7 @@
 <?php else:?>
 <?php get_header(); the_post();?>
 	<div class="row page-content" id="search-results">
-		<div class="span9">
+		<div class="span8">
 			<h2>Search Results</h2>
 			<?php if(have_posts()):?>
 				<ul class="unstyled">
@@ -71,7 +71,7 @@
 			<?php endif;?>
 		</div>
 		
-		<div id="sidebar" class="span3">
+		<div id="sidebar" class="span3 offset1">
 			<?php get_template_part('includes/sidebar'); ?>
 		</div>
 	</div>
