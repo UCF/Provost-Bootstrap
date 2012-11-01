@@ -17,4 +17,7 @@ $().ready(function() {
 		$('.menu li').append('<span class="ieseparator">•</span>');
 		$('.menu li.last .ieseparator').remove();
 	}
+	
+	// tons of tables? why not javascript? (\/) (°,,,°) (\/)
+	$('.page-content table.blue').addClass('table table-striped');
 });

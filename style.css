@@ -62,8 +62,24 @@ ul.menu li:last-child:after, .last:after{content: none !important;}
 /* Faculty Resources */
 #faculty-resources .faculty-award-programs {margin-bottom:40px;}
 #faculty-resources .faculty-award-programs a {text-decoration:none;}
-#faculty-resources .faculty-award-programs .caption {font-weight:bold;}
+#faculty-resources .faculty-award-programs a img {margin-bottom: 4px;}
+#faculty-resources .faculty-award-programs .caption {font-weight:bold; font-size: 14px;}
 #faculty-resources .resource {margin-bottom:40px;}
+
+/* Faculty Excellence Awards */
+.page-content .table-striped {}
+.page-content .table th, .page-content .table td {
+	border-top: 0;
+}
+.page-content .table-striped tbody tr:nth-child(even) td,
+.page-content .table-striped tbody tr:nth-child(even) th { background-color: #E5ECF9; }
+.page-content .table-striped tbody tr:nth-child(odd) td,
+.page-content .table-striped tbody tr:nth-child(odd) th { background-color: #fff; }
+.page-content .table a {color: #953801;}
+#faculty-excellence-awards .table-striped tbody tr:nth-child(even) td,
+#faculty-excellence-awards .table-striped tbody tr:nth-child(even) th { background-color: #fff; }
+#faculty-excellence-awards .table-striped tbody tr:nth-child(odd) td,
+#faculty-excellence-awards .table-striped tbody tr:nth-child(odd) th { background-color: #E5ECF9; }
 
 /* Academic Affairs */
 #academic-affairs {}
@@ -76,9 +92,10 @@ ul.menu li:last-child:after, .last:after{content: none !important;}
 
 /* Page Content */
 .page-content a {text-decoration:underline;}
-.page-content p {font-size: 16px; line-height: 24px;}
+.page-content article, .page-content p {font-size: 16px; line-height: 24px;}
 .page-content h2 {padding: 10px 0 0 0; font-size:27px;}
 .page-content h3 {font-size: 18px;}
+.page-content h4 {font-size: 16px;}
 .page-content p.lead {font-size: 16px; line-height: 24px; font-weight: normal;}
 
 /* Home */
@@ -91,7 +108,6 @@ ul.menu li:last-child:after, .last:after{content: none !important;}
 #home #help-search label {
 	font-family:'Georgia', serif;
 	font-size:16px;
-	text-decoration:underline;
 	color:#C14D00; 
 	margin-bottom:2px;
 }
