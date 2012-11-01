@@ -22,4 +22,11 @@ $().ready(function() {
 	
 	// tons of tables? why not javascript? (\/) (°,,,°) (\/)
 	$('.page-content table.blue').addClass('table table-striped');
+	
+	// ie fix for stripey tables
+	if ($.browser.msie && $.browser.version < 9) {
+		$('.table-striped tbody tr:nth-child(even) td, .table-striped tbody tr:nth-child(even) th').css('background-color','#E5ECF9');
+		$('#faculty-excellence-awards .table-striped tbody tr:nth-child(even) td, #faculty-excellence-awards.table-striped tbody tr:nth-child(even) th').css('background-color','#fff');
+		$('#faculty-excellence-awards .table-striped tbody tr:nth-child(odd) td, #faculty-excellence-awards.table-striped tbody tr:nth-child(odd) th').css('background-color','#E5ECF9');
+	}
 });
