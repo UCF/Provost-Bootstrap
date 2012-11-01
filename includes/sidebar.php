@@ -7,13 +7,13 @@
 	}
  ?>
 <div class="row">
-	<div class="<?php echo $width; ?>">
+	<div id="sidebar-events" class="<?php echo $width; ?>">
 		<h3>Events at UCF</h3>
 		<?php display_events(); ?>
 	</div>
 </div>
 <div class="row">
-	<div class="<?php echo $width; ?>">
+	<div id="sidebar-hrlinks" class="<?php echo $width; ?>">
 		<h3>Human Resource Links</h3>
 		<?=wp_nav_menu(array(
 			'menu'           => 'Human Resource Links', 
@@ -26,7 +26,7 @@
 	</div>
 </div>
 <div class="row">
-	<div class="<?php echo $width; ?>">
+	<div id="sidebar-academiclinks" class="<?php echo $width; ?>">
 		<h3>Academic Resources and Links</h3>
 		<?=wp_nav_menu(array(
 			'menu'           => 'Academic Resources and Links', 
