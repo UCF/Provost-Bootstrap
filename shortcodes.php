@@ -369,15 +369,15 @@ function sc_org_chart($attrs) {
 	
 	function display_people($people, $id=null){
 		?>
-		<div class="row">
+		<div class="row"><div class="span8">
 		<?
 		$count = 0;
 		foreach($people as $person) {
-			if($count > 0 && ($count % 4) == 0) {
-				echo '</div><div class="row">';
+			if($count > 0 && ($count % 5) == 0) {
+				echo '</div></div><div class="row"><div class="span8">';
 			}
 			?>
-			<div class="span2">
+			<div class="person">
 			<a href="<?=get_permalink($person->ID)?>">
 			<?php
 				$img = get_the_post_thumbnail($person->ID);
@@ -393,7 +393,7 @@ function sc_org_chart($attrs) {
 			<?
 			$count++;
 		}
-		?> </div> <?
+		?> </div></div> <?
 	}
 	ob_start();
 	?>

@@ -68,14 +68,16 @@ ul.menu li:last-child:after, .last:after{content: none !important;}
 /* Academic Affairs */
 #academic-affairs {}
 #academic-affairs #org-chart {}
-#academic-affairs #org-chart a {color:#953801;}
-#academic-affairs #org-chart .name {font-weight:bold;display:block;}
-#academic-affairs #org-chart .row {margin-bottom:25px;}
+#academic-affairs #org-chart h3 small a {color:#953801;}
+#academic-affairs #org-chart .person {width: 110px; float:left; margin-right: 14px; margin-bottom: 20px;}
+#academic-affairs #org-chart .person a {color:#953801;}
+#academic-affairs #org-chart .person .name {font-weight:bold;display:block;}
+#academic-affairs #org-chart .person .row {margin-bottom:25px;}
 
 /* Page Content */
 .page-content a {text-decoration:underline;}
 .page-content p {font-size: 16px; line-height: 24px;}
-.page-content h2 {padding: 20px 0 0 0;}
+.page-content h2 {padding: 10px 0 0 0; font-size:27px;}
 .page-content h3 {font-size: 18px;}
 .page-content p.lead {font-size: 16px; line-height: 24px; font-weight: normal;}
 
@@ -207,12 +209,5 @@ ul.menu li:last-child:after, .last:after{content: none !important;}
 	padding:4px 0 2px;
 }
 #profile img { 
-	padding:5px;
 	display:block;
-	background-color:white;
-	-webkit-box-shadow:rgba(0, 0, 0, 0.3) 0px 0px 6px;
-	-moz-box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 6px;
-	-moz-border-radius:5px;
-	-webkit-border-radius: 5x; border-radius:5px;
 }
-.msie #profile img { border:1px solid #C5C5C5; }
