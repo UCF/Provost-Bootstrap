@@ -62,7 +62,7 @@ ul.menu li:last-child:after, .last:after{content: " " !important;}
 /* Faculty Resources */
 #faculty-resources .faculty-award-programs {margin-bottom:40px;}
 #faculty-resources .faculty-award-programs a {text-decoration:none;}
-#faculty-resources .faculty-award-programs a img {margin-bottom: 4px;}
+#faculty-resources .faculty-award-programs a img {margin-bottom: 4px;float:left;clear:both;}
 #faculty-resources .faculty-award-programs .caption {font-weight:bold; font-size: 14px;}
 #faculty-resources .resource {margin-bottom:40px;}
 
