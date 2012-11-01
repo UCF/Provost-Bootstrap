@@ -112,6 +112,7 @@ ul.menu li:last-child:after, .last:after{content: " " !important;}
 	margin-bottom:2px;
 }
 #home #help-search .form-search { margin-bottom: 0; }
+*+html #home #help-search .form-search .btn {background-color:#fafafa;}
 #home #help {padding:15px;}
 #home #search {padding:15px;}
 #home #middle .span12 {
