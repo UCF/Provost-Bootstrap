@@ -10,8 +10,10 @@ $().ready(function() {
 				}
 			}
 		});
+		
 	$('#home-images-carousel').carousel('cycle');
 	
+	// menu nav separators
 	$('.menu li:last-child').addClass('last');
 	if ($.browser.msie && $.browser.version < 9) {
 		$('.menu li').append('<span class="ieseparator">•</span>');
