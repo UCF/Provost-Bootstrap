@@ -1,7 +1,6 @@
 			<?=wp_nav_menu(array(
 				'theme_location' => 'footer-menu', 
 				'container'      => 'false', 
-				'menu_class'     => 'nav nav-pills', 
 				'menu_id'        => 'footer-menu', 
 				'fallback_cb'    => false,
 				'depth'          => 1,

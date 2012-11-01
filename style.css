@@ -13,6 +13,15 @@ Version: v0.0.0
 #header section {border-bottom: 1px dotted black;}
 
 /* Header Menu and Footer Menus */
+ul.menu a{font-weight: normal; text-decoration: none; font-size: 16px; margin-right: 5px;}
+ul.menu a:hover{text-decoration: underline;}
+ul.menu {list-style: none; margin: 0; color: #6d6e71; padding: 10px 0 0 0; clear: right;}
+ul.menu li{display: inline-block; margin: 0 6px 16px 0; padding: 0; float: left;}
+ul.menu li:after{margin-left: 1px; font-size:20px;} 
+:root *> ul.menu li:after {content: "\2022";} /* stupid non-ie hack */
+ul.menu li:last-child:after, .last:after{content: none !important;}
+
+#header-menu {font-family:'Georgia',serif;}
 #header-menu,
 #footer-menu {margin-bottom:0;margin-top:20px;font-size:15px;}
 #header-menu a,
@@ -21,12 +30,22 @@ Version: v0.0.0
 #footer-menu a:hover {background-color:inherit;}
 #header-menu .active a,
 #footer-menu .active a {color:inherit;background-color:inherit;}
-#header-menu li,
+#footer-menu a {font-size:13px;}
+#footer-menu li:after {font-size:15px;}
+/*#header-menu li,
 #footer-menu li  {list-style-type:disc;margin-left:8px;}
 #header-menu li:first-child,
 #footer-menu li:first-child {list-style-type:none;margin-left:0;}
+*/
 
-#footer-menu {border-top:1px dotted black; font-size:13px; font-family: 'Helvetica-Neue', Helvetica, serif;padding:10px 0;}
+#footer-menu {
+	width:100%;
+	overflow:hidden;
+	border-top:1px dotted black; 
+	font-size:13px; 
+	font-family: 'Helvetica-Neue', Helvetica, serif;
+	padding:10px 0;
+}
 
 /* Footer */
 #footer {margin-bottom:20px;}
@@ -96,7 +115,7 @@ Version: v0.0.0
 #home #home-units .row:first-child {margin-bottom:0;}
 #home #home-units {margin-left:19px;border-right:1px solid #e1e1e1;}
 #home .college,
-#home .unit {position:relative; float: left; overflow: hidden; margin: 0 10px 10px 0;}
+#home .unit {position:relative; float: left; overflow: hidden; margin: 0 10px 15px 0;}
 #home .college .name,
 #home .unit .name {
 	position:absolute;
@@ -135,7 +154,7 @@ Version: v0.0.0
 .document {margin-left:30px;font-size:16px;margin-bottom:10px;}
 
 /* Events */
-.events {border-spacing: 0 10px; border-collapse:separate;margin-top:-5px;}
+.events {border-spacing: 0 20px; border-collapse:separate;margin-top:-15px;}
 .events th,
 .events td {border-top:0;}
 .events .date{
