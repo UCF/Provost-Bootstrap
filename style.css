@@ -165,6 +165,7 @@ ul.menu li:last-child:after, ul.menu li.last:after{content: " " !important;}
 
 /* Form, Policies, and Procedures */
 #forms-policies-and-procedures .page-content a {color:#953801;}
+#forms-policies-and-procedures .document {margin-left:30px;}
 
 /* Document Styling */
 .powerpoint,
@@ -183,7 +184,7 @@ ul.menu li:last-child:after, ul.menu li.last:after{content: " " !important;}
 .word{background-position: 0 -108px;}
 .html{background-position: 0 -126px;}
 
-.document {padding-left: 25px;margin-left:30px;font-size:16px;margin-bottom:12px;width:100%;}
+.document {padding-left: 25px;font-size:16px;margin-bottom:12px;width:100%;}
 
 /* Events */
 .events {border-spacing: 0 20px; border-collapse:separate;margin-top:-15px;}
