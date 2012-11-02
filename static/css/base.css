@@ -17,6 +17,7 @@ body{color: #333;background: url("../img/gradient.png") repeat-x top left #fff;}
 	moz-border-radius: 0;
 	margin-bottom: 0;
 	margin-top: 1px;
+	width:115px!important;
 }
 
 select#UCFHBHeaderLinks {
@@ -32,4 +33,4 @@ select#UCFHBHeaderLinks {
 	padding: 0;
 }
 
-#UCFHBHeader * {height:auto;}
+/*#UCFHBHeader * {height:auto;}*/
