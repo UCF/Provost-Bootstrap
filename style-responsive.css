@@ -4,6 +4,8 @@
 }
 
 @media (max-width: 767px) {
+	#UCFHBHeader { margin-left: -20px; width: 100%; padding-right: 40px; }
+	
 	#header { margin-left: 0; }
 	
 	#home .description { margin-top: 10px; }
