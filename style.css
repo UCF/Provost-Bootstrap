@@ -52,6 +52,9 @@ select#UCFHBHeaderLinks {
 	height: 30px;
 }
 
+.navbar-inverse .brand { color: #fff; }
+.navbar .dropdown-menu, .navbar .dropdown-menu li { display: block !important; }
+
 /*#home .site-image img{display: block; margin: 0; border: 5px solid #fff;}*/
 #home .description{font-size: 16px; font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
 #home .content p,

@@ -3,9 +3,6 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<?="\n".header_()."\n"?>
-		<!--[if IE]>
-		<link href="http://cdn.ucf.edu/webcom/-/css/blueprint-ie.css" rel="stylesheet" media="screen, projection">
-		<![endif]-->
 		<?php if(GA_ACCOUNT or CB_UID):?>
 		
 		<script type="text/javascript">
@@ -52,8 +49,8 @@
 	<body class="<?=body_classes()?>">
 		<div class="container">
 			<div class="row">
-				<div id="header" class="row-border-bottom-top">
-					<h1><a href="<?=bloginfo('url')?>"><?=bloginfo('name')?></a></h1>
+				<div id="header" class="row row-border-bottom-top">
+					<h1 class="span9"><a href="<?=bloginfo('url')?>"><?=bloginfo('name')?></a></h1>
 					<?php $options = get_option(THEME_OPTIONS_NAME);?>
 					<?php if($options['facebook_url'] or $options['twitter_url']):?>
 					<ul class="social menu horizontal span3">
@@ -67,7 +64,6 @@
 					<?php else:?>
 					<div class="social span3">&nbsp;</div>
 					<?php endif;?>
-					<div class="end"><!-- --></div>
 				</div>
 			</div>
 			<?=wp_nav_menu(array(

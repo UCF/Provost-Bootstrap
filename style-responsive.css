@@ -83,19 +83,23 @@
 		margin: 0;
 		line-height: 13px;
 	}
-	.navbar ul#header-menu li a {
+	.navbar ul#header-menu li a, 
+	.navbar ul#header-menu .dropdown-menu li > a:hover, 
+	.navbar ul#header-menu .dropdown-menu li > a:focus, 
+	.navbar ul#header-menu .dropdown-submenu:hover > a {
 		display: block;
 		color: #999;
 		font-weight: bold;
 		font-size: 13px;
 		padding: 6px 15px;
 		border-radius: 3px 3px 3px 3px;
+		background-image: none;
 	}
-		.navbar ul#header-menu li.active a {
+		.navbar ul#header-menu li.active > a, .navbar ul#header-menu ul.dropdown-menu li.current-menu-item a {
 			color: #fff;
 			background-color: #222;
 		}
-	.navbar ul#header-menu li a:hover {
+	.navbar ul#header-menu li a:hover, .navbar ul#header-menu ul.dropdown-menu li a:hover {
 		background-color: #222;
 		text-decoration: none;
 		color: #fff;
