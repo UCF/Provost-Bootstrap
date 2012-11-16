@@ -9,6 +9,30 @@ scripts through the built-in wordpress functions.
 * n/a
 
 
+## Deployment
+
+This theme relies on Twitter's Bootstrap framework. UCF's fork of the Bootstrap project (http://github.com/UCF/bootstrap/) is added as submodule in static/bootstrap. Bootstrap must be initialized as a submodule with every new clone of this theme repository.
+
+#### Initializing Bootstrap with a new clone:
+1. Pull/Clone the theme repo
+2. From the theme's root directory, run `git submodule update --init static/bootstrap`
+3. From the static/bootstrap directory, run `git checkout master`.  Make sure a branch has been checked out for submodules as they will default to 'no branch' when cloned.  If you're developing a new theme off of Generic and have created a new Bootstrap branch (see the Development section), checkout that branch instead.
+
+#### Alternative method using Git v1.6.5+:
+1. Run `git clone` using the `--recursive` parameter to clone the repo with all of its submodules; e.g. `git clone --recursive https://github.com/UCF/Wordpress-Generic-Theme.git`
+2. From the static/bootstrap directory, run `git checkout master`.  Make sure a branch has been checked out for submodules as they will default to 'no branch' when cloned.
+
+
+## Development
+
+This theme relies on Twitter's Bootstrap framework. UCF's fork of the Bootstrap project (http://github.com/UCF/bootstrap/) is added as submodule in static/bootstrap. To compile bootstrap:
+
+1. If this is a brand new clone, run `git submodule update --init static/bootstrap` from the theme's root directory.
+2. If they are not already installed, install the dependencies in the Developers section of the Boostrap README
+3. Checkout the latest tag of Bootstrap from the static/bootstrap directory.  If you're developing a theme off of Generic and need to make changes to the default Bootstrap .less files, create a new branch of the Bootstrap fork for your theme and check it out.
+4. Run `make bootstrap` from the static/bootstrap directory to compile the files into static/bootstrap/bootstrap.  If you've created a new Bootstrap branch, be sure to push the compiled files back up to that branch (this must be done from the static/bootstrap directory.)
+
+
 ## Important files/folders:
 
 ### functions/base.php
@@ -46,7 +70,7 @@ content.  For more information, visit http://twitter.github.com/bootstrap/
 Note that this theme may not always be running the most up-to-date version of
 Bootstrap.  For the most accurate documentation on the theme's current
 Bootstrap version, visit http://bootstrapdocs.com/ and select the version number
-found at the top of static/bootstrap/build/css/bootstrap.css
+found at the top of static/bootstrap/bootstrap/css/bootstrap.css
 
 
 Since this theme wasn't really built to function like a separate library to use
