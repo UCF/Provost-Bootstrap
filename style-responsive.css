@@ -74,6 +74,7 @@
 	.navbar .menu {
 		padding: 0;
 	}
+	.navbar ul#header-menu { border-bottom: 0; }
 	.navbar ul#header-menu li:after {
 		content: "";
 	}
@@ -94,6 +95,7 @@
 		padding: 6px 15px;
 		border-radius: 3px 3px 3px 3px;
 		background-image: none;
+		border: 0;
 	}
 		.navbar ul#header-menu li.active > a, .navbar ul#header-menu ul.dropdown-menu li.current-menu-item a {
 			color: #fff;

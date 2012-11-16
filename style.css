@@ -39,7 +39,7 @@ select#UCFHBHeaderLinks {
 
 .end {clear: both; height: 1px;}
 
-.row-border-bottom-top {margin-left:20px;}
+.row-border-bottom-top {margin-left:20px; overflow: hidden;}
 .row-border-bottom-top *:first-child {margin-left:0;}
 
 .search-form #s {

@@ -49,7 +49,7 @@
 	<body class="<?=body_classes()?>">
 		<div class="container">
 			<div class="row">
-				<div id="header" class="row row-border-bottom-top">
+				<div id="header" class="row-border-bottom-top">
 					<h1 class="span9"><a href="<?=bloginfo('url')?>"><?=bloginfo('name')?></a></h1>
 					<?php $options = get_option(THEME_OPTIONS_NAME);?>
 					<?php if($options['facebook_url'] or $options['twitter_url']):?>

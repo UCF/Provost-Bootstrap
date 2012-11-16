@@ -1,9 +1,4 @@
 /**
- * A collection of commonly used styles for wordpress themes.
- **/
-@import url('formatting.css');
-
-/**
  * Element styles (No font-family)
  **/
 body{color: #333;background: url("../img/gradient.png") repeat-x top left #fff;}
