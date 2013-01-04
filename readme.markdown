@@ -139,9 +139,9 @@ searchform.php
 * e.g., [publication name="Where are the robots Magazine"]
 
 ### [person-picture-list]
-* Similar to [person-list], but also outputs thumbnails for each Person.
-
-### [post-type-search]
-* Outputs a list of People with thumbnails, person names, and job titles.
+* Similar to [person-list], but outputs a list of People with thumbnails, person names, and job titles.
 * If a person's description is available, a link to the person's profile will be outputted. If a thumbnail for the person does not exist, a default 'No Photo Available' thumbnail will display.
 * An optional row_size parameter is available to customize the number of rows that will display, in addition to the other filter parameters available to the person-list shortcode.
+
+### [post-type-search]
+* Generates a searchable list of posts. Post lists are generated in alphabetical order and, by default, by category and post title. Posts can be searched by post title and any tags assigned to the post. See the Theme Help section on shortcodes for more information.
