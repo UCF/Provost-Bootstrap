@@ -593,8 +593,21 @@ class Unit extends CustomPostType {
 		$add_new_item   = 'Add New College/Unit',
 		$edit_item      = 'Edit College/Unit',
 		$new_item       = 'New College/Unit',
+		$use_editor     = False,
+		$use_metabox    = True,
 		$use_thumbnails = True,
 		$taxonomies     = array('category');
+	
+	public function fields(){
+		return array(
+			array(
+				'name' => 'URL',
+				'desc' => 'Web address of the college/unit',
+				'id'   => $this->options('name').'_url',
+				'type' => 'text',
+			),
+		);
+	}
 }
 
 class AwardProgram extends CustomPostType {
