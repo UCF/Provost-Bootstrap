@@ -312,7 +312,7 @@ class Document extends CustomPostType{
 		$prefix = post_type($form);
 		
 		$x = get_post_meta($form->ID, $prefix.'_url', True);
-		$y = wp_get_attachment_url(get_post_meta($form->ID, $prefix.'_file', True));
+		$y = str_replace('https://', 'http://', wp_get_attachment_url(get_post_meta($form->ID, $prefix.'_file', True)));
 		
 		if (!$x and !$y){
 			return '#';
