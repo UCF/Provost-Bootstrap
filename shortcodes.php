@@ -420,7 +420,6 @@ add_shortcode('sc-org-chart', 'sc_org_chart');
 
 function sc_submitted_proposals($attrs) {
     $proposal_limit = $attrs['limit'];
-    require_once('custom-post-types.php');
     $proposals = get_posts(array(
         'post_type'        => 'process_improvement',
         'numberposts' => $proposal_limit,
@@ -443,7 +442,7 @@ function sc_submitted_proposals($attrs) {
             <tbody>
             <?php foreach($proposals as $post): setup_postdata($post);?>
                 <tr>
-                    <td><?=the_date('m/d/Y'); ?></td>
+                    <td><?=get_the_date('m/d/Y'); ?></td>
                     <td><?=get_post_meta($post->ID, 'process_improvement_description', true); ?></td>
                     <td><img src="<?=THEME_IMG_URL . '/' . get_post_meta($post->ID, 'process_improvement_action', true); ?>" /> <?=get_post_meta($post->ID, 'process_improvement_status', true); ?></td>
                     <td>
@@ -458,6 +457,6 @@ function sc_submitted_proposals($attrs) {
         </table>
     </div>
     <?php
-    echo ob_get_clean();
+    return ob_get_clean();
 }
 add_shortcode('sc-submitted-proposals', 'sc_submitted_proposals');

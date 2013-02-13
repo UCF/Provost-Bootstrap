@@ -242,3 +242,7 @@ ul.menu li:last-child:after, ul.menu li.last:after{content: " " !important;}
 #pi_proposal_list td {
     border-top: 1px solid #dddddd;
 }
+
+#proposal_link {
+    text-decoration: none;
+}
