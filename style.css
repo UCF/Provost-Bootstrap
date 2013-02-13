@@ -233,3 +233,12 @@ ul.menu li:last-child:after, ul.menu li.last:after{content: " " !important;}
 #profile img { 
 	display:block;
 }
+
+/* Process Improvement Proposals */
+#pi_proposal_list th {
+    font-size: 12px;
+}
+
+#pi_proposal_list td {
+    border-top: 1px solid #dddddd;
+}

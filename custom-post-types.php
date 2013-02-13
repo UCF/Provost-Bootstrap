@@ -620,4 +620,61 @@ class AwardProgram extends CustomPostType {
 		$new_item       = 'New Award Program';
 }
 
+class ProcessImprovement extends CustomPostType {
+    public
+        $name           = 'process_improvement',
+        $plural_name    = 'Process Improvements',
+        $singular_name  = 'Process Improvement',
+        $add_new_item   = 'Add New Process Improvement',
+        $edit_item      = 'Edit Process Improvement',
+        $new_item       = 'New Process Improvement',
+        $use_metabox    = True;
+
+    public function fields() {
+        return array(
+            array(
+                'name' => 'Name',
+                'desc' => 'The person that submitted the process improvement.',
+                'id'   => $this->options('name') . '_name',
+                'type' => 'text',
+            ),
+            array(
+                'name' => 'Email',
+                'desc' => 'The email address of the person who submitted process improvement.',
+                'id'   => $this->options('name') . '_email',
+                'type' => 'text',
+            ),
+            array(
+                'name' => 'Description',
+                'desc' => 'This will display the short description of the submitted process improvement.',
+                'id'   => $this->options('name') . '_description',
+                'type' => 'textarea',
+            ),
+            array(
+                'name' => 'Status',
+                'desc' => 'This will display the status of the submitted process improvement (e.g. Reviewed, In Review, Waiting for Review, etc.).',
+                'id'   => $this->options('name') . '_status',
+                'type' => 'text',
+            ),
+            array(
+                'name'    => 'Action',
+                'desc'    => 'This will display and icon indicating the action taken for the given submitted process improvement.',
+                'id'      => $this->options('name') . '_action',
+                'type'    => 'radio',
+                'options' => array(
+                    'Waiting'   => 'pi_waiting.png',
+                    'In Review' => 'pi_in_review.png',
+                    'Reviewed'  => 'pi_reviewed.png',
+                )
+            ),
+            array(
+                'name' => 'Outcome Document',
+                'desc' => 'Use this to store the outcome document that will be displayed along side the submitted process improvement.',
+                'id'   => $this->options('name') . '_outcome_doc',
+                'type' => 'file',
+            ),
+        );
+    }
+}
+
 ?>

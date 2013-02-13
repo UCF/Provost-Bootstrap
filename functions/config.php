@@ -63,7 +63,8 @@ Config::$custom_post_types = array(
 	'Update',
 	'HomeImage',
 	'Unit',
-	'AwardProgram'
+	'AwardProgram',
+    'ProcessImprovement'
 );
 
 Config::$custom_taxonomies = array(

@@ -417,3 +417,47 @@ function sc_org_chart($attrs) {
 	return ob_get_clean();
 }
 add_shortcode('sc-org-chart', 'sc_org_chart');
+
+function sc_submitted_proposals($attrs) {
+    $proposal_limit = $attrs['limit'];
+    require_once('custom-post-types.php');
+    $proposals = get_posts(array(
+        'post_type'        => 'process_improvement',
+        'numberposts' => $proposal_limit,
+        'orderby'     => 'date',
+        'order'       => 'ASC',
+    ));
+    ob_start();
+    ?>
+    <div>
+        <h3>Submitted Proposals</h3>
+        <table id="pi_proposal_list" class="table table-condensed table-striped">
+            <thead>
+                <tr>
+                    <th>SUBMITTED</th>
+                    <th>DESCRIPTION</th>
+                    <th>STATUS</th>
+                    <th>OUTCOME</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php foreach($proposals as $post): setup_postdata($post);?>
+                <tr>
+                    <td><?=the_date('m/d/Y'); ?></td>
+                    <td><?=get_post_meta($post->ID, 'process_improvement_description', true); ?></td>
+                    <td><img src="<?=THEME_IMG_URL . '/' . get_post_meta($post->ID, 'process_improvement_action', true); ?>" /> <?=get_post_meta($post->ID, 'process_improvement_status', true); ?></td>
+                    <td>
+                    <?php $meta_value = get_post_meta($post->ID, 'process_improvement_outcome_doc', true); ?>
+                    <?php if(!empty($meta_value)): ?>
+                        <a href="<?=wp_get_attachment_url($meta_value); ?>">Outcome</a>
+                    <?php endif; ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <?php
+    echo ob_get_clean();
+}
+add_shortcode('sc-submitted-proposals', 'sc_submitted_proposals');
