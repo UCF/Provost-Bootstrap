@@ -435,8 +435,8 @@ function sc_recent_proposals($attrs) {
                 <tr>
                     <th>SUBMITTED</th>
                     <th>DESCRIPTION</th>
-                    <th>STATUS</th>
                     <th>ACTION</th>
+                    <th>STATUS</th>
                     <th>OUTCOME</th>
                 </tr>
             </thead>
@@ -445,15 +445,15 @@ function sc_recent_proposals($attrs) {
                 <tr>
                     <td><?=$date->format('m/d/Y'); ?></td>
                     <td><?=get_post_meta($post->ID, 'process_improvement_description', true); ?></td>
-                    <td>
+                   <td><?= get_post_meta($post->ID, 'process_improvement_action', true); ?></td>
+                   <td>
                     <?php $status_image = get_post_meta($post->ID, 'process_improvement_status_icon', true); ?>
                     <?php if (!empty($status_image)): ?>
                         <img src="<?=THEME_IMG_URL . '/' . $status_image; ?>" />
                     <?php endif; ?>
                        <?=get_post_meta($post->ID, 'process_improvement_status', true); ?>
                     </td>
-                    <td><?= get_post_meta($post->ID, 'process_improvement_action', true); ?></td>
-                    <td>
+                     <td>
                     <?php $meta_value = get_post_meta($post->ID, 'process_improvement_outcome_doc', true); ?>
                     <?php if(!empty($meta_value)): ?>
                         <a href="<?=wp_get_attachment_url($meta_value); ?>">Outcome</a><a class="<?=ProcessImprovement::get_document_application($post); ?>" href="<?=wp_get_attachment_url($meta_value); ?>"></a>
