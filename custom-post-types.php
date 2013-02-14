@@ -628,7 +628,8 @@ class ProcessImprovement extends CustomPostType {
         $add_new_item   = 'Add New Process Improvement',
         $edit_item      = 'Edit Process Improvement',
         $new_item       = 'New Process Improvement',
-        $use_metabox    = True;
+        $use_metabox    = True,
+        $use_revisions  = False;
 
     public function fields() {
         return array(
@@ -645,7 +646,7 @@ class ProcessImprovement extends CustomPostType {
                 'type' => 'text',
             ),
             array(
-                'name' => 'Description',
+                'name' => 'Short Description',
                 'desc' => 'This will display the short description of the submitted process improvement.',
                 'id'   => $this->options('name') . '_description',
                 'type' => 'textarea',
@@ -657,15 +658,21 @@ class ProcessImprovement extends CustomPostType {
                 'type' => 'text',
             ),
             array(
-                'name'    => 'Action',
-                'desc'    => 'This will display and icon indicating the action taken for the given submitted process improvement.',
-                'id'      => $this->options('name') . '_action',
+                'name'    => 'Status Icon',
+                'desc'    => 'This will display and icon indicating the status for the given submitted process improvement.',
+                'id'      => $this->options('name') . '_status_icon',
                 'type'    => 'radio',
                 'options' => array(
-                    'Waiting'   => 'pi_waiting.png',
-                    'In Review' => 'pi_in_review.png',
-                    'Reviewed'  => 'pi_reviewed.png',
+                    'Exclamation' => 'pi_waiting.png',
+                    'Question'    => 'pi_in_review.png',
+                    'Check'       => 'pi_reviewed.png',
                 )
+            ),
+            array(
+                'name' => 'Action',
+                'desc' => 'This will dipslay the action taken for the given submitted process improvement.',
+                'id'   => $this->options('name') . '_action',
+                'type' => 'text',
             ),
             array(
                 'name' => 'Outcome Document',
@@ -674,6 +681,22 @@ class ProcessImprovement extends CustomPostType {
                 'type' => 'file',
             ),
         );
+    }
+
+    static function get_document_application($form){
+        return mimetype_to_application(self::get_mimetype($form));
+    }
+
+
+    static function get_mimetype($form){
+        if (is_numeric($form)){
+            $form = get_post($form);
+        }
+
+        $prefix   = post_type($form);
+        $document = get_post(get_post_meta($form->ID, $prefix.'_outcome_doc', True));
+
+        return $document->post_mime_type;
     }
 }
 

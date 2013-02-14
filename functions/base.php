@@ -1530,7 +1530,7 @@ function _show_meta_boxes($post, $meta_box){
 			<?php break; case 'radio':?>
 				<?php foreach ($field['options'] as $k=>$v):?>
 				<label for="<?=$field['id']?>_<?=slug($k, '_')?>"><?=$k?></label>
-				<input type="radio" name="<?=$field['id']?>" id="<?=$field['id']?>_<?=slug($k, '_')?>" value="<?=$v?>"<?=($current_value == $v) ? ' checked="checked"' : ''?> />
+				<input type="radio" name="<?=$field['id']?>" id="<?=$field['id']?>_<?=slug($k, '_')?>" value="<?=$v?>"<?=($current_value == $v) ? ' checked="checked"' : ''?> />&nbsp;
 				<?php endforeach;?>
 			
 			<?php break; case 'checkbox':?>

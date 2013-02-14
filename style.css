@@ -184,7 +184,7 @@ ul.menu li:last-child:after, ul.menu li.last:after{content: " " !important;}
 .word{background-position: 0 -108px;}
 .html{background-position: 0 -126px;}
 
-.document {padding-left: 25px;font-size:16px;margin-bottom:12px;width:100%;}
+.document {font-size:16px;}
 
 /* Events */
 .events {border-spacing: 0 20px; border-collapse:separate;margin-top:-15px;}
@@ -235,12 +235,26 @@ ul.menu li:last-child:after, ul.menu li.last:after{content: " " !important;}
 }
 
 /* Process Improvement Proposals */
+.pi_proposal_year {
+    border-bottom: 1px dotted black;
+}
+
 #pi_proposal_list th {
     font-size: 12px;
 }
 
 #pi_proposal_list td {
     border-top: 1px solid #dddddd;
+}
+
+#pi_proposal_list td a {
+    margin-right: 10px;
+    display: block;
+    float: left;
+}
+
+#pi_proposal_list td img {
+    padding-right: 5px;
 }
 
 #proposal_link {
