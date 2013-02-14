@@ -507,8 +507,8 @@ function sc_all_proposals($attrs) {
                     <tr>
                         <th>SUBMITTED</th>
                         <th>DESCRIPTION</th>
-                        <th>STATUS
                         <th>ACTION</th>
+                        <th>STATUS
                         <th>OUTCOME</th>
                     </tr>
                     </thead>
@@ -518,6 +518,7 @@ function sc_all_proposals($attrs) {
                         <tr>
                             <td><?=$proposal_date->format('m/d/Y'); ?></td>
                             <td><?=get_post_meta($proposal->ID, 'process_improvement_description', true); ?></td>
+                            <td><?=get_post_meta($proposal->ID, 'process_improvement_action', true); ?></td>
                             <td>
                                 <?php $status_image = get_post_meta($proposal->ID, 'process_improvement_status_icon', true); ?>
                                 <?php if (!empty($status_image)): ?>
@@ -525,7 +526,6 @@ function sc_all_proposals($attrs) {
                                 <?php endif; ?>
                                 <?=get_post_meta($proposal->ID, 'process_improvement_status', true); ?>
                             </td>
-                            <td><?=get_post_meta($proposal->ID, 'process_improvement_action', true); ?></td>
                             <td>
                                 <?php $meta_value = get_post_meta($proposal->ID, 'process_improvement_outcome_doc', true); ?>
                                 <?php if(!empty($meta_value)): ?>
