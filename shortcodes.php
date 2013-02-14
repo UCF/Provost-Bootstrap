@@ -433,8 +433,8 @@ function sc_recent_proposals($attrs) {
         <table id="pi_proposal_list" class="table table-striped">
             <thead>
                 <tr>
-                    <th>SUBMITTED</th>
-                    <th>DESCRIPTION</th>
+                    <th class="submitted">SUBMITTED</th>
+                    <th class="description">DESCRIPTION</th>
                     <th>ACTION</th>
                     <th>STATUS</th>
                     <th>OUTCOME</th>
@@ -443,8 +443,8 @@ function sc_recent_proposals($attrs) {
             <tbody>
             <?php foreach($proposals as $post): $date = new DateTime($post->post_date);?>
                 <tr>
-                    <td><?=$date->format('m/d/Y'); ?></td>
-                    <td><?=get_post_meta($post->ID, 'process_improvement_description', true); ?></td>
+                    <td class="submitted"><?=$date->format('m/d/Y'); ?></td>
+                    <td class="description"><?=get_post_meta($post->ID, 'process_improvement_description', true); ?></td>
                    <td><?= get_post_meta($post->ID, 'process_improvement_action', true); ?></td>
                    <td>
                     <?php $status_image = get_post_meta($post->ID, 'process_improvement_status_icon', true); ?>
@@ -505,8 +505,8 @@ function sc_all_proposals($attrs) {
                 <table id="pi_proposal_list" class="table table-striped">
                     <thead>
                     <tr>
-                        <th>SUBMITTED</th>
-                        <th>DESCRIPTION</th>
+                        <th class="submitted">SUBMITTED</th>
+                        <th class="description">DESCRIPTION</th>
                         <th>ACTION</th>
                         <th>STATUS
                         <th>OUTCOME</th>
@@ -516,8 +516,8 @@ function sc_all_proposals($attrs) {
                     <?php while($proposal_date->format('Ym') == $date->format('Ym') && $proposal_index < count($proposals)): setup_postdata($proposal); ?>
 
                         <tr>
-                            <td><?=$proposal_date->format('m/d/Y'); ?></td>
-                            <td><?=get_post_meta($proposal->ID, 'process_improvement_description', true); ?></td>
+                            <td class="submitted"><?=$proposal_date->format('m/d/Y'); ?></td>
+                            <td class="description"><?=get_post_meta($proposal->ID, 'process_improvement_description', true); ?></td>
                             <td><?=get_post_meta($proposal->ID, 'process_improvement_action', true); ?></td>
                             <td>
                                 <?php $status_image = get_post_meta($proposal->ID, 'process_improvement_status_icon', true); ?>

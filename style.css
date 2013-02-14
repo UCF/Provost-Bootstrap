@@ -260,3 +260,9 @@ ul.menu li:last-child:after, ul.menu li.last:after{content: " " !important;}
 #proposal_link {
     text-decoration: none;
 }
+
+.submitted {width:75px;
+}
+
+.description {width:350px;
+}
