@@ -184,7 +184,7 @@ ul.menu li:last-child:after, ul.menu li.last:after{content: " " !important;}
 .word{background-position: 0 -108px;}
 .html{background-position: 0 -126px;}
 
-.document {font-size:16px;}
+.document {padding-left: 25px;font-size:16px;margin-bottom:12px;width:100%;}
 
 /* Events */
 .events {border-spacing: 0 20px; border-collapse:separate;margin-top:-15px;}
@@ -255,6 +255,12 @@ ul.menu li:last-child:after, ul.menu li.last:after{content: " " !important;}
 
 #pi_proposal_list td img {
     padding-right: 5px;
+}
+
+#pi_proposal_list a.document {
+    padding-left: 0;
+    margin-bottom: 0;
+    width: 18px;
 }
 
 #proposal_link {
