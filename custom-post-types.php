@@ -314,11 +314,6 @@ class Document extends CustomPostType{
 		$x = get_post_meta($form->ID, $prefix.'_url', True);
 		$y = wp_get_attachment_url(get_post_meta($form->ID, $prefix.'_file', True));
 		
-		/* Backward compatibility fix */
-		if ($x && substr($x, 0, 1) == '/') {
-			$x = site_url().$x;
-		}
-		
 		if (!$x and !$y){
 			return '#';
 		}
