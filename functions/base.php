@@ -800,14 +800,32 @@ function mimetype_to_application($mimetype){
 			break;
 		case 'application/msword':
 		case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+		case 'application/vnd.openxmlformats-officedocument.wordprocessingml.template':
+		case 'application/vnd.ms-word.document.macroEnabled.12':
+		case 'application/vnd.ms-word.template.macroEnabled.12':
 			$type = 'word';
 			break;
 		case 'application/msexcel':
 		case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+		case 'application/vnd.ms-excel':
+		case 'application/vnd.ms-excel':
+		case 'application/vnd.ms-excel':
+		case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+		case 'application/vnd.openxmlformats-officedocument.spreadsheetml.template':
+		case 'application/vnd.ms-excel.sheet.macroEnabled.12':
+		case 'application/vnd.ms-excel.template.macroEnabled.12':
+		case 'application/vnd.ms-excel.addin.macroEnabled.12':
+		case 'application/vnd.ms-excel.sheet.binary.macroEnabled.12':
 			$type = 'excel';
 			break;
 		case 'application/vnd.ms-powerpoint':
 		case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
+		case 'application/vnd.openxmlformats-officedocument.presentationml.template':
+		case 'application/vnd.openxmlformats-officedocument.presentationml.slideshow':
+		case 'application/vnd.ms-powerpoint.addin.macroEnabled.12':
+		case 'application/vnd.ms-powerpoint.presentation.macroEnabled.12':
+		case 'application/vnd.ms-powerpoint.template.macroEnabled.12':
+		case 'application/vnd.ms-powerpoint.slideshow.macroEnabled.12':
 			$type = 'powerpoint';
 			break;
 	}
