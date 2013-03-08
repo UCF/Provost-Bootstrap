@@ -808,9 +808,6 @@ function mimetype_to_application($mimetype){
 		case 'application/msexcel':
 		case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
 		case 'application/vnd.ms-excel':
-		case 'application/vnd.ms-excel':
-		case 'application/vnd.ms-excel':
-		case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
 		case 'application/vnd.openxmlformats-officedocument.spreadsheetml.template':
 		case 'application/vnd.ms-excel.sheet.macroEnabled.12':
 		case 'application/vnd.ms-excel.template.macroEnabled.12':
