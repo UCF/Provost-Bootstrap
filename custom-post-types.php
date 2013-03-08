@@ -681,8 +681,14 @@ class ProcessImprovement extends CustomPostType {
                 'type' => 'text',
             ),
             array(
+                'name' => 'Outcome URL',
+                'desc' => 'Use this to link to the outcome URL stored on another website it will be displayed along side the submitted process improvement. Must include http://.',
+                'id'   => $this->options('name') . '_outcome_url',
+                'type' => 'text',
+            ),
+            array(
                 'name' => 'Outcome Document',
-                'desc' => 'Use this to store the outcome document that will be displayed along side the submitted process improvement.',
+                'desc' => 'Use this to upload the outcome document and store it on this site. It will be displayed along side the submitted process improvement.',
                 'id'   => $this->options('name') . '_outcome_doc',
                 'type' => 'file',
             ),

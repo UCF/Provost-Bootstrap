@@ -452,9 +452,16 @@ function sc_recent_proposals($attrs) {
                     <?php endif; ?>
                        <?=get_post_meta($post->ID, 'process_improvement_status', true); ?>
                     </td>
-                   <td><?= get_post_meta($post->ID, 'process_improvement_action', true); ?></td>
-                     <td>
+                    <td><?= get_post_meta($post->ID, 'process_improvement_action', true); ?></td>
+                    <td>
                     <?php $meta_value = get_post_meta($post->ID, 'process_improvement_outcome_doc', true); ?>
+                    <?php $meta_url_value = get_post_meta($post->ID, 'process_improvement_outcome_url', true); ?>
+                    <?php if(!empty($meta_url_value)): ?>
+                    	<a href="<?=$meta_url_value; ?>">Outcome</a><a class="html" href="<?=$meta_url_value; ?>"></a>
+                    	<?php if(!empty($meta_value)): ?>
+                    		<br />
+                    	<?php endif; ?>
+                	<?php endif; ?>
                     <?php if(!empty($meta_value)): ?>
                         <a href="<?=wp_get_attachment_url($meta_value); ?>">Outcome</a><a class="<?=ProcessImprovement::get_document_application($post); ?>" href="<?=wp_get_attachment_url($meta_value); ?>"></a>
                     <?php endif; ?>
@@ -528,9 +535,16 @@ function sc_all_proposals($attrs) {
                             <td><?=get_post_meta($proposal->ID, 'process_improvement_action', true); ?></td>
                             <td>
                                 <?php $meta_value = get_post_meta($proposal->ID, 'process_improvement_outcome_doc', true); ?>
-                                <?php if(!empty($meta_value)): ?>
-                                <a href="<?=wp_get_attachment_url($meta_value); ?>">Outcome</a><a class="<?=ProcessImprovement::get_document_application($proposal); ?>" href="<?=wp_get_attachment_url($meta_value); ?>"></a>
-                                <?php endif; ?>
+                                <?php $meta_url_value = get_post_meta($proposal->ID, 'process_improvement_outcome_url', true); ?>
+			                    <?php if(!empty($meta_url_value)): ?>
+			                    	<a href="<?=$meta_url_value; ?>">Outcome</a><a class="html" href="<?=$meta_url_value; ?>"></a>
+			                    	<?php if(!empty($meta_value)): ?>
+			                    		<br />
+			                    	<?php endif; ?>
+			                	<?php endif; ?>
+			                    <?php if(!empty($meta_value)): ?>
+			                        <a href="<?=wp_get_attachment_url($meta_value); ?>">Outcome</a><a class="<?=ProcessImprovement::get_document_application($proposal); ?>" href="<?=wp_get_attachment_url($meta_value); ?>"></a>
+			                    <?php endif; ?>
                             </td>
                         </tr>
                         <?php $proposal = $proposals[(++$proposal_index)] ?>
