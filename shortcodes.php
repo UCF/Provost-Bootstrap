@@ -183,7 +183,7 @@ function sc_post_type_search($params=array(), $content='') {
 		'non_alpha_section_name' => 'Other',
 		'column_width'           => 'span4',
 		'column_count'           => '3',
-		'order_by'               => 'post_title',
+		'order_by'               => 'title',
 		'order'                  => 'ASC',
 		'show_sorting'           => True,
 		'default_sorting'        => 'term',
@@ -262,7 +262,7 @@ function sc_post_type_search($params=array(), $content='') {
 	$by_alpha_posts = get_posts(array(
 		'numberposts' => -1,
 		'post_type'   => $params['post_type_name'],
-		'orderby'     => 'post_title',
+		'orderby'     => 'title',
 		'order'       => 'alpha'
 	));
 	foreach($by_alpha_posts as $post) {
