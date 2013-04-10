@@ -2,7 +2,7 @@
 Theme Name: Provost Theme (Bootstrap)
 Author: UCF Web Communications
 Github Theme URI: https://github.com/UCF/Provost-Bootstrap/tree/minimal
-Version: v0.0.0
+Version: v1.0.9
 */
 
 /* Header */
@@ -17,7 +17,7 @@ Version: v0.0.0
 ul.menu a{font-weight: normal; text-decoration: none; font-size: 16px; margin-right: 5px;}
 ul.menu a:hover{text-decoration: underline;}
 ul.menu {list-style: none; margin: 0; color: #6d6e71; padding: 10px 0 0 0; clear: right;}
-ul.menu li{display: inline-block; margin: 0 6px 16px 0; padding: 0; float: left;}
+ul.menu li{display: inline-block; margin: 0 6px 0 0; padding: 0; float: left;}
 ul.menu li:after{margin-left: 1px; font-size:20px;} 
 :root *> ul.menu li:after {content: "\2022";} /* stupid non-ie hack */
 ul.menu li:last-child:after, ul.menu li.last:after{content: " " !important;}
@@ -25,6 +25,7 @@ ul.menu li:last-child:after, ul.menu li.last:after{content: " " !important;}
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     ul.menu li.last:after{content: "" !important;} 
 }
+ul.menu li a { display: inline-block; }
 
 #header-menu {font-family:'Georgia',serif;}
 #header-menu,
