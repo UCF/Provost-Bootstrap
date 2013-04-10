@@ -176,7 +176,7 @@ ul.menu li a { display: inline-block; }
 .zip,
 .pdf,
 .html,
-.document{background: url('static/img/documents.png') no-repeat; margin: 0 5px 0 0; height: 18px; width: 18px; content: ''; display: inline-block; position: relative; top: 3px;}
+.document{background: url('static/img/documents.png') no-repeat; margin: 0 5px 0 0; padding-left: 25px; line-height: 18px; content: ''; display: inline-block; position: relative; top: 3px;}
 .powerpoint{background-position: 0 -18px;}
 .pdf{background-position: 0 -36px;}
 .missing{background-position: 0 -54px;}
@@ -185,7 +185,7 @@ ul.menu li a { display: inline-block; }
 .word{background-position: 0 -108px;}
 .html{background-position: 0 -126px;}
 
-.document {padding-left: 25px;font-size:16px;margin-bottom:12px;width:100%;}
+.document {font-size:16px;margin-bottom:12px;width:100%;}
 
 /* Events */
 .events {border-spacing: 0 20px; border-collapse:separate;margin-top:-15px;}
