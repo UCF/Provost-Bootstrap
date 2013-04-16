@@ -2,7 +2,7 @@
 Theme Name: Provost Theme (Bootstrap)
 Author: UCF Web Communications
 Github Theme URI: https://github.com/UCF/Provost-Bootstrap/tree/minimal
-Version: v1.0.10
+Version: v1.0.11
 */
 
 /* Header */
@@ -16,16 +16,11 @@ Version: v1.0.10
 /* Header Menu and Footer Menus */
 ul.menu a{font-weight: normal; text-decoration: none; font-size: 16px; margin-right: 5px;}
 ul.menu a:hover{text-decoration: underline;}
-ul.menu {list-style: none; margin: 0; color: #6d6e71; padding: 10px 0 0 0; clear: right;}
-ul.menu li{display: inline-block; margin: 0 6px 0 0; padding: 0; float: left;}
-ul.menu li:after{margin-left: 1px; font-size:20px;} 
-:root *> ul.menu li:after {content: "\2022";} /* stupid non-ie hack */
-ul.menu li:last-child:after, ul.menu li.last:after{content: " " !important;}
-/* Chrome/Safari .last top spacing fix */
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-    ul.menu li.last:before{content: "" !important; padding-top:2px; display:block;} 
-}
-ul.menu li a { display: inline-block; }
+ul.menu{list-style-type: none; margin: 0; color: #6d6e71; padding: 10px 0 0 0; clear: right;}
+ul.menu li{display: block; margin: 0 6px 16px 0; padding: 0; float: left;}
+ul.menu li:after{content: "\2022"; margin-left: 1px;}
+.ie8 ul.menu li:after{content: "";}
+ul.menu .last:after {content: none !important;}
 
 #header-menu {font-family:'Georgia',serif;}
 #header-menu,
@@ -38,12 +33,6 @@ ul.menu li a { display: inline-block; }
 #footer-menu .active a {color:inherit;background-color:inherit;}
 #footer-menu a {font-size:13px;}
 #footer-menu li:after {font-size:15px;}
-#footer-menu li.last:before{content: "" !important; padding-top:1px; display:block;} 
-/*#header-menu li,
-#footer-menu li  {list-style-type:disc;margin-left:8px;}
-#header-menu li:first-child,
-#footer-menu li:first-child {list-style-type:none;margin-left:0;}
-*/
 
 #footer-menu {
 	width:100%;
