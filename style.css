@@ -23,7 +23,7 @@ ul.menu li:after{margin-left: 1px; font-size:20px;}
 ul.menu li:last-child:after, ul.menu li.last:after{content: " " !important;}
 /* Chrome/Safari .last top spacing fix */
 @media screen and (-webkit-min-device-pixel-ratio:0) {
-    ul.menu li.last:after{content: "" !important;} 
+    ul.menu li.last:before{content: "" !important; padding-top:2px; display:block;} 
 }
 ul.menu li a { display: inline-block; }
 
@@ -38,6 +38,7 @@ ul.menu li a { display: inline-block; }
 #footer-menu .active a {color:inherit;background-color:inherit;}
 #footer-menu a {font-size:13px;}
 #footer-menu li:after {font-size:15px;}
+#footer-menu li.last:before{content: "" !important; padding-top:1px; display:block;} 
 /*#header-menu li,
 #footer-menu li  {list-style-type:disc;margin-left:8px;}
 #header-menu li:first-child,
