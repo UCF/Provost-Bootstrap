@@ -499,7 +499,7 @@ function sc_all_proposals($attrs) {
         $proposal_date = $date;
 
         ob_start();
-        while ($date >= $end_date) {
+	while ($date->format('Ym') >= $end_date->format('Ym')) {
             if ($year != intval($date->format('Y'))) {
                 $year = intval($date->format('Y'));
             ?>
