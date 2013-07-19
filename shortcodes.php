@@ -487,7 +487,7 @@ function sc_all_proposals($attrs) {
 			'numberposts' => -1,
 			'meta_key'	  => 'process_improvement_improvement_id',
 			'orderby'     => 'meta_value date',
-			'order'       => 'ASC',
+			'order'       => 'DESC',
 		);
 		$proposals = get_posts($args_ids);
 		$args_noids = array(
