@@ -494,7 +494,7 @@ function sc_all_proposals($attrs) {
 			'post_type'   => 'process_improvement',
 			'numberposts' => -1,
 			'orderby'     => 'date',
-			'order'       => 'ASC',
+			'order'       => 'DESC',
 			'meta_key'	  => 'process_improvement_improvement_id',
 			'meta_value'  => '',
 			'meta_compare' => 'NOT EXISTS',
