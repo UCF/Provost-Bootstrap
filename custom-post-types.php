@@ -255,7 +255,7 @@ class Document extends CustomPostType{
 		$use_editor     = False,
 		$use_shortcode  = True,
 		$use_metabox    = True,
-		$taxonomies     = array('category');
+		$taxonomies     = array('category, post_tag');
 	
 	public function fields(){
 		$fields   = parent::fields();
@@ -420,7 +420,7 @@ class Person extends CustomPostType
 		$use_metabox    = True,
 		$use_thumbnails = True,
 		$use_order      = True,
-		$taxonomies     = array('org_groups', 'category');
+		$taxonomies     = array('org_groups', 'category', 'post_tag');
 
 		public function fields(){
 			$fields = array(
@@ -553,14 +553,14 @@ class Help extends CustomPostType {
 		$documents  = new Document();
 		return array(
 			array(
-				'name' => 'url',
+				'name' => 'URL',
 				'desc' => 'URL',
 				'id'   => $id_prefix.'_url',
 				'type' => 'text',
 			),
 			array(
-				'name'    => 'forms',
-				'desc'    => 'You can define a url or select an existing form.',
+				'name'    => 'Forms',
+				'desc'    => 'You can define a URL or select an existing form.',
 				'id'      => $id_prefix.'_forms',
 				'type'    => 'select',
 				'options' => $documents->get_objects_as_options()
@@ -577,7 +577,8 @@ class Update extends CustomPostType {
 		$add_new_item   = 'Add New Update',
 		$edit_item      = 'Edit Update',
 		$new_item       = 'New Update',
-		$use_shortcode  = True;
+		$use_shortcode  = True,
+		$taxonomies		= array();
 }
 
 class HomeImage extends CustomPostType {
@@ -588,7 +589,9 @@ class HomeImage extends CustomPostType {
 		$add_new_item   = 'Add New Home Image',
 		$edit_item      = 'Edit Home Image',
 		$new_item       = 'New Home Image',
-		$use_thumbnails = True;
+		$use_thumbnails = True,
+		$use_editor		= False,
+		$taxonomies		= array();
 }
 
 class Unit extends CustomPostType {
@@ -623,7 +626,24 @@ class AwardProgram extends CustomPostType {
 		$singular_name  = 'Award Program',
 		$add_new_item   = 'Add New Award Program',
 		$edit_item      = 'Edit Award Program',
-		$new_item       = 'New Award Program';
+		$new_item       = 'New Award Program',
+		$public 		= True,
+		$use_metabox 	= True,
+		$use_thumbnails = True,
+		$use_editor 	= False,
+		$use_title 		= True,
+		$taxonomies		= array();
+
+	public function fields(){
+		return array(
+			array(
+				'name' => 'URL',
+				'desc' => 'URL',
+				'id'   => $this->options('name').'_url',
+				'type' => 'text',
+			),
+		);
+	}
 }
 
 class ProcessImprovement extends CustomPostType {
