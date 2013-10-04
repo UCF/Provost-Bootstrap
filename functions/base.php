@@ -450,6 +450,19 @@ function indent($html, $n){
  ***************************************************************************/
 
 /**
+ * University Header enqueue-ing fix.
+ **/
+function add_id_to_ucfhb($url) {
+    if ( (false !== strpos($url, 'bar/js/university-header.js')) || (false !== strpos($url, 'bar/js/university-header-full.js')) ) {
+      remove_filter('clean_url', 'add_id_to_ucfhb', 10, 3);
+      return "$url' id='ucfhb-script";
+    }
+    return $url;
+}
+add_filter('clean_url', 'add_id_to_ucfhb', 10, 3);
+
+
+/**
  * Walker function to add Bootstrap classes to nav menus using wp_nav_menu()
  * 
  * based on https://gist.github.com/1597994
