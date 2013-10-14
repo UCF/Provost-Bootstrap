@@ -402,7 +402,7 @@ if ($theme_options['bootstrap_enable_responsive'] == 1) {
 
 Config::$scripts = array(
 	array('admin' => True, 'src' => THEME_JS_URL.'/admin.js',),
-	array('name' => 'ucfhb-script', 'src' => 'http://universityheaderqa.smca.ucf.edu/bar/js/university-header.js?use-bootstrap-overrides=1',),
+	array('name' => 'ucfhb-script', 'src' => '//universityheader.ucf.edu/bar/js/university-header.js?use-bootstrap-overrides=1',),
 	//array('name' => 'jquery', 'src' => 'http://code.jquery.com/jquery-1.7.1.min.js',),
 	THEME_STATIC_URL.'/bootstrap/bootstrap/js/bootstrap.js',
 	//THEME_JS_URL.'/jquery-extras.js',
