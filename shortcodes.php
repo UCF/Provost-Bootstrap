@@ -477,83 +477,65 @@ function sc_recent_proposals($attrs) {
 add_shortcode('sc-recent-proposals', 'sc_recent_proposals');
 
 function sc_all_proposals($attrs) {
-	$orderby = $attrs['orderby'] ? $attrs['orderby'] : 'date';
-	$proposals = array();
-
-	// Handle ordering by meta value improvement_ID
-	if ($orderby == 'ImprovementID') {
-		$args_ids = array(
-			'post_type'   => 'process_improvement',
-			'numberposts' => -1,
-			'meta_key'	  => 'process_improvement_improvement_id',
-			'orderby'     => 'meta_value',
-			'order'       => 'DESC',
-		);
-		$proposals = get_posts($args_ids);
-		$args_noids = array(
-			'post_type'   => 'process_improvement',
-			'numberposts' => -1,
-			'orderby'     => 'date',
-			'order'       => 'DESC',
-			'meta_key'	  => 'process_improvement_improvement_id',
-			'meta_value'  => '',
-			'meta_compare' => 'NOT EXISTS',
-		);
-		$proposals = $proposals + get_posts($args_noids); // add posts with improvement IDs in front of others
-	}
-	else {
-		$args = array(
-			'post_type'   => 'process_improvement',
-			'numberposts' => -1,
-			'orderby'     => 'date',
-			'order'       => 'DESC',
-		);
-		$proposals = get_posts($args);
-	}
+    $proposals = get_posts(array(
+        'post_type'   => 'process_improvement',
+        'numberposts' => -1,
+        'orderby'     => 'date',
+        'order'       => 'DESC',
+    ));
 
     if (count($proposals) > 0) {
-    	switch ($orderby) {
-    		// only handle by meta value improvement_ID or by date
-    		case 'ImprovementID':
-    			ob_start();
-    		?>
-    			<table id="pi_proposal_list" class="table table-striped">
-    			    <thead>
-    			    <tr>
-    			        <th class="submitted">SUBMITTED</th>
-    			        <th class="id">ID</th>
-    			        <th class="description">DESCRIPTION</th>
-    			        <th>STATUS</th>
-    			        <th>ACTION</th>
-    			        <th>OUTCOME</th>
-    			     </tr>
-    			    </thead>
-    			    <tbody>
-    			<?php
-    			foreach ($proposals as $proposal) { 
-    				$submitted 		= date('m/d/Y', strtotime($proposal->post_date));
-    				$id 			= 	get_post_meta($proposal->ID, 'process_improvement_improvement_id', true)
-    									? get_post_meta($proposal->ID, 'process_improvement_improvement_id', true)
-    									: 'n/a';
-    				$desc 			= get_post_meta($proposal->ID, 'process_improvement_description', true);
-    				$status 		= get_post_meta($proposal->ID, 'process_improvement_status', true);
-    				$status_image 	= get_post_meta($proposal->ID, 'process_improvement_status_icon', true);
-    				$action 		= get_post_meta($proposal->ID, 'process_improvement_action', true);
-    				$meta_value 	= get_post_meta($proposal->ID, 'process_improvement_outcome_doc', true);
-    				$meta_url_value = get_post_meta($proposal->ID, 'process_improvement_outcome_url', true);
-    			?>	                
+        $proposal = $proposals[0];
+        $last_proposal = $proposals[count($proposals) - 1];
+
+        $date = new DateTime($proposal->post_date);
+        $end_date = new DateTime($last_proposal->post_date);
+        $interval = new DateInterval("P1M");
+
+        // So the first year will be printed
+        $year = intval($date->format('Y')) + 1;
+
+        $proposal_index = 0;
+        $proposal_date = $date;
+
+        ob_start();
+	while ($date->format('Ym') >= $end_date->format('Ym')) {
+            if ($year != intval($date->format('Y'))) {
+                $year = intval($date->format('Y'));
+            ?>
+                <br />
+                <h3 class="pi_proposal_year"><?=$year; ?></h3>
+            <?php } ?>
+            <h4><?=$date->format('F'); ?></h4>
+
+            <?php if ($proposal_date->format('Ym') == $date->format('Ym')): ?>
+                <table id="pi_proposal_list" class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th class="submitted">SUBMITTED</th>
+                        <th class="description">DESCRIPTION</th>
+                        <th>STATUS</th>
+                        <th>ACTION</th>
+                        <th>OUTCOME</th>
+                     </tr>
+                    </thead>
+                    <tbody>
+                    <?php while($proposal_date->format('Ym') == $date->format('Ym') && $proposal_index < count($proposals)): setup_postdata($proposal); ?>
+
                         <tr>
-                            <td class="submitted"><?=$submitted?></td>
-                            <td class="id"><?=$id?></td>
-                            <td class="description"><?=$desc?></td>
+                            <td class="submitted"><?=$proposal_date->format('m/d/Y'); ?></td>
+                            <td class="description"><?=get_post_meta($proposal->ID, 'process_improvement_description', true); ?></td>
                             <td>
+                                <?php $status_image = get_post_meta($proposal->ID, 'process_improvement_status_icon', true); ?>
                                 <?php if (!empty($status_image)): ?>
                                 <img src="<?=THEME_IMG_URL . '/' . $status_image; ?>" />
                                 <?php endif; ?>
-                                <?=$status?>
+                                <?=get_post_meta($proposal->ID, 'process_improvement_status', true); ?>
                             </td>
-                            <td><?=$action?></td>
+                            <td><?=get_post_meta($proposal->ID, 'process_improvement_action', true); ?></td>
                             <td>
+                                <?php $meta_value = get_post_meta($proposal->ID, 'process_improvement_outcome_doc', true); ?>
+                                <?php $meta_url_value = get_post_meta($proposal->ID, 'process_improvement_outcome_url', true); ?>
 			                    <?php if(!empty($meta_url_value)): ?>
 			                    	<a href="<?=$meta_url_value; ?>">Outcome</a><a class="html" href="<?=$meta_url_value; ?>"></a>
 			                    	<?php if(!empty($meta_value)): ?>
@@ -565,94 +547,18 @@ function sc_all_proposals($attrs) {
 			                    <?php endif; ?>
                             </td>
                         </tr>
-	            <?php
-    			} ?>
+                        <?php $proposal = $proposals[(++$proposal_index)] ?>
+                        <?php $proposal_date = new DateTime($proposal->post_date); ?>
+                    <?php endwhile; ?>
                     </tbody>
                 </table>
-
-                <?php
-    			return ob_get_clean();
-    			break;
-
-    		default:
-
-		        $proposal = $proposals[0];
-		        $last_proposal = $proposals[count($proposals) - 1];
-
-		        $date = new DateTime($proposal->post_date);
-		        $end_date = new DateTime($last_proposal->post_date);
-		        $interval = new DateInterval("P1M");
-
-		        // So the first year will be printed
-		        $year = intval($date->format('Y')) + 1;
-
-		        $proposal_index = 0;
-		        $proposal_date = $date;
-
-		        ob_start();
-				while ($date->format('Ym') >= $end_date->format('Ym')) {
-		            if ($year != intval($date->format('Y'))) {
-		                $year = intval($date->format('Y'));
-		            ?>
-		                <br />
-		                <h3 class="pi_proposal_year"><?=$year; ?></h3>
-		            <?php } ?>
-		            <h4><?=$date->format('F'); ?></h4>
-
-		            <?php if ($proposal_date->format('Ym') == $date->format('Ym')): ?>
-		                <table id="pi_proposal_list" class="table table-striped">
-		                    <thead>
-		                    <tr>
-		                        <th class="submitted">SUBMITTED</th>
-		                        <th class="description">DESCRIPTION</th>
-		                        <th>STATUS</th>
-		                        <th>ACTION</th>
-		                        <th>OUTCOME</th>
-		                     </tr>
-		                    </thead>
-		                    <tbody>
-		                    <?php while($proposal_date->format('Ym') == $date->format('Ym') && $proposal_index < count($proposals)): setup_postdata($proposal); ?>
-
-		                        <tr>
-		                            <td class="submitted"><?=$proposal_date->format('m/d/Y'); ?></td>
-		                            <td class="description"><?=get_post_meta($proposal->ID, 'process_improvement_description', true); ?></td>
-		                            <td>
-		                                <?php $status_image = get_post_meta($proposal->ID, 'process_improvement_status_icon', true); ?>
-		                                <?php if (!empty($status_image)): ?>
-		                                <img src="<?=THEME_IMG_URL . '/' . $status_image; ?>" />
-		                                <?php endif; ?>
-		                                <?=get_post_meta($proposal->ID, 'process_improvement_status', true); ?>
-		                            </td>
-		                            <td><?=get_post_meta($proposal->ID, 'process_improvement_action', true); ?></td>
-		                            <td>
-		                                <?php $meta_value = get_post_meta($proposal->ID, 'process_improvement_outcome_doc', true); ?>
-		                                <?php $meta_url_value = get_post_meta($proposal->ID, 'process_improvement_outcome_url', true); ?>
-					                    <?php if(!empty($meta_url_value)): ?>
-					                    	<a href="<?=$meta_url_value; ?>">Outcome</a><a class="html" href="<?=$meta_url_value; ?>"></a>
-					                    	<?php if(!empty($meta_value)): ?>
-					                    		<br />
-					                    	<?php endif; ?>
-					                	<?php endif; ?>
-					                    <?php if(!empty($meta_value)): ?>
-					                        <a href="<?=wp_get_attachment_url($meta_value); ?>">Outcome</a><a class="<?=ProcessImprovement::get_document_application($proposal); ?>" href="<?=wp_get_attachment_url($meta_value); ?>"></a>
-					                    <?php endif; ?>
-		                            </td>
-		                        </tr>
-		                        <?php $proposal = $proposals[(++$proposal_index)] ?>
-		                        <?php $proposal_date = new DateTime($proposal->post_date); ?>
-		                    <?php endwhile; ?>
-		                    </tbody>
-		                </table>
-		            <?php endif; ?>
+            <?php endif; ?>
 
 
-		            <?php $date->sub($interval); ?>
-			    <?php
-			        }
-			    }
-
-			    return ob_get_clean();
-    			break;
-    	}
+            <?php $date->sub($interval); ?>
+    <?php
+        }
+    }
+    return ob_get_clean();
 }
 add_shortcode('sc-all-proposals', 'sc_all_proposals');

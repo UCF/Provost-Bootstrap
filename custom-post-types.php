@@ -659,12 +659,6 @@ class ProcessImprovement extends CustomPostType {
 
     public function fields() {
         return array(
-        	array(
-        	    'name' => 'ID',
-        	    'desc' => 'To identify what type of improvement this process related to.',
-        	    'id'   => $this->options('name') . '_improvement_id',
-        	    'type' => 'text',
-        	),
             array(
                 'name' => 'Name',
                 'desc' => 'The person that submitted the process improvement.',
