@@ -313,7 +313,6 @@ Config::$links = array(
 # Header styles
 Config::$styles = array(
 	array('admin' => True, 'src' => THEME_CSS_URL.'/admin.css',),
-	'http://universityheader.ucf.edu/bar/css/bar.css',
 	THEME_STATIC_URL.'/bootstrap/bootstrap/css/bootstrap.css',
 );
 
@@ -345,13 +344,20 @@ if ($theme_options['bootstrap_enable_responsive'] == 1) {
 
 # Scripts (output in footer)
 Config::$scripts = array(
-	array('name' => 'jquery', 'src' => 'http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js',),
 	array('admin' => True, 'src' => THEME_JS_URL.'/admin.js',),
-	'http://universityheader.ucf.edu/bar/js/university-header.js',
+	'//universityheader.ucf.edu/bar/js/university-header.js',
 	THEME_STATIC_URL.'/bootstrap/bootstrap/js/bootstrap.js',
 	array('name' => 'base-script',  'src' => THEME_JS_URL.'/webcom-base.js',),
 	THEME_STATIC_URL.'/js/script.js',
 );
+
+# Scripts in header
+function jquery_in_header() {
+    wp_deregister_script( 'jquery' );
+    wp_register_script( 'jquery', '//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js');
+    wp_enqueue_script( 'jquery' );
+}
+add_action('wp_enqueue_scripts', 'jquery_in_header');
 
 # Header Meta
 Config::$metas = array(
