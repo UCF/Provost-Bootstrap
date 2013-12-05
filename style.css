@@ -1,8 +1,8 @@
-/*   
+/*
 Theme Name: Provost Theme (Bootstrap)
 Author: UCF Web Communications
 Github Theme URI: https://github.com/UCF/Provost-Bootstrap/tree/minimal
-Version: v1.0.15
+Version: v1.0.16
 */
 
 /* Header */
@@ -37,8 +37,8 @@ ul.menu .last:after {content: none !important;}
 #footer-menu {
 	width:100%;
 	overflow:hidden;
-	border-top:1px dotted black; 
-	font-size:13px; 
+	border-top:1px dotted black;
+	font-size:13px;
 	font-family: 'Helvetica-Neue', Helvetica, serif;
 	padding:10px 0;
 }
@@ -103,7 +103,7 @@ ul.menu .last:after {content: none !important;}
 #home #help-search label {
 	font-family:'Georgia', serif;
 	font-size:16px;
-	color:#C14D00; 
+	color:#C14D00;
 	margin-bottom:2px;
 }
 #home #help-search .form-search { margin-bottom: 0; }
@@ -221,7 +221,7 @@ ul.menu .last:after {content: none !important;}
 	font-size:12px;
 	padding:4px 0 2px;
 }
-#profile img { 
+#profile img {
 	display:block;
 }
 
