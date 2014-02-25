@@ -255,7 +255,7 @@ class Document extends CustomPostType{
 		$use_editor     = False,
 		$use_shortcode  = True,
 		$use_metabox    = True,
-		$taxonomies     = array('category, post_tag');
+		$taxonomies     = array('category', 'post_tag');
 	
 	public function fields(){
 		$fields   = parent::fields();
