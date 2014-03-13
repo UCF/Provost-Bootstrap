@@ -51,7 +51,7 @@ table, td, tr { border-collapse:collapse; margin:0; padding:0; vertical-align:to
 				</td></tr>
 				<tr><td id="left" style="padding: 24px 20px 0 20px;" width="auto">
 					<?php the_content(); ?>
-					<p>Sincerely,<br><img src="<?=THEME_IMG_URL?>/update-signature.gif" alt="Signature&mdash;Tony Waldrop"></p>
+					<p>Sincerely,<br/><br/>Tony Waldrop</p>
 				</td>
 				<td id="right" style="padding: 0 10px;">
 					<div style="padding-top:24px; padding-bottom:15px; line-height: 21px;"><img style="width: auto;" src="<?=THEME_IMG_URL?>/tony-waldrop-photo2.jpg" alt="Tony G. Waldrop, Ph.D. Provost and Vice President for Academic Affairs"></div>
