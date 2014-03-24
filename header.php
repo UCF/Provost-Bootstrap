@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en-US">
 	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<?="\n".header_()."\n"?>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<!--[if IE]>
 		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
