@@ -27,6 +27,20 @@ add_action('after_setup_theme', '__init__');
 
 
 
+/**
+ * Remove height and width
+ */
+function remove_thumbnail_dimensions( $html, $post_id, $post_image_id ) {
+	$post_template = get_post_meta( $post_id, 'custom_post_template', true );
+	if ($post_template ==='dale.php') {
+		$html = preg_replace( '/(width|height)=\"\d*\"\s/', "", $html );
+		$html = preg_replace( '/ wp-post-image/', "", $html );
+	}
+	return $html;
+}
+add_filter( 'post_thumbnail_html', 'remove_thumbnail_dimensions', 10, 3 );
+
+
 # Set theme constants
 #define('DEBUG', True);                  # Always on
 #define('DEBUG', False);                 # Always off

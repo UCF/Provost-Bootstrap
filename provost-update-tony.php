@@ -1,6 +1,9 @@
 <?php
-	/* This HTML is really ugly because it's a modified form of the email template */
-	 
+/*
+WP Post Template: Tony Waldrop
+Description: This HTML is really ugly because it's a modified form of the email template
+*/
+
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -23,7 +26,7 @@ font-size:14px; padding:0; }
 h2 { text-align:center; color:#666; font-family:Georgia, "Times New Roman", Times, serif; font-size:15px; margin-bottom:6px; padding:0; }
 a { color:#660000; text-decoration: none;}
 a:hover { color:#E50606; }
-a img { border: 0; }	
+a img { border: 0; }
 img { border:0; }
 table, td, tr { border-collapse:collapse; margin:0; padding:0; vertical-align:top; }
 #title { position:relative; height:65px; background:url('<?=THEME_IMG_URL?>/update-title.jpg') no-repeat top left; }
@@ -57,7 +60,7 @@ table, td, tr { border-collapse:collapse; margin:0; padding:0; vertical-align:to
 					<div style="padding-top:24px; padding-bottom:15px; line-height: 21px;"><img style="width: auto;" src="<?=THEME_IMG_URL?>/tony-waldrop-photo2.jpg" alt="Tony G. Waldrop, Ph.D. Provost and Vice President for Academic Affairs"></div>
 					<h2>Contact the Provost</h2>
 					<a href="mailto:provostcomments@ucf.edu"><img src="<?=THEME_IMG_URL?>/update-feedback.gif"></a></div>
-					
+
 				</td></tr>
 				<tr><td style="padding: 0 20px;" colspan="2">
 					<div style="font-family:'Lucida Grande', Arial, sans-serif; font-size:11px; margin:0 0 20px 0; border-top:1px solid #ededed;color:#a1a1a1;padding-top:10px;line-height:150%;" id="foot">
