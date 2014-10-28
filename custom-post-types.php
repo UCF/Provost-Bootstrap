@@ -577,9 +577,36 @@ class Update extends CustomPostType {
 		$add_new_item   = 'Add New Update',
 		$edit_item      = 'Edit Update',
 		$new_item       = 'New Update',
+		$use_metabox    = True,
 		$use_shortcode  = True,
 		$use_thumbnails = True,
 		$taxonomies		= array();
+
+	public function fields(){
+		$fields = array(
+			array(
+				'name'    => 'Date',
+				'desc'    => 'The date the update was made (ex. Month Day, Year). Will show up in the Provost Update list.',
+				'id'      => $this->options('name').'_date',
+				'type'    => 'text',
+			),
+		);
+		return $fields;
+	}
+
+
+	/**
+	 * Outputs this item in HTML.  Can be overridden for descendants.
+	 **/
+	public function toHTML($object){
+		$object_title = $object->post_title;
+		$object_date = get_post_meta($object->ID, $this->options('name').'_date', True);
+		if ($object_date) {
+			$object_title = $object_date.' - '.$object_title;
+		}
+		$html = '<a href="'.get_permalink($object->ID).'">'.$object_title.'</a>';
+		return $html;
+	}
 }
 
 class HomeImage extends CustomPostType {
