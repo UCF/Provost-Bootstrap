@@ -140,6 +140,7 @@ the_post();
 							<tr>
 								<td class="ccollapse100pb" style="padding-bottom: 12px;">
 									<table class="tcollapse100" align="right">
+										<?php if (has_post_thumbnail()) : ?>
 										<tr>
 											<td class="ccollapse100" style="padding-bottom: 6px;">
 												<?php
@@ -162,6 +163,7 @@ the_post();
 											</td>
 										</tr>
 										<?php
+											endif;
 											// Make email ready
 											$tmp_content = get_the_content();
 
