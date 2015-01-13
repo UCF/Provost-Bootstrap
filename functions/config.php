@@ -8,22 +8,27 @@
  * @return void
  * @author Jared Lang
  **/
-function __init__(){
-	add_theme_support('menus');
-	add_theme_support('post-thumbnails');
-	register_nav_menu('header-menu', __('Header Menu'));
-	register_nav_menu('footer-menu', __('Footer Menu'));
+function __init__() {
+	add_theme_support( 'menus' );
+	add_theme_support( 'post-thumbnails' );
+	register_nav_menu( 'header-menu', __( 'Header Menu' ) );
+	register_nav_menu( 'footer-menu', __( 'Footer Menu' ) );
+	register_nav_menu( 'foe-menu', __( 'Foundations of Excellence Template Menu' ) );
 
-	foreach(Config::$styles as $style){Config::add_css($style);}
-	foreach(Config::$scripts as $script){Config::add_script($script);}
+	foreach ( Config::$styles as $style ) {
+		Config::add_css( $style );
+	}
+	foreach ( Config::$scripts as $script ) {
+		Config::add_script( $script );
+	}
 
 	global $timer;
 	$timer = Timer::start();
 
-	wp_deregister_script('l10n');
+	wp_deregister_script( 'l10n' );
 	set_defaults_for_options();
 }
-add_action('after_setup_theme', '__init__');
+add_action( 'after_setup_theme', '__init__' );
 
 
 
@@ -148,6 +153,13 @@ Config::$theme_settings = array(
 			'id'          => THEME_OPTIONS_NAME.'[events_url]',
 			'description' => 'Base URL for the calendar you wish to use. Example: <em>http://events.ucf.edu/mycalendar</em>',
 			'value'       => $theme_options['events_url'],
+			'default'     => 'http://events.ucf.edu',
+		)),
+		new TextField(array(
+			'name'        => 'Events Calendar URL for Foundation of Excellence',
+			'id'          => THEME_OPTIONS_NAME.'[foe_events_url]',
+			'description' => 'Base URL for the calendar you wish to use. Example: <em>http://events.ucf.edu/mycalendar</em>',
+			'value'       => $theme_options['foe_events_url'],
 			'default'     => 'http://events.ucf.edu',
 		)),
 	),

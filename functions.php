@@ -60,46 +60,51 @@ function hyphenate($string){
 }
 
 
-function get_events($start=null, $limit=null){
-	$options = get_option(THEME_OPTIONS_NAME);
-	$qstring = (bool)strpos($options['events_url'], '?');
-	$url     = $options['events_url'];
-	if (!$qstring){
+function get_events( $start=null, $limit=null, $calendar_url=null) {
+	$options = get_option( THEME_OPTIONS_NAME );
+
+	$url = $calendar_url;
+	if ( $url === null ) {
+		$url = $options[ 'events_url' ];
+	}
+
+	$qstring = ( bool ) strpos( $url, '?' );
+	if ( !$qstring ) {
 		$url .= '?';
-	}else{
+	} else{
 		$url .= '&';
 	}
 	$url    .= 'upcoming=upcoming&format=rss';
-	$events  = array_reverse(FeedManager::get_items($url));
-	$events  = array_slice($events, $start, $limit);
+	$events  = array_reverse( FeedManager::get_items( $url ) );
+	$events  = array_slice( $events, $start, $limit );
 	return $events;
 }
 
-function display_events($header='h2'){?>
-	<?php $options = get_option(THEME_OPTIONS_NAME);?>
-	<?php $count   = $options['events_max_items']?>
-	<?php $events  = get_events(0, ($count) ? $count : 3);?>
-	<?php if(count($events)):?>
+function display_events( $header='h2', $calendar_url=null ){ ?>
+	<?php $options = get_option( THEME_OPTIONS_NAME ); ?>
+	<?php $count   = $options[ 'events_max_items' ]; ?>
+	<?php $events  = get_events( 0, ( $count ) ? $count : 3, $calendar_url) ;?>
+	<?php if( count( $events ) ) : ?>
 		<table class="table table-condensed events">
-			<?php foreach($events as $item):?>
+			<?php foreach ( $events as $item ) : ?>
 			<tr class="item">
 				<td class="date">
 					<?php
-						$month = $item->get_date("M");
-						$day   = $item->get_date("j");
+						$month = $item->get_date( "M" );
+						$day   = $item->get_date( "j" );
 					?>
-					<div class="month"><?=$month?></div>
-					<div class="day"><?=$day?></div>
+					<div class="month"><?php echo $month; ?></div>
+					<div class="day"><?php echo $day; ?></div>
 				</td>
 				<td class="title">
-					<a href="<?=$item->get_link()?>" class="wrap ignore-external"><?=$item->get_title()?></a>
+					<a href="<?php echo $item->get_link(); ?>" class="wrap ignore-external"><?php echo $item->get_title(); ?></a>
 				</td>
 			</tr>
-			<?php endforeach;?>
+			<?php endforeach; ?>
 		</table>
-	<?php else:?>
+	<?php else : ?>
 		<p>Unable to fetch events</p>
-	<?php endif;?>
+	<?php endif; ?>
 <?php
 }
 
@@ -113,7 +118,7 @@ class FeedManager{
 	static private
 		$feeds        = array(),
 		$cache_length = 3600;
-	
+
 	/**
 	 * Provided a URL, will return an array representing the feed item for that
 	 * URL.  A feed item contains the content, url, simplepie object, and failure
@@ -125,12 +130,12 @@ class FeedManager{
 	static protected function __new_feed($url){
 		$timer = Timer::start();
 		require_once(ABSPATH . WPINC . '/class-feed.php');
-		
+
 		$simplepie = null;
 		$failed    = False;
 		$cache_key = 'feedmanager-'.md5($url);
 		$content   = get_site_transient($cache_key);
-		
+
 		if ($content === False){
 			$content = @file_get_contents($url);
 			if ($content === False){
@@ -141,13 +146,13 @@ class FeedManager{
 				set_site_transient($cache_key, $content, self::$cache_length);
 			}
 		}
-		
+
 		if ($content){
 			$simplepie = new SimplePie();
 			$simplepie->set_raw_data($content);
 			$simplepie->init();
 			$simplepie->handle_content_type();
-			
+
 			if ($simplepie->error){
 				error_log($simplepie->error);
 				$simplepie = null;
@@ -156,7 +161,7 @@ class FeedManager{
 		}else{
 			$failed = True;
 		}
-		
+
 		$elapsed = round($timer->elapsed() * 1000);
 		debug("__new_feed: {$elapsed} milliseconds");
 		return array(
@@ -166,8 +171,8 @@ class FeedManager{
 			'failed'    => $failed,
 		);
 	}
-	
-	
+
+
 	/**
 	 * Returns all the items for a given feed defined by URL
 	 *
@@ -183,10 +188,10 @@ class FeedManager{
 		}else{
 			return array();
 		}
-		
+
 	}
-	
-	
+
+
 	/**
 	 * Retrieve the current cache expiration value.
 	 *
@@ -196,8 +201,8 @@ class FeedManager{
 	static public function get_cache_expiration(){
 		return self::$cache_length;
 	}
-	
-	
+
+
 	/**
 	 * Set the cache expiration length for all feeds from this manager.
 	 *
@@ -209,8 +214,8 @@ class FeedManager{
 			self::$cache_length = (int)$expire;
 		}
 	}
-	
-	
+
+
 	/**
 	 * Returns all items from the feed defined by URL and limited by the start
 	 * and limit arguments.
@@ -220,7 +225,7 @@ class FeedManager{
 	 **/
 	static public function get_items($url, $start=null, $limit=null){
 		if ($start === null){$start = 0;}
-		
+
 		$items = self::__get_items($url);
 		$items = array_slice($items, $start, $limit);
 		return $items;
@@ -228,7 +233,7 @@ class FeedManager{
 }
 
 /**
- * Uses the google search appliance to search the current site or the site 
+ * Uses the google search appliance to search the current site or the site
  * defined by the argument $domain.
  *
  * @return array
@@ -262,19 +267,19 @@ function get_search_results(
 		'sitesearch' => $domain,
 		'q'          => $query,
 	);
-	
+
 	if (strlen($query) > 0){
 		$query_string = http_build_query($arguments);
 		$url          = $search_url.'?'.$query_string;
 		$response     = file_get_contents($url);
-		
+
 		if ($response){
 			$xml   = simplexml_load_string($response);
 			$items = $xml->RES->R;
 			$total = $xml->RES->M;
-			
+
 			$temp = array();
-			
+
 			if ($total){
 				foreach($items as $result){
 					$item            = array();
@@ -290,7 +295,7 @@ function get_search_results(
 			$results['number'] = $total;
 		}
 	}
-	
+
 	return $results;
 }
 ?>
