@@ -2,7 +2,7 @@
 /**
  * Template Name: Foundations of Excellence
  **/
-disallow_direct_load( 'page.php' );
+disallow_direct_load( 'template-foe.php' );
 get_header();
 the_post();
 ?>
