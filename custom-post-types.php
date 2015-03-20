@@ -380,7 +380,8 @@ class Page extends CustomPostType {
 		$use_order      = True,
 		$use_title      = True,
 		$use_metabox    = True,
-		$built_in       = True;
+		$built_in       = True,
+		$taxonomies     = array('category', 'post_tag');		
 
 	public function fields() {
 		$prefix = $this->options('name').'_';

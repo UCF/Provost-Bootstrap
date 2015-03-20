@@ -7,7 +7,7 @@
 		</div>
 		
 		<div id="sidebar" class="span3 offset1">
-			<?php get_template_part('includes/sidebar') ?>
+			<?php get_template_part('includes/subpage-sidebar') ?>
 		</div>
 	</div>
 <?php get_footer();?>

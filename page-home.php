@@ -62,10 +62,10 @@
 			</div>
 		</div>
 		<div class="row" id="middle">
-			<div class="span12">
-				<div class="row">
+						<div class="span12">
+							<div class="row">
 					<?php foreach(get_menu_pages('home-menu') as $i=>$page):?>
-						<div class="span3"><a href="<?=get_page_link($page->ID)?>">
+						<div class="span2"><a href="<?=get_page_link($page->ID)?>">
 							<?=get_the_post_thumbnail($page->ID)?>
 							<span class="title"><?=$page->post_title?></span>
 						</a></div>
@@ -75,9 +75,6 @@
 		</div>
 		<div id="bottom" class="row">
 			<div class="span12">
-				<div class="row">
-					<h2 class="span12">Reporting to the Provost</h2>
-				</div>
 				<div class="row">
 					<!-- Colleges-->
 					<div id="home-colleges" class="span5">
@@ -106,32 +103,14 @@
 						<?php endforeach;?>
 					</div>
 					<!--Units -->
-					<div id="home-units" class="span4">
-						<h3>Academic&nbsp;Affairs&nbsp;Units</h3>
-						<?php foreach(get_posts(array(
-							'numberposts' => -1,
-							'orderby'     => 'post_title',
-							'order'       => 'ASC',
-							'post_type'   => 'provost_unit',
-							'category'    => get_category_by_slug('academic-unit')->term_id,
-						)) as $i=>$unit):?>
-							<div class="unit">
-								<?php $url = get_post_meta($unit->ID, 'provost_unit_url', True);?>
-								<?php if($url):?>
-								<a href="<?=get_post_meta($unit->ID, 'provost_unit_url', True)?>">
-									<?=get_the_post_thumbnail($unit->ID)?>
-									<span class="name"><?=hyphenate($unit->post_title)?></span>
-								</a>
-								<?php else:?>
-								<div>
-									<?=get_the_post_thumbnail($unit->ID)?>
-									<span class="name"><?=hyphenate($unit->post_title)?></span>
-								</div>
-								<?php endif;?>
-							</div>
-						<?php endforeach;?>
-					</div>
+					<div id="home-resources" class="span4">
+						<h3>Resources&nbsp;&amp;&nbsp;Links</h3>
+						<div class="sidebar">
+						<?php $sidebar_width = 4; get_template_part('includes/resources-menu'); ?>
+						</div>
+					</div>	
 					<div id="sidebar" class="span3">
+					<h3>Events at UCF</h3>
 						<?php $sidebar_width = 3; get_template_part('includes/sidebar'); ?>
 					</div>
 				</div>

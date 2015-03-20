@@ -49,10 +49,10 @@ ul.menu .last:after {content: none !important;}
 
 /* Sidebar */
 #sidebar {padding-top: 75px;}
-#sidebar h3 {font-size:16px;color:#C14D00;font-weight:normal;line-height:1em;margin-bottom:15px;}
+#sidebar h3 {font-size:17px;color:#C14D00;font-weight:normal;line-height:1em;margin-bottom:15px;}
 *+html #sidebar #sidebar-events h3 {margin-bottom: 30px; margin-top: 20px;}
 #sidebar ul > li {margin-bottom:7px;}
-#sidebar ul > li > a {font-size:15px;text-decoration:underline}
+#sidebar ul > li > a {font-size:13px;text-decoration:underline}
 
 /* Faculty Resources */
 #faculty-resources .faculty-award-programs {margin-bottom:40px;}
@@ -132,8 +132,9 @@ ul.menu .last:after {content: none !important;}
 	padding: 20px 0 10px 0 !ie;
 }
 #home #home-colleges h3,
-#home #home-units h3 {font-family:'Georgia',serif;color:#666;font-size:21px;font-weight:normal;line-height:26px;}
-#home #home-units {margin-left:19px;border-right:1px solid #e1e1e1;}
+#home #home-resources h3 {font-family:'Georgia',serif;color:#666;font-size:21px;font-weight:normal;line-height:26px;}
+#home #home-resources {margin-left:19px;border-right:1px solid #e1e1e1;}
+#home #home-resources ul > li {margin-bottom:7px;}
 #home .college,
 #home .unit {position:relative; float: left; overflow: hidden; margin: 0 10px 15px 0; width: 110px; height:92px;}
 #home .college .name,
@@ -193,9 +194,9 @@ ul.menu .last:after {content: none !important;}
 	box-shadow: 0 0 15px #CCCCCC;
 	overflow:hidden;
 }
-.events .month{font-size: 18px;}
-.events .day{font-size: 16px;}
-.events .title{font-size: 14px; text-align: left; padding-left:10px;padding-top:0;}
+.events .month{font-size: 17px;}
+.events .day{font-size: 15px;;margin-bottom:5px;}
+.events .title{font-size: 13px; text-align: left; padding-left:10px;padding-top:0;margin-bottom:2px;}
 .events .title a {text-decoration:underline;}
 .events .title .wrap{display: block; max-height: 65px;overflow:hidden}
 
