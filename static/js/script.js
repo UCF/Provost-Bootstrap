@@ -5,13 +5,13 @@ Generic.resizeSearch = function($){
 	var height        = form.height();
 	var search_field  = form.find('.search-field');
 	var search_button = form.find('.search-submit');
-	
+
 	var loops = 0;
-	
+
 	while (form.height() == height){
 		var width = search_field.width();
 		search_field.width(++width);
-		
+
 		loops++;
 		if (loops > 1024){break;}
 	}
@@ -21,16 +21,16 @@ Generic.resizeSearch = function($){
 Generic.homeDimensions = function($){
 	var cls = this;
 	cls.home_element = $('#home');
-	
+
 	cls.resizeToHeight = function(element, target_height){
 		if(element.length < 1){return;}
-		
+
 		var loops = 0;
-		
+
 		var difference = function(){
 			return Math.abs(element.height() - target_height);
 		};
-		
+
 		// Adjust smaller if the text is too large
 		while (element.height() > target_height){
 			var current_font_size = parseInt(element.css('font-size'));
@@ -40,8 +40,8 @@ Generic.homeDimensions = function($){
 			}
 			if (++loops > 1024){break;}
 		}
-		
-		
+
+
 		// Adjust larger if the text is too small
 		while (element.height() < target_height && difference() > 8){
 			var current_font_size = parseInt(element.css('font-size'));
@@ -53,32 +53,32 @@ Generic.homeDimensions = function($){
 			if (++loops > 1024){break;}
 			console.log(element.height(), target_height, current_font_size);
 		}
-		
+
 		element.height(target_height);
 	};
-	
+
 	cls.uniformHeight = function(){
 		var template = cls.home_element.data()['template'];
-		
+
 		if (template == "home-nodescription"){
 			cls.resizeToHeight($('.content'), $('.site-image').height());
 		}
-		
+
 		if (template == "home-description"){
 			cls.resizeToHeight($('.right-column .description'), $('.site-image').height() - $('.search').height());
 		}
 		return;
 	};
-	
+
 	if (cls.home_element.length < 1){return;}
-	
+
 	cls.uniformHeight();
 };
 
 
 Generic.defaultMenuSeparators = function($) {
 	// Because IE sucks, we're removing the last stray separator
-	// on default navigation menus for browsers that don't 
+	// on default navigation menus for browsers that don't
 	// support the :last-child CSS property
 	$('.menu.horizontal li:last-child').addClass('last');
 };
@@ -120,7 +120,7 @@ Generic.mobileNavBar = function($) {
 			}
 		}
 	}
-	
+
 	if ( !($.browser.msie && $.browser.version < 9) ) { /* Don't resize in IE8 or older */
 		adjust_mobile_nav();
 		$(window).resize(function() {
@@ -151,7 +151,7 @@ Generic.PostTypeSearch = function($) {
 				typing_timer = null,
 				typing_delay = 300, // milliseconds
 
-				prev_post_id_sum = null, // Sum of result post IDs. Used to cache results 
+				prev_post_id_sum = null, // Sum of result post IDs. Used to cache results
 
 				MINIMUM_SEARCH_MATCH_LENGTH = 2;
 
@@ -215,6 +215,7 @@ Generic.PostTypeSearch = function($) {
 				if(search_term.length < MINIMUM_SEARCH_MATCH_LENGTH) {
 					results.empty();
 					results.hide();
+          prev_post_id_sum = null;
 					return;
 				}
 				// Find the search matches
@@ -249,7 +250,7 @@ Generic.PostTypeSearch = function($) {
 						if(post_id_sum != prev_post_id_sum) {
 							results.empty();
 							prev_post_id_sum = post_id_sum;
-							
+
 
 							// Slice the elements into their respective columns
 							elements_per_column = Math.ceil(elements.length / column_count);
@@ -286,7 +287,7 @@ if (typeof jQuery != 'undefined'){
 		Webcom.analytics($);
 		Webcom.handleExternalLinks($);
 		Webcom.loadMoreSearchResults($);
-		
+
 		/* Theme Specific Code Here */
 		//Generic.homeDimensions($);
 		//Generic.resizeSearch($);
