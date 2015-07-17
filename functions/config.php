@@ -4,7 +4,7 @@
  * Responsible for running code that needs to be executed as wordpress is
  * initializing.  Good place to register scripts, stylesheets, theme elements,
  * etc.
- * 
+ *
  * @return void
  * @author Jared Lang
  **/
@@ -73,10 +73,10 @@ function __init__(){
 	));
 	foreach(Config::$styles as $style){Config::add_css($style);}
 	foreach(Config::$scripts as $script){Config::add_script($script);}
-	
+
 	global $timer;
 	$timer = Timer::start();
-	
+
 	wp_deregister_script('l10n');
 	set_defaults_for_options();
 }
@@ -189,7 +189,7 @@ Config::$theme_settings = array(
 			'id'          => THEME_OPTIONS_NAME.'[events_url]',
 			'description' => 'Base URL for the calendar you wish to use. Example: <em>http://events.ucf.edu/mycalendar</em>',
 			'value'       => $theme_options['events_url'],
-			'default'     => 'http://events.ucf.edu',
+			'default'     => 'http://events.ucf.edu/upcoming/feed.rss',
 		)),
 	),
 	'News' => array(
@@ -383,21 +383,21 @@ Config::$styles = array(
 );
 
 if ($theme_options['bootstrap_enable_responsive'] == 1) {
-	array_push(Config::$styles, 
+	array_push(Config::$styles,
 		THEME_STATIC_URL.'/bootstrap/bootstrap/css/bootstrap-responsive.css'
-	);		
+	);
 }
 
-array_push(Config::$styles,	
+array_push(Config::$styles,
 	plugins_url( 'gravityforms/css/forms.css' ),
-	THEME_CSS_URL.'/webcom-base.css', 
+	THEME_CSS_URL.'/webcom-base.css',
 	get_bloginfo('stylesheet_url')
 );
 
 if ($theme_options['bootstrap_enable_responsive'] == 1) {
-	array_push(Config::$styles, 
+	array_push(Config::$styles,
 		THEME_URL.'/style-responsive.css'
-	);	
+	);
 }
 
 Config::$scripts = array(
@@ -424,6 +424,6 @@ function jquery_in_header() {
     wp_deregister_script( 'jquery' );
     wp_register_script( 'jquery', '//code.jquery.com/jquery-1.7.1.min.js');
     wp_enqueue_script( 'jquery' );
-}    
- 
+}
+
 add_action('wp_enqueue_scripts', 'jquery_in_header');
