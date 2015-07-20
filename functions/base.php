@@ -129,7 +129,7 @@ class Config {
  * */
 abstract class Field {
 	protected function check_for_default() {
-		if ( $this->value === null ) {
+		if ( ( $this->value === null || $this->value === '' ) && isset( $this->default ) ) {
 			$this->value = $this->default;
 		}
 	}
@@ -184,9 +184,17 @@ abstract class Field {
  * @author Jared Lang
  * */
 abstract class ChoicesField extends Field{
+	// Ensure 'default' value is added to choices if it isn't already
+	protected function add_default_to_choices() {
+		if ( isset( $this->default ) && !array_key_exists( $this->default, $this->choices ) ) {
+			$this->choices = array( $this->default => '' ) + $this->choices;
+		}
+	}
+
 	function __construct( $attr ) {
 		$this->choices = @$attr['choices'];
 		parent::__construct( $attr );
+		$this->add_default_to_choices();
 	}
 }
 
@@ -232,7 +240,7 @@ class TextareaField extends Field{
 	function input_html() {
 		ob_start();
 ?>
-		<textarea id="<?php echo htmlentities( $this->id )?>" name="<?php echo htmlentities( $this->id )?>"><?php echo htmlentities( $this->value )?></textarea>
+		<textarea cols="60" rows="4" id="<?php echo htmlentities( $this->id ); ?>" name="<?php echo htmlentities( $this->id ); ?>"><?php echo $this->value; ?></textarea>
 		<?php
 		return ob_get_clean();
 	}
@@ -252,6 +260,27 @@ class SelectField extends ChoicesField{
 		<select name="<?php echo htmlentities( $this->id )?>" id="<?php echo htmlentities( $this->id )?>">
 			<?php foreach ( $this->choices as $key=>$value ):?>
 			<option<?php if ( $this->value == $value ):?> selected="selected"<?php endif;?> value="<?php echo htmlentities( $value )?>"><?php echo htmlentities( $key )?></option>
+			<?php endforeach;?>
+		</select>
+		<?php
+		return ob_get_clean();
+	}
+}
+
+
+/**
+ * Multiselect form element
+ *
+ * @package default
+ * @author Jo Dickson
+ * */
+class MultiselectField extends ChoicesField{
+	function input_html() {
+		ob_start();
+?>
+		<select multiple name="<?php echo htmlentities( $this->id ); ?>[]" id="<?php echo htmlentities( $this->id ); ?>">
+			<?php foreach ( $this->choices as $key=>$value ): ?>
+			<option<?php if ( in_array( $value, $this->value ) ) : ?> selected="selected"<?php endif; ?> value="<?php echo htmlentities( $value ); ?>"><?php echo htmlentities( $key ); ?></option>
 			<?php endforeach;?>
 		</select>
 		<?php
@@ -302,6 +331,59 @@ class CheckboxField extends ChoicesField{
 			</li>
 			<?php endforeach;?>
 		</ul>
+		<?php
+		return ob_get_clean();
+	}
+}
+
+
+class FileField extends Field {
+	function __construct( $attr ) {
+		parent::__construct( $attr );
+		$this->post_id = isset( $attr['post_id'] ) ? $attr['post_id'] : 0;
+		$this->thumbnail = $this->get_attachment_thumbnail_src();
+	}
+
+	function get_attachment_thumbnail_src() {
+		if ( !empty( $this->value ) ) {
+			$attachment = get_post( $this->value );
+			$use_thumb = wp_attachment_is_image( $this->value ) ? false : true;
+			if ( $attachment ) {
+				$src = wp_get_attachment_image_src( $this->value, 'thumbnail', $use_thumb );
+				return $src[0];
+			}
+		}
+		else {
+			return false;
+		}
+	}
+
+	function input_html() {
+		$upload_link = esc_url( get_upload_iframe_src( null, $this->post_id ) );
+
+		ob_start();
+?>
+		<div class="meta-file-wrap">
+			<div class="meta-file-preview">
+				<?php if ( $this->thumbnail ): ?>
+					<img src="<?php echo $this->thumbnail; ?>" alt="File thumbnail" style="max-width:100%;" /><br>
+					<?php echo basename( wp_get_attachment_url( $this->value ) ); ?>
+				<?php else: ?>
+					No file selected.
+				<?php endif; ?>
+			</div>
+
+			<p class="hide-if-no-js">
+				<a class="meta-file-upload <?php if ( !empty( $this->value ) ) { echo 'hidden'; } ?>" href="<?php echo $upload_link; ?>">
+					Add File
+				</a>
+				<a class="meta-file-delete <?php if ( empty( $this->value ) ) { echo 'hidden'; } ?>" href="#">
+					Remove File
+				</a>
+			</p>
+
+			<input class="meta-file-field" id="<?php echo htmlentities( $this->id ); ?>" name="<?php echo htmlentities( $this->id ); ?>" type="hidden" value="<?php echo htmlentities( $this->value ); ?>">
+		</div>
 		<?php
 		return ob_get_clean();
 	}
@@ -398,12 +480,12 @@ function dump() {
  * @return void
  * @author Jared Lang
  * */
-if ( DEBUG ) {
+if ( defined( 'DEBUG' ) ) {
 	function debug( $string ) { /*
 		print "<!-- DEBUG: {$string} -->\n"; */
 	}
-}else {
-	function debug( $string ) {return;}
+} else {
+	function debug( $string ) { return; }
 }
 
 
@@ -415,12 +497,12 @@ if ( DEBUG ) {
  * @return mixed
  * @author Jared Lang
  * */
-if ( DEBUG ) {
+if ( defined( 'DEBUG' ) ) {
 	function debug_callfunc( $func, $args ) {
 		return call_user_func_array( $func, $args );
 	}
 }else {
-	function debug_callfunc( $func, $args ) {return;}
+	function debug_callfunc( $func, $args ) { return; }
 }
 
 
@@ -786,10 +868,10 @@ function get_menu( $name, $classes=null, $id=null, $callback=null ) {
 	if ( $callback === null ) {
 		ob_start();
 ?>
-		<ul<?php if ( $classes ):?> class="<?php echo $classes?>"<?php endif;?><?php if ( $id ):?> id="<?php echo $id?>"<?php endif;?>>
-			<?php foreach ( $items as $key=>$item ): $last = $key == count( $items ) - 1;?>
-			<li<?php if ( $last ):?> class="last"<?php endif;?>><a href="<?php echo $item->url?>"><?php echo $item->title?></a></li>
-			<?php endforeach;?>
+		<ul<?php if ( $classes ): ?> class="<?php echo $classes?>"<?php endif; ?><?php if ( $id ): ?> id="<?php echo $id?>"<?php endif; ?>>
+			<?php foreach ( $items as $key=>$item ): $last = $key == count( $items ) - 1; ?>
+			<li<?php if ( $last ): ?> class="last"<?php endif; ?>><a href="<?php echo $item->url?>"><?php echo $item->title?></a></li>
+			<?php endforeach; ?>
 		</ul>
 		<?php
 		$menu = ob_get_clean();
@@ -814,7 +896,7 @@ function get_search_results(
 	$start=null,
 	$per_page=null,
 	$domain=null,
-	$search_url='http://google.cc.ucf.edu/search'
+	$search_url="http://google.cc.ucf.edu/search"
 ) {
 	$start     = ( $start ) ? $start : 0;
 	$per_page  = ( $per_page ) ? $per_page : 10;
@@ -1090,7 +1172,7 @@ function set_defaults_for_options() {
 	foreach ( Config::$theme_settings as $option ) {
 		if ( is_array( $option ) ) {
 			$options = array_merge( $option, $options );
-		}else {
+		} else {
 			$options[] = $option;
 		}
 	}
@@ -1157,7 +1239,6 @@ function slug( $s, $spaces='-' ) {
  * @author Jared Lang
  * */
 function header_( $tabs=2 ) {
-	opengraph_setup();
 	remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head' );
 	remove_action( 'wp_head', 'index_rel_link' );
 	remove_action( 'wp_head', 'rel_canonical' );
@@ -1167,7 +1248,7 @@ function header_( $tabs=2 ) {
 
 	// If Yoast SEO is activated, assume we're handling ALL SEO-related
 	// modifications with it.  Don't use opengraph_setup().
-	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+	include_once ABSPATH . 'wp-admin/includes/plugin.php';
 	if ( !is_plugin_active( 'wordpress-seo/wp-seo.php' ) ) {
 		opengraph_setup();
 	}
@@ -1332,7 +1413,7 @@ function header_title( $title, $separator ) {
 	}
 	elseif ( is_category() ) {
 		$content = __( 'Category Archives:' );
-		$content .= ' ' . single_cat_title( "", false );;
+		$content .= ' ' . single_cat_title( '', false );
 	}
 	elseif ( is_404() ) {
 		$content = __( 'Not Found' );
@@ -1534,34 +1615,6 @@ function show_meta_boxes( $post ) {
 	return _show_meta_boxes( $post, $meta_box );
 }
 
-function save_file( $post_id, $field ) {
-	$file_uploaded = @!empty( $_FILES[$field['id']] );
-	if ( $file_uploaded ) {
-		require_once ABSPATH.'wp-admin/includes/file.php';
-		$override['action'] = 'editpost';
-		$file               = $_FILES[$field['id']];
-		$uploaded_file      = wp_handle_upload( $file, $override );
-
-		// TODO: Pass reason for error back to frontend
-		if ( $uploaded_file['error'] ) {return;}
-
-		$attachment = array(
-			'post_title'     => $file['name'],
-			'post_content'   => '',
-			'post_type'      => 'attachment',
-			'post_parent'    => $post_id,
-			'post_mime_type' => $file['type'],
-			'guid'           => $uploaded_file['url'],
-		);
-		$id = wp_insert_attachment( $attachment, $file['file'], $post_id );
-		wp_update_attachment_metadata(
-			$id,
-			wp_generate_attachment_metadata( $id, $file['file'] )
-		);
-		update_post_meta( $post_id, $field['id'], $id );
-	}
-}
-
 function save_default( $post_id, $field ) {
 	$old = get_post_meta( $post_id, $field['id'], true );
 	$new = $_POST[$field['id']];
@@ -1591,7 +1644,7 @@ function _save_meta_data( $post_id, $meta_box ) {
 	}
 
 	// check autosave
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+	if ( ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || isset( $_REQUEST['bulk_edit'] ) ) {
 		return $post_id;
 	}
 
@@ -1605,16 +1658,78 @@ function _save_meta_data( $post_id, $meta_box ) {
 	}
 
 	foreach ( $meta_box['fields'] as $field ) {
-		switch ( $field['type'] ) {
-		case 'file':
-			save_file( $post_id, $field );
-			break;
-		default:
-			save_default( $post_id, $field );
-			break;
-		}
+		save_default( $post_id, $field );
 	}
 }
+
+
+/**
+ * Displays meta box fields with current or default values.
+ * */
+function display_meta_box_field( $post_id, $field ) {
+	$field_obj = null;
+	$field['value'] = get_post_meta( $post_id, $field['id'], true );
+
+	// Fix inconsistencies between CPT field array keys and Field obj property names
+	// TODO fix inconsistencies
+	if ( isset( $field['desc'] ) ) {
+		$field['description'] = $field['desc'];
+		unset( $field['desc'] );
+	}
+	if ( isset( $field['options'] ) ) {
+		$field['choices'] = $field['options'];
+		unset( $field['options'] );
+	}
+
+	switch ( $field['type'] ) {
+	case 'text':
+		$field_obj = new TextField( $field );
+		break;
+	case 'textarea':
+		$field_obj = new TextareaField( $field );
+		break;
+	case 'select':
+		$field_obj = new SelectField( $field );
+		break;
+	case 'multiselect':
+		$field_obj = new MultiselectField( $field );
+		break;
+	case 'radio':
+		$field_obj = new RadioField( $field );
+		break;
+	case 'checkbox':
+		$field_obj = new CheckboxField( $field );
+		break;
+	case 'file':
+		$field['post_id'] = $post_id;
+		$field_obj = new FileField( $field );
+		break;
+	default:
+		break;
+	}
+
+	$markup = '';
+
+	if ( $field_obj ) {
+		ob_start();
+?>
+		<tr>
+			<th><?php echo $field_obj->label_html(); ?></th>
+			<td>
+				<?php echo $field_obj->description_html(); ?>
+				<?php echo $field_obj->input_html(); ?>
+			</td>
+		</tr>
+	<?php
+		$markup = ob_get_clean();
+	}
+	else {
+		$markup = '<tr><th></th><td>Don\'t know how to handle field of type '. $field_type .'</td></tr>';
+	}
+
+	echo $markup;
+}
+
 
 /**
  * Outputs the html for the fields defined for a given post and metabox.
@@ -1626,69 +1741,13 @@ function _show_meta_boxes( $post, $meta_box ) {
 ?>
 	<input type="hidden" name="meta_box_nonce" value="<?php echo wp_create_nonce( basename( __FILE__ ) )?>"/>
 	<table class="form-table">
-	<?php foreach ( $meta_box['fields'] as $field ):
-		$current_value = get_post_meta( $post->ID, $field['id'], true );?>
-		<tr>
-			<th><label for="<?php echo $field['id']?>"><?php echo $field['name']?></label></th>
-			<td>
-			<?php if ( $field['desc'] ):?>
-				<div class="description">
-					<?php echo $field['desc']?>
-				</div>
-			<?php endif;?>
-
-			<?php switch ( $field['type'] ):
-	case 'text':?>
-				<input type="text" name="<?php echo $field['id']?>" id="<?php echo $field['id']?>" value="<?php echo ( $current_value ) ? htmlentities( $current_value ) : $field['std']?>" />
-
-			<?php break; case 'textarea':?>
-				<textarea name="<?php echo $field['id']?>" id="<?php echo $field['id']?>" cols="60" rows="4"><?php echo ( $current_value ) ? htmlentities( $current_value ) : $field['std']?></textarea>
-
-			<?php break; case 'select':?>
-				<select name="<?php echo $field['id']?>" id="<?php echo $field['id']?>">
-					<option value=""><?php echo ( $field['default'] ) ? $field['default'] : '--'?></option>
-				<?php foreach ( $field['options'] as $k=>$v ):?>
-					<option <?php echo ( $current_value == $v ) ? ' selected="selected"' : ''?> value="<?php echo $v?>"><?php echo $k?></option>
-				<?php endforeach;?>
-				</select>
-
-			<?php break; case 'radio':?>
-				<?php foreach ( $field['options'] as $k=>$v ):?>
-				<label for="<?php echo $field['id']?>_<?php echo slug( $k, '_' )?>"><?php echo $k?></label>
-				<input type="radio" name="<?php echo $field['id']?>" id="<?php echo $field['id']?>_<?php echo slug( $k, '_' )?>" value="<?php echo $v?>"<?php echo ( $current_value == $v ) ? ' checked="checked"' : ''?> />
-				<?php endforeach;?>
-
-			<?php break; case 'checkbox':?>
-				<input type="checkbox" name="<?php echo $field['id']?>" id="<?php echo $field['id']?>"<?php echo ( $current_value ) ? ' checked="checked"' : ''?> />
-
-			<?php break; case 'file':?>
-				<?php
-	$document_id = get_post_meta( $post->ID, $field['id'], True );
-	if ( $document_id ) {
-		$document = get_post( $document_id );
-		$url      = wp_get_attachment_url( $document->ID );
-	}else {
-		$document = null;
+		<?php
+	foreach ( $meta_box['fields'] as $field ) {
+		display_meta_box_field( $post->ID, $field );
 	}
 ?>
-				<?php if ( $document ):?>
-				<a href="<?php echo $url?>"><?php echo $document->post_title?></a><br /><br />
-				<?php endif;?>
-				<input type="file" id="file_<?php echo $post->ID?>" name="<?php echo $field['id']?>"><br />
-
-			<?php break; case 'help':?><!-- Do nothing for help -->
-			<?php break; default:?>
-				<p class="error">Don't know how to handle field of type '<?php echo $field['type']?>'</p>
-			<?php break; endswitch;?>
-			<td>
-		</tr>
-	<?php endforeach;?>
 	</table>
-
-	<?php if ( $meta_box['helptxt'] ):?>
-	<p><?php echo $meta_box['helptxt']?></p>
-	<?php endif;?>
-	<?php
+<?php
 }
 
 ?>
