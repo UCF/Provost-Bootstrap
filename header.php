@@ -44,14 +44,18 @@
 
 		<?php
 		global $post;
-		$post_type = get_post_type( $post->ID );
-		if (
-			( $stylesheet_id = get_post_meta( $post->ID, $post_type.'_stylesheet', True ) ) !== False
-			&& ( $stylesheet_url = wp_get_attachment_url( $stylesheet_id ) ) !== False
-		):
+		if ( $post ):
+			$post_type = get_post_type( $post->ID );
+			if (
+				( $stylesheet_id = get_post_meta( $post->ID, $post_type.'_stylesheet', True ) ) !== False
+				&& ( $stylesheet_url = wp_get_attachment_url( $stylesheet_id ) ) !== False
+			):
 		?>
-		<link rel="stylesheet" href="<?php echo $stylesheet_url; ?>" type="text/css" media="all">
-		<?php endif; ?>
+				<link rel="stylesheet" href="<?php echo $stylesheet_url; ?>" type="text/css" media="all">
+		<?php
+			endif;
+		endif;
+		?>
 
 	</head>
 	<body ontouchstart class="<?php echo body_classes(); ?>">
@@ -59,19 +63,23 @@
 			<div class="row">
 				<div id="header" class="row-border-bottom-top">
 					<h1 class="span9"><a href="<?php echo bloginfo('url'); ?>"><?php echo bloginfo('name'); ?></a></h1>
-					<?php $options = get_option( THEME_OPTIONS_NAME ); ?>
-					<?php if ( $options['facebook_url'] or $options['twitter_url'] ): ?>
+					<?php
+					$facebook_url = get_theme_option( 'facebook_url' );
+					$twitter_url = get_theme_option( 'twitter_url' );
+
+					if ( $facebook_url || $twitter_url ):
+					?>
 					<ul class="social menu horizontal span3">
-						<?php if ( $options['facebook_url'] ): ?>
-						<li><a class="ignore-external facebook" href="<?php echo $options['facebook_url']; ?>">Facebook</a></li>
-						<?php endif;?>
-						<?php if ( $options['twitter_url'] ): ?>
-						<li><a class="ignore-external twitter" href="<?php echo $options['twitter_url']; ?>">Twitter</a></li>
-						<?php endif;?>
+						<?php if ( $facebook_url ): ?>
+						<li><a class="ignore-external facebook" href="<?php echo $facebook_url; ?>">Facebook</a></li>
+						<?php endif; ?>
+						<?php if ( $twitter_url ): ?>
+						<li><a class="ignore-external twitter" href="<?php echo $twitter_url; ?>">Twitter</a></li>
+						<?php endif; ?>
 					</ul>
-					<?php else:?>
+					<?php else: ?>
 					<div class="social span3">&nbsp;</div>
-					<?php endif;?>
+					<?php endif; ?>
 				</div>
 			</div>
 			<?php

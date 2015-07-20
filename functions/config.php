@@ -130,7 +130,21 @@ add_action( 'admin_enqueue_scripts', 'enqueue_backend_theme_assets' );
 
 
 
-// Set theme constants
+/**
+ * Set theme constants
+ **/
+
+define( 'THEME_OPTIONS_GROUP', 'settings' );
+define( 'THEME_OPTIONS_NAME', 'theme' );
+define( 'THEME_OPTIONS_PAGE_TITLE', 'Theme Options' );
+
+$theme_options = get_option( THEME_OPTIONS_NAME );
+
+function get_theme_option( $key ) {
+	global $theme_options;
+	return isset( $theme_options[$key] ) ? $theme_options[$key] : null;
+}
+
 // define( 'DEBUG', True );   # Always on
 // define( 'DEBUG', False );  # Always off
 define( 'DEBUG', isset( $_GET['debug'] ) ); // Enable via get parameter
@@ -142,21 +156,17 @@ define( 'THEME_STATIC_URL', THEME_URL.'/static' );
 define( 'THEME_IMG_URL', THEME_STATIC_URL.'/img' );
 define( 'THEME_JS_URL', THEME_STATIC_URL.'/js' );
 define( 'THEME_CSS_URL', THEME_STATIC_URL.'/css' );
-define( 'THEME_OPTIONS_GROUP', 'settings' );
-define( 'THEME_OPTIONS_NAME', 'theme' );
-define( 'THEME_OPTIONS_PAGE_TITLE', 'Theme Options' );
-
-$theme_options = get_option( THEME_OPTIONS_NAME );
-define( 'GA_ACCOUNT', $theme_options['ga_account'] );
-define( 'CB_UID', $theme_options['cb_uid'] );
-define( 'CB_DOMAIN', $theme_options['cb_domain'] );
+define( 'GA_ACCOUNT', get_theme_option( 'ga_account' ) );
+define( 'CB_UID', get_theme_option( 'cb_uid' ) );
+define( 'CB_DOMAIN', get_theme_option( 'cb_domain' ) );
 
 
 /**
  * Set config values including meta tags, registered custom post types, styles,
  * scripts, and any other statically defined assets that belong in the Config
  * object.
- * */
+ **/
+
 Config::$custom_post_types = array(
 	'Video',
 	'Document',
@@ -166,11 +176,14 @@ Config::$custom_post_types = array(
 	'Post'
 );
 
+
 Config::$custom_taxonomies = array(
 	'OrganizationalGroups'
 );
 
+
 Config::$body_classes = array( 'default', );
+
 
 /**
  * Configure theme settings, see abstract class Field's descendants for
@@ -183,14 +196,14 @@ Config::$theme_settings = array(
 			'id'          => THEME_OPTIONS_NAME.'[gw_verify]',
 			'description' => 'Example: <em>9Wsa3fspoaoRE8zx8COo48-GCMdi5Kd-1qFpQTTXSIw</em>',
 			'default'     => null,
-			'value'       => $theme_options['gw_verify'],
+			'value'       => get_theme_option( 'gw_verify' ),
 		) ),
 		new TextField( array(
 			'name'        => 'Google Analytics Account',
 			'id'          => THEME_OPTIONS_NAME.'[ga_account]',
 			'description' => 'Example: <em>UA-9876543-21</em>. Leave blank for development.',
 			'default'     => null,
-			'value'       => $theme_options['ga_account'],
+			'value'       => get_theme_option( 'ga_account' ),
 		) ),
 	),
 	'Events' => array(
@@ -203,13 +216,13 @@ Config::$theme_settings = array(
 				'On'  => 1,
 				'Off' => 0,
 			),
-			'value'       => $theme_options['enable_events'],
+			'value'       => get_theme_option( 'enable_events' ),
 		) ),
 		new RadioField( array(
 			'name'        => 'Enable Events on Search Page',
 			'id'          => THEME_OPTIONS_NAME.'[enable_search_events]',
 			'description' => 'Display events on the search results page.',
-			'value'       => $theme_options['enable_search_events'],
+			'value'       => get_theme_option( 'enable_search_events' ),
 			'default'     => 1,
 			'choices'     => array(
 				'On'  => 1,
@@ -220,7 +233,7 @@ Config::$theme_settings = array(
 			'name'        => 'Events Max Items',
 			'id'          => THEME_OPTIONS_NAME.'[events_max_items]',
 			'description' => 'Maximum number of events to display whenever outputting event information.',
-			'value'       => $theme_options['events_max_items'],
+			'value'       => get_theme_option( 'events_max_items' ),
 			'default'     => 4,
 			'choices'     => array(
 				'1' => 1,
@@ -234,7 +247,7 @@ Config::$theme_settings = array(
 			'name'        => 'Events Calendar URL',
 			'id'          => THEME_OPTIONS_NAME.'[events_url]',
 			'description' => 'Base URL for the calendar you wish to use. Example: <em>http://events.ucf.edu/mycalendar</em>',
-			'value'       => $theme_options['events_url'],
+			'value'       => get_theme_option( 'events_url' ),
 			'default'     => 'http://events.ucf.edu/upcoming/feed.rss',
 		) ),
 	),
@@ -248,13 +261,13 @@ Config::$theme_settings = array(
 				'On'  => 1,
 				'Off' => 0,
 			),
-			'value'       => $theme_options['enable_news'],
+			'value'       => get_theme_option( 'enable_news' ),
 		) ),
 		new SelectField( array(
 			'name'        => 'News Max Items',
 			'id'          => THEME_OPTIONS_NAME.'[news_max_items]',
 			'description' => 'Maximum number of articles to display when outputting news information.',
-			'value'       => $theme_options['news_max_items'],
+			'value'       => get_theme_option( 'news_max_items' ),
 			'default'     => 2,
 			'choices'     => array(
 				'1' => 1,
@@ -268,7 +281,7 @@ Config::$theme_settings = array(
 			'name'        => 'News Feed',
 			'id'          => THEME_OPTIONS_NAME.'[news_url]',
 			'description' => 'Use the following URL for the news RSS feed <br />Example: <em>http://today.ucf.edu/feed/</em>',
-			'value'       => $theme_options['news_url'],
+			'value'       => get_theme_option( 'news_url' ),
 			'default'     => 'http://today.ucf.edu/feed/',
 		) ),
 	),
@@ -282,21 +295,21 @@ Config::$theme_settings = array(
 				'On'  => 1,
 				'Off' => 0,
 			),
-			'value'       => $theme_options['enable_google'],
+			'value'       => get_theme_option( 'enable_google' ),
 		) ),
 		new TextField( array(
 			'name'        => 'Search Domain',
 			'id'          => THEME_OPTIONS_NAME.'[search_domain]',
 			'description' => 'Domain to use for the built-in google search.  Useful for development or if the site needs to search a domain other than the one it occupies. Example: <em>some.domain.com</em>',
 			'default'     => null,
-			'value'       => $theme_options['search_domain'],
+			'value'       => get_theme_option( 'search_domain' ),
 		) ),
 		new TextField( array(
 			'name'        => 'Search Results Per Page',
 			'id'          => THEME_OPTIONS_NAME.'[search_per_page]',
 			'description' => 'Number of search results to show per page of results',
 			'default'     => 10,
-			'value'       => $theme_options['search_per_page'],
+			'value'       => get_theme_option( 'search_per_page' ),
 		) ),
 	),
 	'Site' => array(
@@ -304,26 +317,26 @@ Config::$theme_settings = array(
 			'name'        => 'Contact Email',
 			'id'          => THEME_OPTIONS_NAME.'[site_contact]',
 			'description' => 'Contact email address that visitors to your site can use to contact you.',
-			'value'       => $theme_options['site_contact'],
+			'value'       => get_theme_option( 'site_contact' ),
 		) ),
 		new TextField( array(
 			'name'        => 'Organization Name',
 			'id'          => THEME_OPTIONS_NAME.'[organization_name]',
 			'description' => 'Your organization\'s name',
-			'value'       => $theme_options['organization_name'],
+			'value'       => get_theme_option( 'organization_name' ),
 		) ),
 		new FileField( array(
 			'name'        => 'Home Image',
 			'id'          => THEME_OPTIONS_NAME.'[site_image]',
 			'description' => 'Image to feature on the homepage.',
-			'value'       => $theme_options['site_image'],
+			'value'       => get_theme_option( 'site_image' ),
 		) ),
 		new TextareaField( array(
 			'name'        => 'Site Description',
 			'id'          => THEME_OPTIONS_NAME.'[site_description]',
 			'description' => 'A quick description of your organization and its role.',
 			'default'     => 'This is the site\'s default description, change or remove it on the <a href="'.get_admin_url().'admin.php?page=theme-options#site">theme options page</a> in the admin site.',
-			'value'       => $theme_options['site_description'],
+			'value'       => get_theme_option( 'site_description' ),
 		) ),
 	),
 	'Social' => array(
@@ -332,13 +345,13 @@ Config::$theme_settings = array(
 			'id'          => THEME_OPTIONS_NAME.'[facebook_url]',
 			'description' => 'URL to the facebook page you would like to direct visitors to.  Example: <em>https://www.facebook.com/CSBrisketBus</em>',
 			'default'     => null,
-			'value'       => $theme_options['facebook_url'],
+			'value'       => get_theme_option( 'facebook_url' ),
 		) ),
 		new TextField( array(
 			'name'        => 'Twitter URL',
 			'id'          => THEME_OPTIONS_NAME.'[twitter_url]',
 			'description' => 'URL to the twitter user account you would like to direct visitors to.  Example: <em>http://twitter.com/csbrisketbus</em>',
-			'value'       => $theme_options['twitter_url'],
+			'value'       => get_theme_option( 'twitter_url' ),
 		) ),
 		new RadioField( array(
 			'name'        => 'Enable Flickr',
@@ -349,20 +362,20 @@ Config::$theme_settings = array(
 				'On'  => 1,
 				'Off' => 0,
 			),
-			'value'       => $theme_options['enable_flickr'],
+			'value'       => get_theme_option( 'enable_flickr' ),
 		) ),
 		new TextField( array(
 			'name'        => 'Flickr Photostream ID',
 			'id'          => THEME_OPTIONS_NAME.'[flickr_id]',
 			'description' => 'ID of the flickr photostream you would like to show pictures from.  Example: <em>65412398@N05</em>',
 			'default'     => '36226710@N08',
-			'value'       => $theme_options['flickr_id'],
+			'value'       => get_theme_option( 'flickr_id' ),
 		) ),
 		new SelectField( array(
 			'name'        => 'Flickr Max Images',
 			'id'          => THEME_OPTIONS_NAME.'[flickr_max_items]',
 			'description' => 'Maximum number of flickr images to display',
-			'value'       => $theme_options['flickr_max_items'],
+			'value'       => get_theme_option( 'flickr_max_items' ),
 			'default'     => 12,
 			'choices'     => array(
 				'6'  => 6,
@@ -382,7 +395,7 @@ Config::$theme_settings = array(
 				'Tabs with dropdowns' => 'nav-tabs',
 				'Pills with dropdowns' => 'nav-pills'
 			),
-			'value'       => $theme_options['bootstrap_menu_styles'],
+			'value'       => get_theme_option( 'bootstrap_menu_styles' ),
 		) ),
 	),
 );
@@ -403,14 +416,14 @@ if ( !is_plugin_active( 'wordpress-seo/wp-seo.php' ) ) {
 				'On'  => 1,
 				'Off' => 0,
 			),
-			'value'       => $theme_options['enable_og'],
+			'value'       => get_theme_option( 'enable_og' ),
 	    )),
 		new TextField(array(
 			'name'        => 'Facebook Admins',
 			'id'          => THEME_OPTIONS_NAME.'[fb_admins]',
 			'description' => 'Comma seperated facebook usernames or user ids of those responsible for administrating any facebook pages created from pages on this site. Example: <em>592952074, abe.lincoln</em>',
 			'default'     => null,
-			'value'       => $theme_options['fb_admins'],
+			'value'       => get_theme_option( 'fb_admins' ),
 		))
 	);
 }
@@ -451,9 +464,9 @@ Config::$metas = array(
 	array( 'name' => 'viewport', 'content' => 'width=device-width, initial-scale=1.0' ),
 );
 
-if ( $theme_options['gw_verify'] ) {
+if ( get_theme_option( 'gw_verify' ) ) {
 	Config::$metas[] = array(
 		'name'    => 'google-site-verification',
-		'content' => htmlentities( $theme_options['gw_verify'] ),
+		'content' => htmlentities( get_theme_option( 'gw_verify' ) ),
 	);
 }

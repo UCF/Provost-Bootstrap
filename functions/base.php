@@ -553,7 +553,7 @@ function bootstrap_menus() {
 	class Bootstrap_Walker_Nav_Menu extends Walker_Nav_Menu {
 
 
-		function start_lvl( &$output, $depth ) {
+		function start_lvl( &$output, $depth = 0, $args = array() ) {
 
 			$indent = str_repeat( "\t", $depth );
 			$output    .= "\n$indent<ul class=\"dropdown-menu\">\n";
@@ -787,8 +787,7 @@ function get_featured_image_url( $post ) {
  * @author Jo Greybill
  * */
 function get_header_styles() {
-	$options = get_option( THEME_OPTIONS_NAME );
-	$id = $options['bootstrap_menu_styles'];
+	$id = get_theme_option( 'bootstrap_menu_styles' );
 
 	switch ( $id ) {
 	case 'nav-tabs':
@@ -1284,19 +1283,20 @@ function footer_( $tabs=2 ) {
  * @author Jared Lang
  * */
 function opengraph_setup() {
-	$options = get_option( THEME_OPTIONS_NAME );
+	if ( !(bool)get_theme_option( 'enable_og' ) ) { return; }
+	if ( is_search() || is_404() ) { return; }
 
-	if ( !(bool)$options['enable_og'] ) {return;}
-	if ( is_search() ) {return;}
+	global $post;
 
-	global $post, $page;
+	if ( !isset( $post ) ) { return; }
+
 	setup_postdata( $post );
 
 	if ( is_front_page() ) {
 		$title       = htmlentities( get_bloginfo( 'name' ) );
 		$url         = get_bloginfo( 'url' );
 		$site_name   = $title;
-	}else {
+	} else {
 		$title     = htmlentities( $post->post_title );
 		$url       = get_permalink( $post->ID );
 		$site_name = htmlentities( get_bloginfo( 'name' ) );
@@ -1341,7 +1341,7 @@ function opengraph_setup() {
 
 
 	// Include admins if available
-	$admins = trim( $options['fb_admins'] );
+	$admins = trim( get_theme_option( 'fb_admins' ) );
 	if ( strlen( $admins ) > 0 ) {
 		$metas[] = array( 'property' => 'fb:admins', 'content' => $admins );
 	}
@@ -1617,7 +1617,7 @@ function show_meta_boxes( $post ) {
 
 function save_default( $post_id, $field ) {
 	$old = get_post_meta( $post_id, $field['id'], true );
-	$new = $_POST[$field['id']];
+	$new = isset( $_POST[$field['id']]) ? $_POST[$field['id']] : null;
 
 	// Update if new is not empty and is not the same value as old
 	if ( $new !== "" and $new !== null and $new != $old ) {
@@ -1639,7 +1639,8 @@ function save_default( $post_id, $field ) {
  * */
 function _save_meta_data( $post_id, $meta_box ) {
 	// verify nonce
-	if ( !wp_verify_nonce( $_POST['meta_box_nonce'], basename( __FILE__ ) ) ) {
+	$nonce = isset( $_POST['meta_box_nonce'] ) ? $_POST['meta_box_nonce'] : null;
+	if ( !wp_verify_nonce( $nonce, basename( __FILE__ ) ) ) {
 		return $post_id;
 	}
 
@@ -1724,7 +1725,7 @@ function display_meta_box_field( $post_id, $field ) {
 		$markup = ob_get_clean();
 	}
 	else {
-		$markup = '<tr><th></th><td>Don\'t know how to handle field of type '. $field_type .'</td></tr>';
+		$markup = '<tr><th></th><td>Don\'t know how to handle field of type '. $field['type'] .'</td></tr>';
 	}
 
 	echo $markup;

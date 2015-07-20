@@ -121,7 +121,8 @@ Generic.mobileNavBar = function($) {
     }
   }
 
-  if ( !($.browser.msie && $.browser.version < 9) ) { /* Don't resize in IE8 or older */
+  /* Only resize in browsers that support media queries/responsive layout */
+  if ( typeof window.matchMedia != 'undefined' || typeof window.msMatchMedia != 'undefined') {
     adjust_mobile_nav();
     $(window).resize(function() {
       adjust_mobile_nav();
@@ -283,7 +284,6 @@ Generic.PostTypeSearch = function($) {
 
 if (typeof jQuery != 'undefined'){
   jQuery(document).ready(function($) {
-    Webcom.slideshow($);
     Webcom.analytics($);
     Webcom.handleExternalLinks($);
     Webcom.loadMoreSearchResults($);
