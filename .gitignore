@@ -21,3 +21,12 @@ CVS
 ._*
 .DS_Store
 Thumbs.db
+
+# Bower
+static/components/*
+
+# Sass stuff
+static/scss/.sass-cache/*
+
+# Gulp
+node_modules/*

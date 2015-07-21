@@ -1,0 +1,204 @@
+// Force sans-serif font on common elements
+input,
+label,
+select,
+textarea {
+  @include no-font-smoothing();
+  font-family: $font-family-sans-serif !important;
+}
+
+
+// GravityForms overrides.  Intended to be used with GF's CSS turned on.
+// There will be several nasty !importants here because GF's assets
+// get loaded after our main stylesheet.
+
+.gform_wrapper {
+  max-width: 100% !important;
+
+  li {
+    margin-bottom: 10px !important;
+  }
+
+  form {
+    margin-bottom: 0;
+  }
+
+  .ginput_container {
+    // Applies .form-control styles to Gravity Form elements by default.
+    input[type="text"],
+    input[type="password"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    input[type="date"],
+    input[type="month"],
+    input[type="time"],
+    input[type="week"],
+    input[type="number"],
+    input[type="email"],
+    input[type="url"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="color"],
+    select,
+    textarea {
+      @extend .form-control;
+      font-size: $font-size-base !important;
+
+      @media (max-width: $screen-xs-max) {
+        font-size: 16px !important;
+      }
+    }
+
+    textarea,
+    select[multiple] {
+      height: auto;
+    }
+  }
+
+  .gform_heading {
+    margin-bottom: 10px;
+  }
+
+  .gform_button {
+    @extend .btn;
+    @extend .btn-primary;
+  }
+
+  .left_label .gfield_label {
+    margin-top: .4em !important; // vertically align label text with input
+  }
+
+  .gfield_checkbox li label,
+  .gfield_radio li label,
+  .gfield_date_day label,
+  .gfield_date_month label,
+  .gfield_date_year label,
+  .gfield_time_ampm label,
+  .gfield_time_hour label,
+  .gfield_time_minute label,
+  .ginput_complex label,
+  .instruction {
+    font-size: $font-size-base !important;
+    font-weight: normal !important;
+    white-space: normal !important;
+  }
+
+  .gfield_checkbox li input {
+    margin-top: .15em !important;
+  }
+
+  .gfield_radio li input {
+    margin-top: .2em !important;
+  }
+
+  .chosen-container-single {
+    height: 38px !important;
+
+    .chosen-single {
+      height: auto !important;
+      padding: 6px 0 6px 8px !important;
+
+      div b {
+        margin-top: 7px !important;
+      }
+    }
+
+    .chosen-search input[type="text"] {
+      margin-bottom: 6px !important;
+      width: 100% !important;
+    }
+
+    .chosen-results li {
+      margin-bottom: 0 !important;
+    }
+  }
+
+  .gfield_required {
+    display: none !important;
+  }
+
+  .gfield_error {
+    background-color: initial !important;
+    border-bottom: 1px solid $state-danger-text !important;
+    border-left: 8px solid $state-danger-text !important;
+    border-right: 1px solid $state-danger-text !important;
+    border-top: 1px solid $state-danger-text !important;
+    box-sizing: border-box;
+    padding-right: 15px !important;
+
+    &,
+    .gfield_label {
+      color: $state-danger-text;
+    }
+
+    // Error overrides for inputs
+    input[type="text"],
+    input[type="password"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    input[type="date"],
+    input[type="month"],
+    input[type="time"],
+    input[type="week"],
+    input[type="number"],
+    input[type="email"],
+    input[type="url"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="color"],
+    select,
+    textarea {
+      border-color: $state-danger-text !important;
+      @include box-shadow(inset 0 1px 1px rgba(0, 0, 0, .075)); // Redeclare so transitions work
+      &:focus {
+        border-color: darken($state-danger-text, 10%) !important;
+        $shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px lighten($state-danger-text, 20%);
+        @include box-shadow($shadow);
+      }
+    }
+
+    .gfield_description,
+    .ginput_container,
+    fieldset legend.gfield_label,
+    .gfield_label {
+      margin-left: 15px !important;
+    }
+  }
+
+  div.validation_error { // selector needs to start with 'div' to match GF declaration
+    @extend .alert;
+    @extend .alert-danger;
+    border: 1px solid $state-danger-border !important;
+    font-size: inherit;
+    font-weight: normal !important;
+    padding: $alert-padding !important;
+  }
+
+  .validation_message {
+    @include no-font-smoothing();
+    font-family: $font-family-sans-serif !important;
+    font-weight: normal;
+    color: $state-danger-text !important;
+  }
+
+  .gallery-row {
+    padding: 15px 0;
+  }
+
+  .aligncenter {
+    @extend .center-block;
+  }
+
+  .alignleft {
+    @extend .pull-left;
+  }
+
+  .alignright {
+    @extend .pull-right;
+  }
+
+  figure.alignnone {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

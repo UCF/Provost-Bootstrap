@@ -437,24 +437,14 @@ Config::$links = array(
 
 Config::$styles = array(
 	array( 'admin' => True, 'src' => THEME_CSS_URL.'/admin.css', ),
-	THEME_STATIC_URL.'/bootstrap/bootstrap/css/bootstrap.css',
-	THEME_STATIC_URL.'/bootstrap/bootstrap/css/bootstrap-responsive.css',
-);
-
-array_push( Config::$styles,
-	plugins_url( 'gravityforms/css/forms.css' ),
-	THEME_CSS_URL.'/webcom-base.css',
-	get_bloginfo( 'stylesheet_url' ),
-	THEME_URL . '/style-responsive.css'
+	THEME_CSS_URL . '/style.min.css'
 );
 
 
 Config::$scripts = array(
 	array( 'admin' => True, 'src' => THEME_JS_URL.'/admin.js', ),
-	array( 'name' => 'ucfhb-script', 'src' => '//universityheader.ucf.edu/bar/js/university-header.js?use-bootstrap-overrides=1', ),
-	THEME_STATIC_URL.'/bootstrap/bootstrap/js/bootstrap.js',
-	array( 'name' => 'base-script',  'src' => THEME_JS_URL.'/webcom-base.js', ),
-	array( 'name' => 'theme-script', 'src' => THEME_JS_URL.'/script.js', ),
+	array( 'name' => 'ucfhb-script', 'src' => '//universityheader.ucf.edu/bar/js/university-header.js', ),
+	array( 'name' => 'theme-script', 'src' => THEME_JS_URL.'/script.min.js', ),
 );
 
 

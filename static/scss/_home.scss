@@ -1,0 +1,11 @@
+#home {
+  margin-top: -25px; // counter .site-main bottom margin
+
+  @media (max-width: $screen-xs-max) {
+    margin-top: -15px;
+  }
+
+  .degree-search-form {
+    text-align: center;
+  }
+}

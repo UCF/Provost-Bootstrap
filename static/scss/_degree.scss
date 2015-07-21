@@ -1,0 +1,655 @@
+// Single degree profile
+.degree {
+
+  h1 {
+    margin-bottom: 20px;
+  }
+
+  .degree-details {
+    @include no-font-smoothing();
+    font-family: $font-family-sans-serif;
+    margin-top: 20px;
+    overflow: auto;
+
+    @media (max-width: $screen-xs-max) {
+      margin-bottom: 5px;
+    }
+
+    dt,
+    dd {
+      display: block;
+      float: left;
+      font-size: 18px;
+      line-height: 1.4;
+      margin-bottom: 10px;
+
+      @media (max-width: $screen-xs-max) {
+        font-size: 16px;
+      }
+    }
+
+    dt {
+      clear: left;
+      text-align: left;
+      width: 35%;
+
+      @media (max-width: $screen-xs-max) {
+        margin-bottom: 2px;
+        width: 100%;
+      }
+    }
+
+    dd {
+      clear: right;
+      width: 65%;
+
+      @media (max-width: $screen-xs-max) {
+        width: 100%;
+      }
+    }
+
+  }
+
+  .credits-required {
+    margin-top: 25px;
+    text-align: center;
+
+    @media (max-width: $screen-xs-max) {
+      margin-top: 0;
+      text-align: left;
+    }
+
+    .credit-hours,
+    .credit-label {
+      font-family: $font-family-sans-serif;
+    }
+
+    .credit-hours {
+      font-size: 34px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .credit-label {
+      font-size: 14px;
+    }
+  }
+
+  .get-started {
+    margin-top: 25px;
+
+    h2 {
+      font-size: 20px;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .glyphicon {
+      display: none;
+    }
+  }
+
+  .affix {
+    left: 0;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+
+    a {
+      padding: 8px;
+
+      .glyphicon {
+        bottom: 0;
+        display: block;
+        line-height: 42px;
+        position: absolute;
+        right: 10px;
+        top: 0;
+      }
+    }
+  }
+
+  .lead {
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+
+  .btn {
+    @include font-smoothing();
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    width: 100%;
+
+    @media (max-width: $screen-sm-max) {
+      font-size: 14px;
+    }
+  }
+
+  .social {
+    float: right;
+    margin-bottom: 20px;
+
+    @media (max-width: $screen-sm-max) {
+      float: left;
+      margin: 0 0 20px;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      margin: 20px 0 0;
+    }
+  }
+}
+
+.degree-callout-box {
+  background-color: $light-gold;
+  font-family: $font-family-sans-serif;
+  font-size: 18px;
+  margin-left: 30px;
+  margin-top: 30px;
+  padding: 30px;
+
+  @media (max-width: $screen-sm-max) {
+    margin-left: 0;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    font-size: 16px;
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 24px;
+    font-weight: 300;
+    margin: 0 0 20px;
+    padding: 0;
+    text-align: center;
+
+    @media (max-width: $screen-xs-max) {
+      font-size: 22px;
+    }
+
+    ~ h2 {
+      margin-top: 30px;
+    }
+  }
+
+  p,
+  li {
+    padding: 10px 0;
+  }
+}
+
+.degree-cta-section {
+  background-color: $ucf-gold;
+  font-size: 16px;
+  margin-top: 0;
+
+  @media (max-width: $screen-sm-max) {
+    margin-bottom: 15px;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    margin-bottom: 0;
+
+    > *:last-child {
+      margin-bottom: 20px !important; // match .degree-callout-box padding
+    }
+  }
+
+  // h2 styles are only used on the -lg and -md .degree-cta-section
+  h2 {
+    font-weight: bold;
+  }
+
+  p,
+  li {
+    padding: 0;
+  }
+
+  .degree-phone {
+    display: inline-block;
+
+    .glyphicon {
+      margin-right: 4px;
+    }
+  }
+
+  .validation_error,
+  .validation_message {
+    font-family: $font-family-sans-serif;
+    font-size: 14px;
+  }
+
+  .or {
+    font-family: $font-family-sans-serif;
+    font-size: 26px;
+    font-weight: 300;
+    margin-bottom: 5px; // expect margin-top: 10px from btn below
+    margin-top: 15px;
+    text-align: center;
+  }
+
+  .btn,
+  .gform_button {
+    @include font-smoothing();
+    font-size: 18px !important;
+    font-weight: 600;
+    margin: 10px 0 0;
+    padding-bottom: 16px !important;
+    padding-top: 16px !important;
+    white-space: normal;
+    width: 100%;
+
+    @include body-prefix('.ie8') {
+      font-size: 16px !important;
+    }
+
+    @media (max-width: $screen-md-max) {
+      font-size: 16px !important;
+    }
+
+    @media (max-width: $screen-sm-max) {
+      font-size: 18px !important;
+    }
+  }
+
+  .gform_button {
+    // Hide icons added to form submit buttons
+    .glyphicon {
+      display: none;
+    }
+  }
+
+  .gform_wrapper {
+    margin: 0;
+    max-width: 100%;
+
+    li {
+      margin-bottom: 0 !important;
+    }
+
+    .small,
+    .medium {
+      width: 100% !important;
+    }
+
+    label.gfield_label {
+      font-size: 16px;
+      margin-top: 1em;
+      margin-bottom: 5px !important;
+    }
+
+    // Force full-width labels and inputs
+    .gf_left_half,
+    .gf_right_half,
+    .left_label .gfield_label,
+    .left_label .ginput_container input {
+      display: block !important;
+      float: left !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      width: 100% !important;
+    }
+
+    .ginput_container {
+      @include clearfix();
+    }
+
+    input,
+    select,
+    textarea {
+      // Prevent zooming on inputs at mobile size
+      @media (max-width: $screen-xs-max) {
+        font-size: 16px !important;
+      }
+    }
+
+    .gform_footer {
+      margin-left: 0 !important;
+      margin-top: 0 !important;
+      padding-bottom: 0 !important;
+      text-align: right;
+      width: 100% !important;
+    }
+
+    .populate-degrees {
+      display: none; // Hide degree dropdown on degree profiles
+    }
+  }
+}
+
+.degree-tuition-section {
+  font-size: 14px;
+
+  .currency {
+    font-size: 34px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-top: 25px;
+    text-align: center;
+
+    + .tuition-label {
+      margin-top: -25px;
+    }
+  }
+
+  .tuition-label {
+    font-style: italic;
+    text-align: center;
+  }
+
+  .description {
+    margin-top: 15px;
+    text-align: center;
+  }
+}
+
+.degree-accreditation-section {
+  background-color: transparent;
+  font-size: 16px;
+  padding: 0;
+}
+
+.degree-content {
+  @media (max-width: $screen-sm-max) {
+    margin-top: 25px;
+  }
+
+  h2,
+  .h2,
+  h3,
+  .h3 {
+    font-weight: bold;
+  }
+
+  h2,
+  .h2 {
+    font-size: 26px;
+  }
+
+  h3,
+  .h3 {
+    font-size: 20px;
+  }
+
+  h4,
+  .h4 {
+    font-size: 17px;
+  }
+
+  .degree-data-table {
+    font-size: 13px;
+  }
+
+  .table-responsive .degree-data-table th,
+  .table-responsive .degree-data-table td {
+    @media (max-width: $screen-xs-max) {
+      min-width: 110px;
+      white-space: normal !important;
+    }
+  }
+}
+
+
+// Featured degree function
+.featured-degree {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-bottom: 15px;
+  min-height: 500px;
+
+  @media (max-width: $screen-sm-max) {
+    background-position: top center;
+    background-size: auto 400px;
+    min-height: 400px;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    background-position: top center;
+    background-size: 150% auto;
+    height: auto;
+  }
+
+  @media (max-width: 480px) {
+    background-size: 180% auto;
+  }
+}
+
+.featured-degree-title,
+.featured-degree-content {
+  margin-top: 30px;
+}
+
+.featured-degree-title {
+  @include no-font-smoothing();
+  font-size: 58px;
+  font-weight: 800;
+  line-height: 1;
+
+  @media (min-width: $screen-lg-min) {
+    font-size: 70px;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    font-size: 32px;
+    margin-top: 10%;
+  }
+
+  a {
+    color: #fff;
+    display: block;
+
+    &:hover,
+    &:active,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+
+  .alt {
+    @include no-font-smoothing();
+    background-color: #444;
+    color: #fff;
+    display: block;
+    float: left;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0;
+    margin-bottom: 20px;
+    padding: 8px 10px;
+    text-transform: uppercase;
+
+    @media (min-width: $screen-lg-min) {
+      font-size: 14px;
+      padding: 10px 12px;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      font-size: 11px;
+      margin-bottom: 10px;
+    }
+
+    + span {
+      clear: both;
+      display: block;
+      filter: progid:DXImageTransform.Microsoft.Shadow(color=#333333, direction=130, strength=3);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, .75);
+    }
+  }
+}
+
+.featured-degree-description {
+  @include no-font-smoothing();
+  color: #fff;
+  filter: progid:DXImageTransform.Microsoft.Shadow(color=#333333, direction=130, strength=3);
+  font-family: $font-family-sans-serif;
+  font-size: 22px;
+  margin-top: 20px;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, .75);
+
+  @media (max-width: $screen-xs-max) {
+    display: none;
+  }
+}
+
+.featured-degree-content {
+  @include no-font-smoothing();
+  background-color: $ucf-gold;
+  background-color: transparentize($ucf-gold, .1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, .25);
+  box-sizing: border-box;
+  color: #000;
+  font-family: $font-family-sans-serif;
+  font-size: 16px;
+  margin-bottom: 25px;
+  margin-left: 30px;
+  padding: 25px;
+
+  @media (max-width: $screen-sm-max) {
+    background-color: $ucf-gold;
+    margin-left: 0;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    font-size: 14px;
+    margin-top: 15px;
+  }
+
+  .gform_wrapper {
+    margin-bottom: 0;
+
+    .gform_heading {
+      margin-bottom: 30px;
+    }
+
+    .gform_footer {
+      margin-left: 0 !important;
+      padding-bottom: 0;
+      text-align: left;
+      width: 100% !important;
+    }
+
+    .gform_button {
+      font-size: 16px !important;
+      font-weight: bold;
+      padding: 8px 20px !important;
+    }
+
+    .left_label .gfield_label {
+      width: 26% !important;
+
+      @media (min-width: $screen-lg-min) {
+        width: 20% !important;
+      }
+
+      @media (max-width: $screen-sm-max) {
+        width: 14% !important;
+      }
+
+      @media (max-width: $screen-xs-max) {
+        width: 24% !important;
+      }
+    }
+
+    .left_label .gfield input,
+    .left_label .gfield select,
+    .left_label .gfield textarea,
+    .left_label .gfield .chosen-container {
+      width: 68.5% !important;
+
+      @media (min-width: $screen-lg-min) {
+        width: 74% !important;
+      }
+
+      @media (max-width: $screen-sm-max) {
+        width: 83% !important;
+      }
+
+      @media (max-width: $screen-xs-max) {
+        width: 70% !important;
+      }
+    }
+
+    // Temporarily hide degree dropdown to make room for MSW phone #
+    .populate-degrees {
+      display: none !important;
+    }
+
+    .chosen-container-single .chosen-search input[type="text"] {
+      @media (min-width: $screen-lg-min) {
+        width: 100% !important;
+      }
+
+      @media (max-width: $screen-sm-max) {
+        width: 100% !important;
+      }
+
+      @media (max-width: $screen-xs-max) {
+        width: 100% !important;
+      }
+    }
+
+    .validation_error {
+      font-size: 14px !important;
+    }
+
+    @media (max-width: 480px) {
+      // Fix some stupid override GF adds for chrome specifically
+      &.gf_browser_chrome select {
+        width: 62.5% !important;
+      }
+    }
+  }
+}
+
+
+// Degree lists
+.degree-list {
+  border-top: 1px solid #eee;
+  list-style: none;
+  padding: 0;
+
+  .degree-title-heading {
+    margin: 0;
+    width: 100%;
+  }
+
+  .program {
+    box-sizing: border-box;
+    display: table;
+    margin-bottom: 0;
+    padding: 0;
+    position: relative;
+    width: 100%;
+
+    a {
+      box-sizing: border-box;
+      color: $brand-primary;
+      display: table;
+      font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
+      font-size: 17px;
+      font-style: normal;
+      font-weight: 400;
+      margin-bottom: 0;
+      padding: 20px;
+      width: 100%;
+
+      &:hover {
+        background: #efefef;
+        color: $brand-primary;
+        text-decoration: none;
+      }
+    }
+
+    &:nth-child(even) {
+      background: #fafafa;
+    }
+  }
+}

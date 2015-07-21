@@ -1,0 +1,345 @@
+// Header, Header navigation
+.site-header {
+  padding: 20px 0;
+
+  @media (max-width: $screen-xs-max) {
+    padding: 10px 0;
+  }
+}
+
+.site-title,
+#site-nav {
+  display: inline-block;
+
+  @media (max-width: $screen-md-max) {
+    display: block;
+  }
+}
+
+.site-title {
+  @include font-smoothing();
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1.1;
+  margin-bottom: 10px;
+  margin-top: 10px;
+
+  @media (max-width: $screen-md-max) {
+    margin-top: 0;
+  }
+
+  @media (max-width: $screen-sm-max) {
+    font-size: 34px;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    float: left;
+    font-size: 24px;
+    margin-bottom: 0;
+  }
+
+  a {
+    color: #000;
+
+    &:hover,
+    &:active,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+
+  .ucf-gold {
+    margin-right: -.3em; // Pull "Online" closer to UCF without removing space btwn words
+  }
+}
+
+#site-nav {
+  margin-left: 50px;
+  
+  @media (max-width: $screen-md-max) {
+    margin-left: 0;
+  }
+  
+  @include body-prefix('.ie8') {
+    display: block;
+    margin-left: 0;
+  };
+
+  @media (max-width: $screen-xs-max) {
+    @include animation-fill-mode(forwards); // NOTE: deprecated mixin
+    @include scale(1, 0);
+    @include transform-origin(top);
+    @include transition(all .3s cubic-bezier(.190, 1, .220, 1));
+    clear: left;
+    float: left;
+    // height: 0;
+    max-height: 0;
+    overflow: hidden;
+    width: 100%;
+
+    &.active {
+      @include scale(1, 1);
+      border: 1px solid $gray-lighter;
+      box-shadow: 0 10px 12px rgba(0, 0, 0, .08);
+      // height: auto;
+      margin: 10px 0;
+      max-height: 1000px; // This is a "hack"; we assume the menu will never exceed 1000px high (lets us trigger height-altering animations).
+      overflow: visible;
+    }
+  }
+}
+
+.header-menu {
+  margin-bottom: 0;
+
+  > li {
+    margin-bottom: 6px;
+    margin-left: 15px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      margin-bottom: 0;
+      margin-left: 0;
+      width: 100%;
+    }
+
+    &.active > a {
+      color: $ucf-gold;
+      text-decoration: underline;
+
+      @media (max-width: $screen-xs-max) {
+        background-color: $ucf-gold;
+        color: #000;
+        text-decoration: none;
+      }
+    }
+
+    > a {
+      color: #000;
+      font-size: 18px;
+      font-weight: 400;
+
+      @media (max-width: $screen-sm-max) {
+        font-size: 15px;
+      }
+    }
+  }
+
+  li {
+    @media (max-width: $screen-xs-max) {
+      padding-right: 0;
+    }
+
+    &.open .dropdown-menu {
+      box-shadow: 0 10px 12px rgba(0, 0, 0, .08);
+
+      @media (max-width: $screen-xs-max) {
+        box-shadow: 0 0 0 transparent;
+        position: relative;
+      }
+    }
+  }
+
+  a {
+    @media (max-width: $screen-xs-max) {
+      display: block;
+      padding: 10px 15px;
+
+      &:hover,
+      &:active,
+      &:focus {
+        background-color: #fafafa;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .dropdown-menu {
+    min-width: 250px;
+
+    @media (max-width: $screen-xs-max) {
+      border: 0 solid transparent;
+      margin-top: 0;
+      padding-bottom: 0;
+      padding-top: 0;
+      width: 100%;
+    }
+
+    a {
+      color: #000;
+      padding: 8px 20px;
+
+      @media (max-width: $screen-xs-max) {
+        padding: 8px 30px;
+      }
+    }
+
+    li.active > a {
+      background-color: $ucf-gold;
+      color: #000;
+    }
+  }
+}
+
+
+// Header contact section
+.header-contact {
+  max-width: 250px;
+  min-width: 200px;
+
+  .btn {
+    font-weight: bold;
+  }
+
+  @media (max-width: $screen-sm-max) {
+    font-size: 13px;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    margin: 20px auto 15px;
+  }
+}
+
+#header-pulldown-toggle {
+  color: #000;
+  display: block;
+  font-weight: bold;
+  margin-top: 6.5px; // attempt to align w/bottom of .site-title
+  padding-right: 32px; // .hamburger width + extra pad
+  position: relative;
+  text-transform: uppercase;
+
+  &.active,
+  &:hover,
+  &:active,
+  &:focus {
+    color: $ucf-gold;
+    text-decoration: none;
+
+    .hamburger {
+      border-bottom-color: $ucf-gold;
+      border-top-color: $ucf-gold;
+    }
+  }
+}
+
+.hamburger {
+  border-bottom: 6px double #000;
+  border-top: 2px solid #000;
+  bottom: 0;
+  content: '';
+  height: 10px;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 24px;
+}
+
+
+// Main body content
+.site-main {
+  @include font-smoothing();
+  font-family: $font-family-serif;
+  font-size: 18px;
+  margin-top: 25px;
+
+  @media (max-width: $screen-xs-max) {
+    font-size: 16px;
+    margin-top: 15px;
+  }
+
+  h1 {
+    margin-top: 0;
+  }
+}
+
+
+// Footer menus
+.footer-menu,
+.footer-contact {
+  font-size: 10px;
+  letter-spacing: .8px;
+
+  a {
+    color: $text-color;
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: #e50606;
+    }
+  }
+}
+
+.footer-menu {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  margin-bottom: 20px;
+  margin-top: 50px;
+
+  li {
+    padding-bottom: 8px;
+    padding-right: 0;
+
+    &:before {
+      content: '|';
+      padding-right: 8px;
+    }
+
+    &:first-child {
+      &:before {
+        content: '';
+        padding-right: 0;
+      }
+    }
+  }
+
+  a {
+    color: #000;
+  }
+}
+
+.social-menu {
+  li {
+    padding-left: 3px;
+    padding-right: 3px;
+  }
+
+  a {
+    @include sprite($url: '../img/footer-social.png', $url-r: '../img/footer-social-r.png', $width: 164px, $height: 30px);
+    height: 35px;
+    width: 32px;
+
+    &[href*="facebook"] {
+      background-position: 1px 0;
+    }
+
+    &[href*="twitter"] {
+      background-position: -66px 1px;
+    }
+
+    &[href*="flickr"] {
+      background-position: -32px 0;
+    }
+
+    &[href*="youtube"] {
+      background-position: -100px 0;
+    }
+
+    &[href*="google"] {
+      background-position: -133px 0;
+    }
+  }
+}
+
+.footer-contact {
+  font-family: $font-family-serif;
+  margin-bottom: 30px;
+
+  address {
+    margin-bottom: 5px;
+  }
+}

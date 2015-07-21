@@ -1,0 +1,394 @@
+// Force sans-serif font on common components
+.alert,
+.badge,
+.breadcrumb,
+.btn,
+.carousel,
+.collapse,
+.dropdown,
+.jumbotron,
+.label,
+.list-group,
+.media,
+.modal,
+.nav,
+.navbar,
+.pagination,
+.panel,
+.well {
+  @include no-font-smoothing();
+  font-family: $font-family-sans-serif;
+}
+
+
+// Buttons
+.btn-ucf {
+  background: $ucf-gold;
+  border: 1px solid darken($ucf-gold, 10%);
+  color: #000;
+
+  &:hover {
+    background: darken($ucf-gold, 10%);
+    border: 1px solid darken($ucf-gold, 15%);
+    color: #fff;
+  }
+}
+
+
+// Two-button inline group.  Collapses to stacked buttons at -sm size.
+.btn-cta {
+  font-weight: bold;
+  width: 48%;
+
+  @media (max-width: $screen-sm-max) {
+    width: 100%;
+  }
+
+  &:first-child {
+    clear: left;
+    float: left;
+
+    @media (max-width: $screen-sm-max) {
+      float: none;
+      margin-bottom: 5px;
+    }
+
+    + .btn-cta {
+      clear: right;
+      float: right;
+
+      @media (max-width: $screen-sm-max) {
+        float: none;
+      }
+    }
+  }
+}
+
+
+// Add animations to dropdowns
+// Adapted from https://gist.github.com/orizens/4994397
+@include body-prefix(':not(.ie8)') {
+  .dropdown-menu {
+    @include animation-fill-mode(forwards); // NOTE: deprecated mixin
+    @include scale(1, 0);
+    @include transform-origin(top);
+    @include transition(all .3s cubic-bezier(.190, 1, .220, 1));
+    box-shadow: 0 0 0 transparent;
+    display: block;
+  }
+
+  .open > .dropdown-menu {
+    @include scale(1, 1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .08);
+  }
+
+  .dropup .dropdown-menu {
+    @include transform-origin(bottom);
+
+    &:after {
+      border-bottom: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid rgba(39, 45, 51, .9);
+      bottom: -6px;
+      content: '';
+      display: inline-block;
+      left: 50%;
+      position: absolute;
+      top: auto;
+    }
+  }
+}
+
+
+.dl-vertical {
+  dt,
+  dd {
+    display: block;
+    float: left;
+    font-size: 14px;
+    line-height: 1.3em;
+    margin-bottom: 4px;
+  }
+
+  dt {
+    clear: left;
+    margin-left: 0;
+    overflow: hidden;
+    text-align: left;
+    text-overflow: ellipsis;
+    width: 50%;
+  }
+
+  dd {
+    clear: right;
+    margin-left: 0;
+    overflow: hidden;
+    text-align: right;
+    text-overflow: ellipsis;
+    width: 50%;
+  }
+}
+
+
+.sidebar {
+  background-color: $gray-lighter;
+  border: 0 solid transparent;
+  margin-bottom: 20px;
+  padding: 15px 25px;
+
+  // Can't use ^= selector here to match the start of a -col class, so
+  // loop thru all column sizes (except full-width, col-xx-12).
+  $cols: 11;
+  @for $i from 1 through $cols {
+
+    &.col-lg-#{$i} {
+      @media (min-width: $screen-lg-min) {
+        &.pull-left {
+          margin-right: 30px;
+        }
+
+        &.pull-right {
+          margin-left: 30px;
+        }
+      }
+    }
+
+    &.col-md-#{$i} {
+      @media (min-width: $screen-md-min) {
+        &.pull-left {
+          margin-right: 30px;
+        }
+
+        &.pull-right {
+          margin-left: 30px;
+        }
+      }
+    }
+
+    &.col-sm-#{$i} {
+      @media (min-width: $screen-sm-min) {
+        &.pull-left {
+          margin-right: 30px;
+        }
+
+        &.pull-right {
+          margin-left: 30px;
+        }
+      }
+    }
+
+    &,
+    &.col-xs-#{$i} {
+      @media (max-width: $screen-xs-max) {
+        // Just disable sidebar width values this small
+        width: 100%;
+      }
+    }
+
+  }
+}
+
+
+// Modals
+.modal-dialog {
+  margin-top: 75px; // UCF Header height + 25px pad
+}
+
+
+// Social Buttons
+.share-twitter,
+.share-facebook,
+.share-googleplus,
+.share-linkedin,
+.share-email {
+  @include sprite('../img/social-share-extended.png', '../img/social-share-extended-r.png', 354px, 62px);
+  display: inline-block;
+  height: 31px;
+  margin-top: 5px;
+  width: 70px;
+}
+
+.share-twitter {
+  background-position: -71px 0;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-position: -71px -31px;
+  }
+}
+
+.share-facebook {
+  background-position: 0 0;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-position: 0 -31px;
+  }
+}
+
+.share-googleplus {
+  background-position: -142px 0;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-position: -142px -31px;
+  }
+}
+
+.share-linkedin {
+  background-position: -213px 0;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-position: -213px -31px;
+  }
+}
+
+.share-email {
+  background-position: -284px 0;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-position: -284px -31px;
+  }
+}
+
+
+// Live Chat buttons
+.livechat {
+  bottom: 0;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, .5);
+  color: #fff;
+  display: block;
+  font-family: $font-family-sans-serif;
+  font-size: 14px;
+  left: 0;
+  max-width: 120px;
+  padding: 20px 10px;
+  position: fixed;
+  text-align: center;
+  z-index: 99999;
+
+  @media (max-width: $screen-xs-max) {
+    display: none;
+  }
+
+  small {
+    font-size: 11px;
+  }
+
+  .icon-big,
+  .title,
+  .cta {
+    display: block;
+    text-align: center;
+  }
+
+  .icon-big {
+    font-size: 40px;
+    margin-bottom: 15px;
+  }
+
+  .title {
+    text-transform: uppercase;
+  }
+
+  .cta {
+    font-weight: 800;
+    margin-top: 8px;
+  }
+}
+
+.livechat-online {
+  background-color: #23740d;
+}
+
+.livechat-offline {
+  background-color: #494982;
+}
+
+// NOTE: will hide ANY image from PS.  Do not use pre-made buttons from PS
+// with this selector enabled.
+img[src^="http://image.providesupport.com/"],
+img[src^="https://image.providesupport.com/"] {
+  display: none !important;
+}
+
+
+// Spinner icon
+.glyphicon-spin {
+  @include animation(spin 2000ms infinite linear);
+}
+
+@-webkit-keyframes spin {
+  0% {
+    @include rotate(0deg);
+  }
+
+  100% {
+    @include rotate(359deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    @include rotate(0deg);
+  }
+
+  100% {
+    @include rotate(359deg);
+  }
+}
+
+// Big, white-on-yellow bg icons
+.icon-feature {
+  background-color: $ucf-gold;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 45px;
+  padding: 25px;
+}
+
+// Call out box
+.call-out-box {
+  margin-top: 30px;
+  text-align: center;
+
+  .icon-feature {
+    font-size: 26px;
+    padding: 18px;
+  }
+
+  h2 a {
+    font-size: 20px;
+    color: #337ab7;
+  }
+
+  .lead {
+    font-size: 14px;
+  }
+
+  &.horizontal {
+    text-align: left;
+
+    .icon-feature {
+      font-size: 28px;
+      padding: 12px;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin-top: 10px;
+      min-height: 45px;
+      padding-left: 65px;
+    }
+
+  }
+
+}
