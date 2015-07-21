@@ -5,35 +5,6 @@ Github Theme URI: https://github.com/UCF/Wordpress-Generic-Theme
 Version: v1.1.7
 */
 
-/* UCF Header Styles */
-
-#UCFHBSearch_ucf fieldset #q {
-	line-height: 11px;
-	color: #000000;
-	padding: 2px!important;
-	font-size: 11px;
-	font-family: 'Lucida Grande',sans-serif;
-	height: 13px;
-	border-radius: 0;
-	webkit-border-radius: 0;
-	moz-border-radius: 0;
-	margin-bottom: 0;
-	margin-top: 1px;
-}
-
-select#UCFHBHeaderLinks {
-	height: 18px;
-	font-size: 11px;
-	color: #000000;
-	font-family: 'Lucida Grande', sans-serif;
-	border-radius: 0;
-	webkit-border-radius: 0;
-	moz-border-radius: 0;
-	margin-bottom: 0;
-	margin-top: 1px;
-	padding: 0;
-}
-
 
 /* Site Styles */
 
@@ -130,6 +101,9 @@ select#UCFHBHeaderLinks {
 .post-type-search-results {font-size:115%;background-color:#f1f1f1;padding-top:10px;margin-bottom:10px;display:none;}
 .post-type-search-results li {line-height:150%;}
 .post-type-search-sorting {margin-bottom:5px;}
+.search-post-pgsection {
+  display: none;
+}
 
 .pub { display: block; overflow: auto; }
 .pub a img { float: left; margin-bottom: 10px; width: 153px; height: 198px; }
