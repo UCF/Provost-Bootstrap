@@ -29,19 +29,19 @@ function sc_publication( $attr, $content=null ) {
 		$pub = get_page_by_title( $pub_name, OBJECT, 'publication' );
 	}
 
-	$pub->url   = get_post_meta( $pub->ID, "publication_url", True );
+	$pub->url   = get_post_meta( $pub->ID, 'publication_url', true );
 	$pub->thumb = get_the_post_thumbnail( $pub->ID, 'publication-thumb' );
 
 	ob_start(); ?>
 
 	<div class="pub">
-		<a class="track pub-track" title="<?php echo $pub->post_title?>" data-toggle="modal" href="#pub-modal-<?php echo $pub->ID?>">
-			<?php echo $pub->thumb?>
-			<span><?php echo $pub->post_title?></span>
+		<a class="track pub-track" title="<?php echo $pub->post_title; ?>" data-toggle="modal" href="#pub-modal-<?php echo $pub->ID; ?>">
+			<?php echo $pub->thumb; ?>
+			<span><?php echo $pub->post_title; ?></span>
 		</a>
-		<p class="pub-desc"><?php echo $pub->post_content?></p>
-		<div class="modal hide fade" id="pub-modal-<?php echo $pub->ID?>" role="dialog" aria-labelledby="<?php echo $pub->post_title?>" aria-hidden="true">
-			<iframe src="<?php echo $pub->url?>" width="100%" height="100%" scrolling="no"></iframe>
+		<p class="pub-desc"><?php echo $pub->post_content; ?></p>
+		<div class="modal hide fade" id="pub-modal-<?php echo $pub->ID?>" role="dialog" aria-labelledby="<?php echo $pub->post_title; ?>" aria-hidden="true">
+			<iframe src="<?php echo $pub->url; ?>" width="100%" height="100%" scrolling="no"></iframe>
 			<a href="#" class="btn" data-dismiss="modal">Close</a>
 		</div>
 	</div>
@@ -90,7 +90,7 @@ function sc_person_picture_list( $atts ) {
 	?>
 		<div class="span2 person-picture-wrap">
 			<?php if ( $link ): ?><a href="<?php echo get_permalink( $person->ID ); ?>"><?php endif; ?>
-				<img src="<?php echo $image_url ? $image_url : get_bloginfo( 'stylesheet_directory' ).'/static/img/no-photo.jpg'; ?>" />
+				<img src="<?php echo $image_url ? $image_url : get_bloginfo( 'stylesheet_directory' ).'/static/img/no-photo.jpg'; ?>">
 				<div class="name"><?php echo Person::get_name( $person ); ?></div>
 				<div class="title"><?php echo get_post_meta( $person->ID, 'person_jobtitle', True ); ?></div>
 			<?php if ( $link ): ?></a><?php endif; ?>
@@ -259,7 +259,7 @@ function sc_post_type_search( $params=array(), $content='' ) {
 		<div class="post-type-search-header">
 			<form class="post-type-search-form" action="." method="get">
 				<label><?php echo $params['default_search_label']; ?></label>
-				<input type="text" class="span3" placeholder="<?php echo $params['default_search_text']?>" />
+				<input type="text" class="span3" placeholder="<?php echo $params['default_search_text']; ?>">
 			</form>
 		</div>
 		<div class="post-type-search-results"></div>

@@ -211,7 +211,7 @@ class TextField extends Field{
 	function input_html() {
 		ob_start();
 ?>
-		<input type="<?php echo $this->type_attr?>" id="<?php echo htmlentities( $this->id )?>" name="<?php echo htmlentities( $this->id )?>" value="<?php echo htmlentities( $this->value )?>" />
+		<input type="<?php echo $this->type_attr?>" id="<?php echo htmlentities( $this->id )?>" name="<?php echo htmlentities( $this->id )?>" value="<?php echo htmlentities( $this->value )?>">
 		<?php
 		return ob_get_clean();
 	}
@@ -302,7 +302,7 @@ class RadioField extends ChoicesField{
 		<ul class="radio-list">
 			<?php $i = 0; foreach ( $this->choices as $key=>$value ): $id = htmlentities( $this->id ).'_'.$i++;?>
 			<li>
-				<input<?php if ( $this->value == $value ):?> checked="checked"<?php endif;?> type="radio" name="<?php echo htmlentities( $this->id )?>" id="<?php echo $id?>" value="<?php echo htmlentities( $value )?>" />
+				<input<?php if ( $this->value == $value ):?> checked="checked"<?php endif;?> type="radio" name="<?php echo htmlentities( $this->id )?>" id="<?php echo $id?>" value="<?php echo htmlentities( $value )?>">
 				<label for="<?php echo $id?>"><?php echo htmlentities( $key )?></label>
 			</li>
 			<?php endforeach;?>
@@ -326,7 +326,7 @@ class CheckboxField extends ChoicesField{
 		<ul class="checkbox-list">
 			<?php $i = 0; foreach ( $this->choices as $key=>$value ): $id = htmlentities( $this->id ).'_'.$i++;?>
 			<li>
-				<input<?php if ( is_array( $this->value ) and in_array( $value, $this->value ) ):?> checked="checked"<?php endif;?> type="checkbox" name="<?php echo htmlentities( $this->id )?>[]" id="<?php echo $id?>" value="<?php echo htmlentities( $value )?>" />
+				<input<?php if ( is_array( $this->value ) and in_array( $value, $this->value ) ):?> checked="checked"<?php endif;?> type="checkbox" name="<?php echo htmlentities( $this->id )?>[]" id="<?php echo $id?>" value="<?php echo htmlentities( $value )?>">
 				<label for="<?php echo $id?>"><?php echo htmlentities( $key )?></label>
 			</li>
 			<?php endforeach;?>
@@ -366,7 +366,7 @@ class FileField extends Field {
 		<div class="meta-file-wrap">
 			<div class="meta-file-preview">
 				<?php if ( $this->thumbnail ): ?>
-					<img src="<?php echo $this->thumbnail; ?>" alt="File thumbnail" style="max-width:100%;" /><br>
+					<img src="<?php echo $this->thumbnail; ?>" alt="File thumbnail"><br>
 					<?php echo basename( wp_get_attachment_url( $this->value ) ); ?>
 				<?php else: ?>
 					No file selected.
@@ -468,7 +468,7 @@ function dump() {
 	foreach ( $args as $arg ) {
 		$out[] = print_r( $arg, True );
 	}
-	$out = implode( "<br />", $out );
+	$out = implode( "<br>", $out );
 	return "<pre>{$out}</pre>";
 }
 
@@ -1740,7 +1740,7 @@ function display_meta_box_field( $post_id, $field ) {
  * */
 function _show_meta_boxes( $post, $meta_box ) {
 ?>
-	<input type="hidden" name="meta_box_nonce" value="<?php echo wp_create_nonce( basename( __FILE__ ) )?>"/>
+	<input type="hidden" name="meta_box_nonce" value="<?php echo wp_create_nonce( basename( __FILE__ ) )?>">
 	<table class="form-table">
 		<?php
 	foreach ( $meta_box['fields'] as $field ) {

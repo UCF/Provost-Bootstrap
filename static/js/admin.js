@@ -228,7 +228,7 @@ WebcomAdmin.fileUploader = function($) {
         var attachment = frame.state().get('selection').first().toJSON();
 
         // Send the attachment URL to our custom image input field.
-        $previewContainer.html( '<img src="' + attachment.iconOrThumb + '" alt="" style="max-width:100%;"/><br>' + attachment.filename );
+        $previewContainer.html( '<img src="' + attachment.iconOrThumb + '"><br>' + attachment.filename );
 
         // Send the attachment id to our hidden input
         $field.val(attachment.id);

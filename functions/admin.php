@@ -64,7 +64,7 @@ add_action( 'add_meta_boxes', 'shortcode_interface' );
  * */
 function login_scripts() {
 	ob_start();?>
-	<link rel="stylesheet" href="<?php echo THEME_CSS_URL; ?>/admin.css" type="text/css" media="screen" charset="utf-8" />
+	<link rel="stylesheet" href="<?php echo THEME_CSS_URL; ?>/admin.css" type="text/css" media="screen" charset="utf-8">
 	<?php
 	$out = ob_get_clean();
 	print $out;

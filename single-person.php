@@ -23,7 +23,7 @@
 
 				<?php if ( $email != '' ): ?>
 				<hr>
-				<a class="email" href="mailto:<?php echo $email?>"><?php echo $email?></a>
+				<a class="email" href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a>
 				<?php endif; ?>
 
 			</div>
