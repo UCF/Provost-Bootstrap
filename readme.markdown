@@ -1,3 +1,6 @@
+## NOTE: This is a working branch that is NOT complete! (Bootstrap 3 upgrade still WIP) ##
+
+
 # Generic Wordpress Theme for UCF Marketing
 
 Simple theme which includes some of the most common theme elements found in most
@@ -49,7 +52,7 @@ Theme-specific functions only should be defined here.  (Other required
 function files are also included at the top of this file.)
 
 ### shortcodes.php
-Where Wordpress shortcodes can be defined.  See example shortcodes for more 
+Where Wordpress shortcodes can be defined.  See example shortcodes for more
 information.
 
 ### custom-post-types.php
@@ -117,9 +120,9 @@ within Wordpress.  Allows for easy video embed output via shortcode.
 ## Shortcodes
 
 ### [slideshow]
-* All top level elements contained within will be displayed as a slideshow.  
+* All top level elements contained within will be displayed as a slideshow.
 Arguments controlling transition timing and animations are available.
-* Note: this does NOT output a Bootstrap carousel!  To include Bootstrap 
+* Note: this does NOT output a Bootstrap carousel!  To include Bootstrap
 carousels, use the Wordpress HTML editor and insert your content using the
 required Bootstrap classes.
 
