@@ -1,6 +1,6 @@
 			<div id="footer">
 
-				<?php echo wp_nav_menu( array(
+				<?php wp_nav_menu( array(
 					'theme_location' => 'footer-menu',
 					'container' => 'false',
 					'menu_class' => 'menu horizontal',
