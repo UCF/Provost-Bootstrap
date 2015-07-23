@@ -227,7 +227,7 @@ function display_flickr( $header='h2' ) {
 		<<?php echo $header; ?>><a href="<?php echo get_flickr_stream_url(); ?>">Flickr Stream</a></<?php echo $header; ?>>
 		<ul class="flickr-stream">
 			<?php foreach ( $photos as $photo ):?>
-			<li><a class="ignore-external" href="<?php echo $photo['page']?>"><img height="75" width="75" src="<?php echo $photo['square']; ?>" title="<?php echo $photo['title']; ?>" /></a></li>
+			<li><a class="ignore-external" href="<?php echo $photo['page']?>"><img height="75" width="75" src="<?php echo $photo['square']; ?>" title="<?php echo $photo['title']; ?>"></a></li>
 			<?php endforeach;?>
 		</ul>
 	<?php else: ?>
@@ -282,7 +282,7 @@ function display_news( $header='h2' ) {
 				<p>
 					<a class="image ignore-external" href="<?php echo $item->get_link(); ?>">
 						<?php if ( $image ): ?>
-						<img src="<?php echo $image; ?>" alt="Feed image for <?php echo $item->get_title(); ?>" />
+						<img src="<?php echo $image; ?>" alt="Feed image for <?php echo $item->get_title(); ?>">
 						<?php endif; ?>
 					</a>
 					<a class="description ignore-external"  href="<?php echo $item->get_link(); ?>">

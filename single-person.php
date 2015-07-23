@@ -9,7 +9,7 @@
 				$email = get_post_meta($post->ID, 'person_email', True);
 				$phones = Person::get_phones($post);
 			?>
-			<img src="<?=$image_url ? $image_url : get_bloginfo('stylesheet_directory').'/static/img/no-photo.jpg'?>" />
+			<img src="<?=$image_url ? $image_url : get_bloginfo('stylesheet_directory').'/static/img/no-photo.jpg'?>">
 			<? if(count($phones)) { ?>
 			<ul class="phones unstyled">
 				<? foreach($phones as $phone) { ?>
@@ -18,7 +18,7 @@
 			</ul>
 			<? } ?>
 			<? if($email != '') { ?>
-			<hr />
+			<hr>
 			<a class="email" href="mailto:<?=$email?>"><?=$email?></a>
 			<? } ?>
 			</div>

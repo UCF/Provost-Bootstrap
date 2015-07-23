@@ -267,7 +267,7 @@ Config::$theme_settings = array(
 		new TextField( array(
 			'name'        => 'News Feed',
 			'id'          => THEME_OPTIONS_NAME.'[news_url]',
-			'description' => 'Use the following URL for the news RSS feed <br />Example: <em>http://today.ucf.edu/feed/</em>',
+			'description' => 'Use the following URL for the news RSS feed <br>Example: <em>http://today.ucf.edu/feed/</em>',
 			'value'       => $theme_options['news_url'],
 			'default'     => 'http://today.ucf.edu/feed/',
 		) ),

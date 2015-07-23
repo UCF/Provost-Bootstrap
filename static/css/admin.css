@@ -61,3 +61,8 @@ body.login #login h1 a .hide{display: block;}
 #theme-help table {border-collapse:collapse;}
 #theme-help table th, #theme-help table td {border:1px solid #333;padding:5px;}
 #theme-help table th {background-color:#f1f1f1;}
+
+
+.meta-file-preview img {
+  max-width: 100%;
+}

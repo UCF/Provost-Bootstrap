@@ -1,10 +1,10 @@
-<?php 
+<?php
 	# Check for settings updated or updated, varies between wp versions
 	$updated  = (bool)($_GET['settings-updated'] or $_GET['updated']);
 	$settings = array_filter(Config::$theme_settings, 'is_array');
 	$misc     = array_filter(Config::$theme_settings, 'is_object');
 	if (count($misc)){ $settings['Miscellaneous'] = $misc;}
-	
+
 	$sections = array_keys($settings);
 ?>
 
@@ -12,11 +12,11 @@
     <?php settings_fields(THEME_OPTIONS_GROUP);?>
 	<div class="container">
 		<h2><?=__(THEME_OPTIONS_PAGE_TITLE)?></h2>
-		
+
 		<?php if ($updated):?>
 		<div class="updated fade"><p><strong><?=__( 'Options saved' ); ?></strong></p></div>
 		<?php endif; ?>
-		
+
 		<div class="sections">
 			<ul>
 				<?php foreach($sections as $key=>$section):?>
@@ -44,7 +44,7 @@
 				<?php endforeach;?>
 			</ul>
 			<div class="submit">
-				<input type="submit" class="button-primary" value="<?= __('Save Options')?>" />
+				<input type="submit" class="button-primary" value="<?= __('Save Options')?>">
 			</div>
 		</div>
 	</div>
