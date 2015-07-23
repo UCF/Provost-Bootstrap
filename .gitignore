@@ -18,6 +18,7 @@ CVS
 =======
 *~
 ._*
+<<<<<<< HEAD
 
 *.diff
 *.err
@@ -48,3 +49,16 @@ nbproject
 .svn
 .CVS
 .idea
+=======
+.DS_Store
+Thumbs.db
+
+# Bower
+static/components/*
+
+# Sass stuff
+static/scss/.sass-cache/*
+
+# Gulp
+node_modules/*
+>>>>>>> upstream/updates-2

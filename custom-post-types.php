@@ -3,8 +3,8 @@
 /**
  * Abstract class for defining custom post types.
  *
- **/
-abstract class CustomPostType{
+ * */
+abstract class CustomPostType {
 	public
 		$name           = 'custom_post_type',
 		$plural_name    = 'Custom Posts',
@@ -12,19 +12,19 @@ abstract class CustomPostType{
 		$add_new_item   = 'Add New Custom Post',
 		$edit_item      = 'Edit Custom Post',
 		$new_item       = 'New Custom Post',
-		$public         = True,  # I dunno...leave it true
-		$use_title      = True,  # Title field
-		$use_editor     = True,  # WYSIWYG editor, post content field
-		$use_revisions  = True,  # Revisions on post content and titles
-		$use_thumbnails = False, # Featured images
-		$use_order      = False, # Wordpress built-in order meta data
-		$use_metabox    = False, # Enable if you have custom fields to display in admin
-		$use_shortcode  = False, # Auto generate a shortcode for the post type
-		                         # (see also objectsToHTML and toHTML methods)
-		$taxonomies     = array('post_tag'),
+		$public         = True,  // I dunno...leave it true
+		$use_title      = True,  // Title field
+		$use_editor     = True,  // WYSIWYG editor, post content field
+		$use_revisions  = True,  // Revisions on post content and titles
+		$use_thumbnails = False, // Featured images
+		$use_order      = False, // Wordpress built-in order meta data
+		$use_metabox    = False, // Enable if you have custom fields to display in admin
+		$use_shortcode  = False, // Auto generate a shortcode for the post type
+		// (see also objectsToHTML and toHTML methods)
+		$taxonomies     = array( 'post_tag' ),
 		$built_in       = False,
 
-		# Optional default ordering for generic shortcode if not specified by user.
+		// Optional default ordering for generic shortcode if not specified by user.
 		$default_orderby = null,
 		$default_order   = null;
 
@@ -33,17 +33,17 @@ abstract class CustomPostType{
 	 * Wrapper for get_posts function, that predefines post_type for this
 	 * custom post type.  Any options valid in get_posts can be passed as an
 	 * option array.  Returns an array of objects.
-	 **/
-	public function get_objects($options=array()){
+	 * */
+	public function get_objects( $options=array() ) {
 
 		$defaults = array(
 			'numberposts'   => -1,
 			'orderby'       => 'title',
 			'order'         => 'ASC',
-			'post_type'     => $this->options('name'),
+			'post_type'     => $this->options( 'name' ),
 		);
-		$options = array_merge($defaults, $options);
-		$objects = get_posts($options);
+		$options = array_merge( $defaults, $options );
+		$objects = get_posts( $options );
 		return $objects;
 	}
 
@@ -51,18 +51,18 @@ abstract class CustomPostType{
 	/**
 	 * Similar to get_objects, but returns array of key values mapping post
 	 * title to id if available, otherwise it defaults to id=>id.
-	 **/
-	public function get_objects_as_options($options=array()){
-		$objects = $this->get_objects($options);
+	 * */
+	public function get_objects_as_options( $options=array() ) {
+		$objects = $this->get_objects( $options );
 		$opt     = array();
-		foreach($objects as $o){
-			switch(True){
-				case $this->options('use_title'):
-					$opt[$o->post_title] = $o->ID;
-					break;
-				default:
-					$opt[$o->ID] = $o->ID;
-					break;
+		foreach ( $objects as $o ) {
+			switch ( True ) {
+			case $this->options( 'use_title' ):
+				$opt[$o->post_title] = $o->ID;
+				break;
+			default:
+				$opt[$o->ID] = $o->ID;
+				break;
 			}
 		}
 		return $opt;
@@ -71,9 +71,9 @@ abstract class CustomPostType{
 
 	/**
 	 * Return the instances values defined by $key.
-	 **/
-	public function options($key){
-		$vars = get_object_vars($this);
+	 * */
+	public function options( $key ) {
+		$vars = get_object_vars( $this );
 		return $vars[$key];
 	}
 
@@ -81,8 +81,8 @@ abstract class CustomPostType{
 	/**
 	 * Additional fields on a custom post type may be defined by overriding this
 	 * method on an descendant object.
-	 **/
-	public function fields(){
+	 * */
+	public function fields() {
 		return array();
 	}
 
@@ -90,23 +90,23 @@ abstract class CustomPostType{
 	/**
 	 * Using instance variables defined, returns an array defining what this
 	 * custom post type supports.
-	 **/
-	public function supports(){
-		#Default support array
+	 * */
+	public function supports() {
+		//Default support array
 		$supports = array();
-		if ($this->options('use_title')){
+		if ( $this->options( 'use_title' ) ) {
 			$supports[] = 'title';
 		}
-		if ($this->options('use_order')){
+		if ( $this->options( 'use_order' ) ) {
 			$supports[] = 'page-attributes';
 		}
-		if ($this->options('use_thumbnails')){
+		if ( $this->options( 'use_thumbnails' ) ) {
 			$supports[] = 'thumbnail';
 		}
-		if ($this->options('use_editor')){
+		if ( $this->options( 'use_editor' ) ) {
 			$supports[] = 'editor';
 		}
-		if ($this->options('use_revisions')){
+		if ( $this->options( 'use_revisions' ) ) {
 			$supports[] = 'revisions';
 		}
 		return $supports;
@@ -115,14 +115,14 @@ abstract class CustomPostType{
 
 	/**
 	 * Creates labels array, defining names for admin panel.
-	 **/
-	public function labels(){
+	 * */
+	public function labels() {
 		return array(
-			'name'          => __($this->options('plural_name')),
-			'singular_name' => __($this->options('singular_name')),
-			'add_new_item'  => __($this->options('add_new_item')),
-			'edit_item'     => __($this->options('edit_item')),
-			'new_item'      => __($this->options('new_item')),
+			'name'          => __( $this->options( 'plural_name' ) ),
+			'singular_name' => __( $this->options( 'singular_name' ) ),
+			'add_new_item'  => __( $this->options( 'add_new_item' ) ),
+			'edit_item'     => __( $this->options( 'edit_item' ) ),
+			'new_item'      => __( $this->options( 'new_item' ) ),
 		);
 	}
 
@@ -130,13 +130,13 @@ abstract class CustomPostType{
 	/**
 	 * Creates metabox array for custom post type. Override method in
 	 * descendants to add or modify metaboxes.
-	 **/
-	public function metabox(){
-		if ($this->options('use_metabox')){
+	 * */
+	public function metabox() {
+		if ( $this->options( 'use_metabox' ) ) {
 			return array(
-				'id'       => $this->options('name').'_metabox',
-				'title'    => __($this->options('singular_name').' Fields'),
-				'page'     => $this->options('name'),
+				'id'       => $this->options( 'name' ).'_metabox',
+				'title'    => __( $this->options( 'singular_name' ).' Fields' ),
+				'page'     => $this->options( 'name' ),
 				'context'  => 'normal',
 				'priority' => 'high',
 				'fields'   => $this->fields(),
@@ -148,9 +148,9 @@ abstract class CustomPostType{
 
 	/**
 	 * Registers metaboxes defined for custom post type.
-	 **/
-	public function register_metaboxes(){
-		if ($this->options('use_metabox')){
+	 * */
+	public function register_metaboxes() {
+		if ( $this->options( 'use_metabox' ) ) {
 			$metabox = $this->metabox();
 			add_meta_box(
 				$metabox['id'],
@@ -167,24 +167,24 @@ abstract class CustomPostType{
 	/**
 	 * Registers the custom post type and any other ancillary actions that are
 	 * required for the post to function properly.
-	 **/
-	public function register(){
+	 * */
+	public function register() {
 		$registration = array(
 			'labels'     => $this->labels(),
 			'supports'   => $this->supports(),
-			'public'     => $this->options('public'),
-			'taxonomies' => $this->options('taxonomies'),
-			'_builtin'   => $this->options('built_in')
+			'public'     => $this->options( 'public' ),
+			'taxonomies' => $this->options( 'taxonomies' ),
+			'_builtin'   => $this->options( 'built_in' )
 		);
 
-		if ($this->options('use_order')){
-			$registration = array_merge($registration, array('hierarchical' => True,));
+		if ( $this->options( 'use_order' ) ) {
+			$registration = array_merge( $registration, array( 'hierarchical' => True, ) );
 		}
 
-		register_post_type($this->options('name'), $registration);
+		register_post_type( $this->options( 'name' ), $registration );
 
-		if ($this->options('use_shortcode')){
-			add_shortcode($this->options('name').'-list', array($this, 'shortcode'));
+		if ( $this->options( 'use_shortcode' ) ) {
+			add_shortcode( $this->options( 'name' ).'-list', array( $this, 'shortcode' ) );
 		}
 	}
 
@@ -193,17 +193,17 @@ abstract class CustomPostType{
 	 * Shortcode for this custom post type.  Can be overridden for descendants.
 	 * Defaults to just outputting a list of objects outputted as defined by
 	 * toHTML method.
-	 **/
-	public function shortcode($attr){
+	 * */
+	public function shortcode( $attr ) {
 		$default = array(
-			'type' => $this->options('name'),
+			'type' => $this->options( 'name' ),
 		);
-		if (is_array($attr)){
-			$attr = array_merge($default, $attr);
-		}else{
+		if ( is_array( $attr ) ) {
+			$attr = array_merge( $default, $attr );
+		}else {
 			$attr = $default;
 		}
-		return sc_object_list($attr);
+		return sc_object_list( $attr );
 	}
 
 
@@ -212,38 +212,39 @@ abstract class CustomPostType{
 	 * If you want to override how a list of objects are outputted, override
 	 * this, if you just want to override how a single object is outputted, see
 	 * the toHTML method.
-	 **/
-	public function objectsToHTML($objects, $css_classes){
-		if (count($objects) < 1){ return '';}
+	 * */
+	public function objectsToHTML( $objects, $css_classes ) {
+		if ( count( $objects ) < 1 ) { return '';}
 
-		$class = get_custom_post_type($objects[0]->post_type);
+		$class = get_custom_post_type( $objects[0]->post_type );
 		$class = new $class;
 
 		ob_start();
-		?>
-		<ul class="<?php if($css_classes):?><?=$css_classes?><?php else:?><?=$class->options('name')?>-list<?php endif;?>">
-			<?php foreach($objects as $o):?>
+?>
+		<ul class="<?php if ( $css_classes ):?><?php echo $css_classes?><?php else:?><?php echo $class->options( 'name' )?>-list<?php endif;?>">
+			<?php foreach ( $objects as $o ):?>
 			<li>
-				<?=$class->toHTML($o)?>
+				<?php echo $class->toHTML( $o )?>
 			</li>
 			<?php endforeach;?>
 		</ul>
 		<?php
-		$html = ob_get_clean();
+			$html = ob_get_clean();
 		return $html;
 	}
 
 
 	/**
 	 * Outputs this item in HTML.  Can be overridden for descendants.
-	 **/
-	public function toHTML($object){
-		$html = '<a href="'.get_permalink($object->ID).'">'.$object->post_title.'</a>';
+	 * */
+	public function toHTML( $object ) {
+		$html = '<a href="'.get_permalink( $object->ID ).'">'.$object->post_title.'</a>';
 		return $html;
 	}
 }
 
-class Document extends CustomPostType{
+
+class Document extends CustomPostType {
 	public
 		$name           = 'provost_form',
 		$plural_name    = 'Documents',
@@ -255,76 +256,75 @@ class Document extends CustomPostType{
 		$use_editor     = False,
 		$use_shortcode  = True,
 		$use_metabox    = True,
-		$taxonomies     = array('category', 'post_tag');
+		$taxonomies     = array( 'category', 'post_tag' );
 
-	public function fields(){
+	public function fields() {
 		$fields   = parent::fields();
 		$fields[] = array(
-			'name' => __('URL'),
-			'desc' => __('Associate this document with a URL.  This will take precedence over any uploaded file, so leave empty if you want to use a file instead.'),
-			'id'   => $this->options('name').'_url',
+			'name' => __( 'URL' ),
+			'desc' => __( 'Associate this document with a URL.  This will take precedence over any uploaded file, so leave empty if you want to use a file instead.' ),
+			'id'   => $this->options( 'name' ).'_url',
 			'type' => 'text',
 		);
 		$fields[] = array(
-			'name'    => __('File'),
-			'desc'    => __('Associate this document with an already existing file.'),
-			'id'      => $this->options('name').'_file',
+			'name'    => __( 'File' ),
+			'desc'    => __( 'Associate this document with an already existing file.' ),
+			'id'      => $this->options( 'name' ).'_file',
 			'type'    => 'file',
 		);
 		return $fields;
 	}
 
 
-	static function get_document_application($form){
-		return mimetype_to_application(self::get_mimetype($form));
+	static function get_document_application( $form ) {
+		return mimetype_to_application( self::get_mimetype( $form ) );
 	}
 
 
-	static function get_mimetype($form){
-		if (is_numeric($form)){
-			$form = get_post($form);
+	static function get_mimetype( $form ) {
+		if ( is_numeric( $form ) ) {
+			$form = get_post( $form );
 		}
 
-		$prefix   = post_type($form);
-		$document = get_post(get_post_meta($form->ID, $prefix.'_file', True));
+		$prefix   = post_type( $form );
+		$document = get_post( get_post_meta( $form->ID, $prefix.'_file', True ) );
 
-		$is_url = get_post_meta($form->ID, $prefix.'_url', True);
+		$is_url = get_post_meta( $form->ID, $prefix.'_url', True );
 
-		return ($is_url) ? "text/html" : $document->post_mime_type;
+		return ( $is_url ) ? "text/html" : $document->post_mime_type;
 	}
 
 
-	static function get_title($form){
-		if (is_numeric($form)){
-			$form = get_post($form);
+	static function get_title( $form ) {
+		if ( is_numeric( $form ) ) {
+			$form = get_post( $form );
 		}
 
-		$prefix = post_type($form);
+		$prefix = post_type( $form );
 
 		return $form->post_title;
 	}
 
-	static function get_url($form){
-		if (is_numeric($form)){
-			$form = get_post($form);
+	static function get_url( $form ) {
+		if ( is_numeric( $form ) ) {
+			$form = get_post( $form );
 		}
 
-		$prefix = post_type($form);
+		$prefix = post_type( $form );
 
-		$x = get_post_meta($form->ID, $prefix.'_url', True);
-		$y = wp_get_attachment_url(get_post_meta($form->ID, $prefix.'_file', True));
-
+		$x = get_post_meta( $form->ID, $prefix.'_url', True );
+		$y = str_replace( 'https://', 'http://', wp_get_attachment_url( get_post_meta( $form->ID, $prefix.'_file', True ) ) );
 
 		/* Backward compatibility fix */
-		if ($x && substr($x, 0, 1) == '/') {
+		if ( $x && substr( $x, 0, 1 ) == '/' ) {
 			$x = site_url().$x;
 		}
 
-		if (!$x and !$y){
+		if ( !$x and !$y ) {
 			return '#';
 		}
 
-		return ($x) ? $x : $y;
+		return ( $x ) ? $x : $y;
 	}
 
 
@@ -333,38 +333,39 @@ class Document extends CustomPostType{
 	 * If you want to override how a list of objects are outputted, override
 	 * this, if you just want to override how a single object is outputted, see
 	 * the toHTML method.
-	 **/
-	public function objectsToHTML($objects, $css_classes){
-		if (count($objects) < 1){ return '';}
+	 * */
+	public function objectsToHTML( $objects, $css_classes ) {
+		if ( count( $objects ) < 1 ) { return '';}
 
-		$class_name = get_custom_post_type($objects[0]->post_type);
+		$class_name = get_custom_post_type( $objects[0]->post_type );
 		$class      = new $class_name;
 
 		ob_start();
-		?>
-		<ul class="unstyled <?php if($css_classes):?><?=$css_classes?><?php else:?><?=$class->options('name')?>-list<?php endif;?>">
-			<?php foreach($objects as $o):?>
-			<li class="document <?=$class_name::get_document_application($o)?>">
-				<?=$class->toHTML($o)?>
+?>
+		<ul class="list-unstyled <?php if ( $css_classes ):?><?php echo $css_classes?><?php else:?><?php echo $class->options( 'name' )?>-list<?php endif;?>">
+			<?php foreach ( $objects as $o ):?>
+			<li class="document <?php echo $class_name::get_document_application( $o )?>">
+				<?php echo $class->toHTML( $o )?>
 			</li>
 			<?php endforeach;?>
 		</ul>
 		<?php
-		$html = ob_get_clean();
+			$html = ob_get_clean();
 		return $html;
 	}
 
 
 	/**
 	 * Outputs this item in HTML.  Can be overridden for descendants.
-	 **/
-	public function toHTML($object){
-		$title = Document::get_title($object);
-		$url   = Document::get_url($object);
+	 * */
+	public function toHTML( $object ) {
+		$title = Document::get_title( $object );
+		$url   = Document::get_url( $object );
 		$html = "<a href='{$url}'>{$title}</a>";
 		return $html;
 	}
 }
+
 
 class Page extends CustomPostType {
 	public
@@ -381,34 +382,28 @@ class Page extends CustomPostType {
 		$use_title      = True,
 		$use_metabox    = True,
 		$built_in       = True,
-		$taxonomies     = array('category', 'post_tag');		
+		$taxonomies     = array( 'category', 'post_tag' );
 
 	public function fields() {
-		$prefix = $this->options('name').'_';
+		$prefix = $this->options( 'name' ).'_';
 		return array(
 			array(
-				'name' => 'Hide Lower Section',
-				'desc' => 'This section normally contains the Flickr, News and Events widgets. The footer will not be hidden',
-				'id'   => $prefix.'hide_fold',
-				'type' => 'checkbox',
+				'name' => 'Stylesheet',
+				'desc' => '',
+				'id' => $prefix.'stylesheet',
+				'type' => 'file',
 			),
-				array(
-					'name' => 'Stylesheet',
-					'desc' => '',
-					'id' => $prefix.'stylesheet',
-					'type' => 'file',
-				),
 		);
 	}
 }
+
 
 /**
  * Describes a staff member
  *
  * @author Chris Conover
- **/
-class Person extends CustomPostType
-{
+ * */
+class Person extends CustomPostType {
 	public
 		$name           = 'profile',
 		$plural_name    = 'People',
@@ -421,41 +416,42 @@ class Person extends CustomPostType
 		$use_metabox    = True,
 		$use_thumbnails = True,
 		$use_order      = True,
-		$taxonomies     = array('org_groups', 'category', 'post_tag');
+		$taxonomies     = array( 'org_groups', 'category', 'post_tag' );
 
-		public function fields(){
-			$fields = array(
-				array(
-					'name'    => 'Description',
-					'desc'    => 'Position, title, etc.',
-					'id'      => $this->options('name').'_description',
-					'type'    => 'text',
-				),
-			);
-			return $fields;
-		}
+	public function fields() {
+		$fields = array(
+			array(
+				'name'    => 'Description',
+				'desc'    => 'Position, title, etc.',
+				'id'      => $this->options( 'name' ).'_description',
+				'type'    => 'text',
+			),
+		);
+		return $fields;
+	}
 
-	public function get_objects($options=array()){
+	public function get_objects( $options=array() ) {
 		$options['order']    = 'ASC';
 		$options['orderby']  = 'person_orderby_name';
 		$options['meta_key'] = 'person_orderby_name';
-		return parent::get_objects($options);
+		return parent::get_objects( $options );
 	}
 
-	public static function get_name($person) {
-		$prefix = get_post_meta($person->ID, 'person_title_prefix', True);
-		$suffix = get_post_meta($person->ID, 'person_title_suffix', True);
+	public static function get_name( $person ) {
+		$prefix = get_post_meta( $person->ID, 'person_title_prefix', True );
+		$suffix = get_post_meta( $person->ID, 'person_title_suffix', True );
 		$name = $person->post_title;
 		return $prefix.' '.$name.' '.$suffix;
 	}
 
-	public static function get_phones($person) {
-		$phones = get_post_meta($person->ID, 'person_phones', True);
-		return ($phones != '') ? explode(',', $phones) : array();
+	public static function get_phones( $person ) {
+		$phones = get_post_meta( $person->ID, 'person_phones', True );
+		return ( $phones != '' ) ? explode( ',', $phones ) : array();
 	}
 
-	public function objectsToHTML($people, $css_classes) {
-		ob_start();?>
+	public function objectsToHTML( $people, $css_classes ) {
+		ob_start();
+?>
 		<div class="row">
 			<div class="span12">
 				<table class="table table-striped">
@@ -468,35 +464,36 @@ class Person extends CustomPostType
 						</tr>
 					</thead>
 					<tbody>
-				<?
-				foreach($people as $person) {
-					$email = get_post_meta($person->ID, 'person_email', True);
-					$link = ($person->post_content == '') ? False : True; ?>
+				<?php
+		foreach ( $people as $person ) {
+			$email = get_post_meta( $person->ID, 'person_email', True );
+			$link = ( $person->post_content == '' ) ? False : True; ?>
 						<tr>
 							<td class="name">
-								<?if($link) {?><a href="<?=get_permalink($person->ID)?>"><?}?>
-									<?=$this->get_name($person)?>
-								<?if($link) {?></a><?}?>
+								<?php if ( $link ) {?><a href="<?php echo get_permalink( $person->ID )?>"><?php }?>
+									<?php echo $this->get_name( $person )?>
+								<?php if ( $link ) {?></a><?php }?>
 							</td>
 							<td class="job_title">
-								<?if($link) {?><a href="<?=get_permalink($person->ID)?>"><?}?>
-								<?=get_post_meta($person->ID, 'person_jobtitle', True)?>
-								<?if($link) {?></a><?}?>
+								<?php if ( $link ) {?><a href="<?php echo get_permalink( $person->ID )?>"><?php }?>
+								<?php echo get_post_meta( $person->ID, 'person_jobtitle', True )?>
+								<?php if ( $link ) {?></a><?php }?>
 							</td>
-							<td class="phones"><?php if(($link) && ($this->get_phones($person))) {?><a href="<?=get_permalink($person->ID)?>">
-								<?php } if($this->get_phones($person)) {?>
-									<ul class="unstyled"><?php foreach($this->get_phones($person) as $phone) { ?><li><?=$phone?></li><?php } ?></ul>
-								<?php } if(($link) && ($this->get_phones($person))) {?></a><?php }?></td>
-							<td class="email"><?=(($email != '') ? '<a href="mailto:'.$email.'">'.$email.'</a>' : '')?></td>
+							<td class="phones"><?php if ( ( $link ) && ( $this->get_phones( $person ) ) ) {?><a href="<?php echo get_permalink( $person->ID )?>">
+								<?php } if ( $this->get_phones( $person ) ) {?>
+									<ul class="unstyled"><?php foreach ( $this->get_phones( $person ) as $phone ) { ?><li><?php echo $phone?></li><?php } ?></ul>
+								<?php } if ( ( $link ) && ( $this->get_phones( $person ) ) ) {?></a><?php }?></td>
+							<td class="email"><?php echo ( $email != '' ) ? '<a href="mailto:'.$email.'">'.$email.'</a>' : ''?></td>
 						</tr>
-				<? } ?>
+				<?php } ?>
 				</tbody>
 			</table>
 		</div>
-	</div><?
-	return ob_get_clean();
+	</div><?php
+		return ob_get_clean();
 	}
 } // END class
+
 
 class Post extends CustomPostType {
 	public
@@ -512,27 +509,22 @@ class Post extends CustomPostType {
 		$use_order      = True,
 		$use_title      = True,
 		$use_metabox    = True,
-		$taxonomies     = array('post_tag', 'category'),
+		$taxonomies     = array( 'post_tag', 'category' ),
 		$built_in       = True;
 
 	public function fields() {
-		$prefix = $this->options('name').'_';
+		$prefix = $this->options( 'name' ).'_';
 		return array(
 			array(
-				'name' => 'Hide Lower Section',
-				'desc' => 'This section normally contains the Flickr, News and Events widgets. The footer will not be hidden',
-				'id'   => $prefix.'hide_fold',
-				'type' => 'checkbox',
+				'name' => 'Stylesheet',
+				'desc' => '',
+				'id' => $prefix.'stylesheet',
+				'type' => 'file',
 			),
-				array(
-					'name' => 'Stylesheet',
-					'desc' => '',
-					'id' => $prefix.'stylesheet',
-					'type' => 'file',
-				),
 		);
 	}
 }
+
 
 class Help extends CustomPostType {
 	public
@@ -550,7 +542,7 @@ class Help extends CustomPostType {
 
 
 	public function fields() {
-		$id_prefix  = $this->options('name');
+		$id_prefix  = $this->options( 'name' );
 		$documents  = new Document();
 		return array(
 			array(
@@ -570,6 +562,7 @@ class Help extends CustomPostType {
 	}
 }
 
+
 class Update extends CustomPostType {
 	public
 		$name           = 'provost_update',
@@ -581,14 +574,14 @@ class Update extends CustomPostType {
 		$use_metabox    = True,
 		$use_shortcode  = True,
 		$use_thumbnails = True,
-		$taxonomies		= array();
+		$taxonomies  = array();
 
-	public function fields(){
+	public function fields() {
 		$fields = array(
 			array(
 				'name'    => 'Date',
 				'desc'    => 'The date the update was made (ex. Month Day, Year). Will show up in the Provost Update list.',
-				'id'      => $this->options('name').'_date',
+				'id'      => $this->options( 'name' ).'_date',
 				'type'    => 'text',
 			),
 		);
@@ -598,30 +591,18 @@ class Update extends CustomPostType {
 
 	/**
 	 * Outputs this item in HTML.  Can be overridden for descendants.
-	 **/
-	public function toHTML($object){
+	 * */
+	public function toHTML( $object ) {
 		$object_title = $object->post_title;
-		$object_date = get_post_meta($object->ID, $this->options('name').'_date', True);
-		if ($object_date) {
+		$object_date = get_post_meta( $object->ID, $this->options( 'name' ).'_date', True );
+		if ( $object_date ) {
 			$object_title = $object_date.' - '.$object_title;
 		}
-		$html = '<a href="'.get_permalink($object->ID).'">'.$object_title.'</a>';
+		$html = '<a href="'.get_permalink( $object->ID ).'">'.$object_title.'</a>';
 		return $html;
 	}
 }
 
-class HomeImage extends CustomPostType {
-	public
-		$name           = 'provost_home_images',
-		$plural_name    = 'Home Images',
-		$singular_name  = 'Home Imge',
-		$add_new_item   = 'Add New Home Image',
-		$edit_item      = 'Edit Home Image',
-		$new_item       = 'New Home Image',
-		$use_thumbnails = True,
-		$use_editor		= False,
-		$taxonomies		= array();
-}
 
 class Unit extends CustomPostType {
 	public
@@ -634,19 +615,20 @@ class Unit extends CustomPostType {
 		$use_editor     = False,
 		$use_metabox    = True,
 		$use_thumbnails = True,
-		$taxonomies     = array('category');
+		$taxonomies     = array( 'category' );
 
-	public function fields(){
+	public function fields() {
 		return array(
 			array(
 				'name' => 'URL',
 				'desc' => 'Web address of the college/unit',
-				'id'   => $this->options('name').'_url',
+				'id'   => $this->options( 'name' ).'_url',
 				'type' => 'text',
 			),
 		);
 	}
 }
+
 
 class AwardProgram extends CustomPostType {
 	public
@@ -656,109 +638,110 @@ class AwardProgram extends CustomPostType {
 		$add_new_item   = 'Add New Award Program',
 		$edit_item      = 'Edit Award Program',
 		$new_item       = 'New Award Program',
-		$public 		= True,
-		$use_metabox 	= True,
+		$public   = True,
+		$use_metabox  = True,
 		$use_thumbnails = True,
-		$use_editor 	= False,
-		$use_title 		= True,
-		$taxonomies		= array();
+		$use_editor  = False,
+		$use_title   = True,
+		$taxonomies  = array();
 
-	public function fields(){
+	public function fields() {
 		return array(
 			array(
 				'name' => 'URL',
 				'desc' => 'URL',
-				'id'   => $this->options('name').'_url',
+				'id'   => $this->options( 'name' ).'_url',
 				'type' => 'text',
 			),
 		);
 	}
 }
 
+
 class ProcessImprovement extends CustomPostType {
-    public
-        $name           = 'process_improvement',
-        $plural_name    = 'Process Improvements',
-        $singular_name  = 'Process Improvement',
-        $add_new_item   = 'Add New Process Improvement',
-        $edit_item      = 'Edit Process Improvement',
-        $new_item       = 'New Process Improvement',
-        $use_metabox    = True,
-        $use_revisions  = False;
+	public
+	$name           = 'process_improvement',
+	$plural_name    = 'Process Improvements',
+	$singular_name  = 'Process Improvement',
+	$add_new_item   = 'Add New Process Improvement',
+	$edit_item      = 'Edit Process Improvement',
+	$new_item       = 'New Process Improvement',
+	$use_metabox    = True,
+	$use_revisions  = False;
 
-    public function fields() {
-        return array(
-            array(
-                'name' => 'Name',
-                'desc' => 'The person that submitted the process improvement.',
-                'id'   => $this->options('name') . '_name',
-                'type' => 'text',
-            ),
-            array(
-                'name' => 'Email',
-                'desc' => 'The email address of the person who submitted process improvement.',
-                'id'   => $this->options('name') . '_email',
-                'type' => 'text',
-            ),
-            array(
-                'name' => 'Short Description',
-                'desc' => 'This will display the short description of the submitted process improvement.',
-                'id'   => $this->options('name') . '_description',
-                'type' => 'textarea',
-            ),
-            array(
-                'name' => 'Status',
-                'desc' => 'This will display the status of the submitted process improvement (e.g. Reviewed, In Review, Waiting for Review, etc.).',
-                'id'   => $this->options('name') . '_status',
-                'type' => 'text',
-            ),
-            array(
-                'name'    => 'Status Icon',
-                'desc'    => 'This will display and icon indicating the status for the given submitted process improvement.',
-                'id'      => $this->options('name') . '_status_icon',
-                'type'    => 'radio',
-                'options' => array(
-                    'Exclamation' => 'pi_waiting.png',
-                    'Question'    => 'pi_in_review.png',
-                    'Check'       => 'pi_reviewed.png',
-                )
-            ),
-            array(
-                'name' => 'Action',
-                'desc' => 'This will dipslay the action taken for the given submitted process improvement.',
-                'id'   => $this->options('name') . '_action',
-                'type' => 'text',
-            ),
-            array(
-                'name' => 'Outcome URL',
-                'desc' => 'Use this to link to the outcome URL stored on another website it will be displayed along side the submitted process improvement. Must include http://.',
-                'id'   => $this->options('name') . '_outcome_url',
-                'type' => 'text',
-            ),
-            array(
-                'name' => 'Outcome Document',
-                'desc' => 'Use this to upload the outcome document and store it on this site. It will be displayed along side the submitted process improvement.',
-                'id'   => $this->options('name') . '_outcome_doc',
-                'type' => 'file',
-            ),
-        );
-    }
+	public function fields() {
+		return array(
+			array(
+				'name' => 'Name',
+				'desc' => 'The person that submitted the process improvement.',
+				'id'   => $this->options( 'name' ) . '_name',
+				'type' => 'text',
+			),
+			array(
+				'name' => 'Email',
+				'desc' => 'The email address of the person who submitted process improvement.',
+				'id'   => $this->options( 'name' ) . '_email',
+				'type' => 'text',
+			),
+			array(
+				'name' => 'Short Description',
+				'desc' => 'This will display the short description of the submitted process improvement.',
+				'id'   => $this->options( 'name' ) . '_description',
+				'type' => 'textarea',
+			),
+			array(
+				'name' => 'Status',
+				'desc' => 'This will display the status of the submitted process improvement (e.g. Reviewed, In Review, Waiting for Review, etc.).',
+				'id'   => $this->options( 'name' ) . '_status',
+				'type' => 'text',
+			),
+			array(
+				'name'    => 'Status Icon',
+				'desc'    => 'This will display and icon indicating the status for the given submitted process improvement.',
+				'id'      => $this->options( 'name' ) . '_status_icon',
+				'type'    => 'radio',
+				'options' => array(
+					'Exclamation' => 'pi_waiting.png',
+					'Question'    => 'pi_in_review.png',
+					'Check'       => 'pi_reviewed.png',
+				)
+			),
+			array(
+				'name' => 'Action',
+				'desc' => 'This will dipslay the action taken for the given submitted process improvement.',
+				'id'   => $this->options( 'name' ) . '_action',
+				'type' => 'text',
+			),
+			array(
+				'name' => 'Outcome URL',
+				'desc' => 'Use this to link to the outcome URL stored on another website it will be displayed along side the submitted process improvement. Must include http://.',
+				'id'   => $this->options( 'name' ) . '_outcome_url',
+				'type' => 'text',
+			),
+			array(
+				'name' => 'Outcome Document',
+				'desc' => 'Use this to upload the outcome document and store it on this site. It will be displayed along side the submitted process improvement.',
+				'id'   => $this->options( 'name' ) . '_outcome_doc',
+				'type' => 'file',
+			),
+		);
+	}
 
-    static function get_document_application($form){
-        return mimetype_to_application(self::get_mimetype($form));
-    }
+	static function get_document_application( $form ) {
+		return mimetype_to_application( self::get_mimetype( $form ) );
+	}
 
 
-    static function get_mimetype($form){
-        if (is_numeric($form)){
-            $form = get_post($form);
-        }
+	static function get_mimetype( $form ) {
+		if ( is_numeric( $form ) ) {
+			$form = get_post( $form );
+		}
 
-        $prefix   = post_type($form);
-        $document = get_post(get_post_meta($form->ID, $prefix.'_outcome_doc', True));
+		$prefix   = post_type( $form );
+		$document = get_post( get_post_meta( $form->ID, $prefix.'_outcome_doc', True ) );
 
-        return $document->post_mime_type;
-    }
+		return $document->post_mime_type;
+	}
 }
 
 ?>

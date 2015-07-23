@@ -1,6 +1,10 @@
-
-<form class="form-search" role="search" method="get" action="<?=home_url( '/' )?>">
-	<label for="s">Search:</label><br />
-	<input type="text" class="input-large" value="<?=htmlentities($_GET['s'])?>" name="s" placeholder="Enter your search term here...">
-	<button type="submit" class="btn">Search</button>
+<?php
+	$search_query = isset( $_GET['s'] ) ? htmlentities( $_GET['s'] ) : '';
+?>
+<form role="search" method="get" class="search-form" action="<?php echo home_url( '/' ); ?>">
+	<div>
+		<label for="s">Search:</label>
+		<input type="text" value="<?php echo $search_query; ?>" name="s" class="search-field" id="s" placeholder="Enter your search term here...">
+		<button type="submit" class="search-submit">Search</button>
+	</div>
 </form>
