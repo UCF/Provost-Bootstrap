@@ -339,6 +339,8 @@ Config::$theme_settings = array(
  * If Yoast SEO is activated, assume we're handling ALL SEO-related
  * modifications with it.  Don't add Facebook Opengraph theme options.
  **/
+include_once ABSPATH . 'wp-admin/includes/plugin.php';
+
 if ( !is_plugin_active( 'wordpress-seo/wp-seo.php' ) ) {
 	array_unshift( Config::$theme_settings['Social'],
 		new RadioField(array(
