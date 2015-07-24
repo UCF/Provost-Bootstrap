@@ -660,14 +660,14 @@ class AwardProgram extends CustomPostType {
 
 class ProcessImprovement extends CustomPostType {
 	public
-	$name           = 'process_improvement',
-	$plural_name    = 'Process Improvements',
-	$singular_name  = 'Process Improvement',
-	$add_new_item   = 'Add New Process Improvement',
-	$edit_item      = 'Edit Process Improvement',
-	$new_item       = 'New Process Improvement',
-	$use_metabox    = True,
-	$use_revisions  = False;
+		$name           = 'process_improvement',
+		$plural_name    = 'Process Improvements',
+		$singular_name  = 'Process Improvement',
+		$add_new_item   = 'Add New Process Improvement',
+		$edit_item      = 'Edit Process Improvement',
+		$new_item       = 'New Process Improvement',
+		$use_metabox    = True,
+		$use_revisions  = False;
 
 	public function fields() {
 		return array(

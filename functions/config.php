@@ -16,6 +16,12 @@ function __init__() {
 	register_nav_menu( 'header-menu', __( 'Header Menu' ) );
 	register_nav_menu( 'footer-menu', __( 'Footer Menu' ) );
 
+	register_sidebar( array(
+		'name'          => __( 'Sidebar' ),
+		'id'            => 'sidebar',
+		'description'   => 'Sidebar found on two column page templates and search pages.',
+	) );
+
 	global $timer;
 	$timer = Timer::start();
 
@@ -68,6 +74,21 @@ function enqueue_backend_theme_assets() {
 }
 add_action( 'admin_enqueue_scripts', 'enqueue_backend_theme_assets' );
 
+
+/**
+ * Unregisters sidebar widgets that this theme doesn't need.
+ **/
+function widget_cleanup() {
+	unregister_widget( 'WP_Widget_Pages' );
+	unregister_widget( 'WP_Widget_Calendar' );
+	unregister_widget( 'WP_Widget_Archives' );
+	unregister_widget( 'WP_Widget_Meta' );
+	unregister_widget( 'WP_Widget_Categories' );
+	unregister_widget( 'WP_Widget_Recent_Comments' );
+	unregister_widget( 'WP_Widget_RSS' );
+	unregister_widget( 'WP_Widget_Tag_Cloud' );
+}
+add_action( 'widgets_init', 'widget_cleanup', 11 );
 
 /**
  * Set theme constants
