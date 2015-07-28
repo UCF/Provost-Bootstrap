@@ -15,8 +15,7 @@ class Config {
 		$body_classes        = array(), // Body classes
 		$customizer_panels   = array(), // WP Customizer panels to register
 		$customizer_sections = array(), // WP Customizer sections to register
-		$customizer_settings = array(), // WP Customizer settings to register
-		$customizer_controls = array(), // WP Customizer controls to register
+		$customizer_fields   = array(), // Combination of WP Customizer settings and controls to register
 		$custom_post_types   = array(), // Custom post types to register
 		$custom_taxonomies   = array(), // Custom taxonomies to register
 		$styles              = array(), // Stylesheets to register
@@ -1530,8 +1529,7 @@ add_action( 'do_meta_boxes', 'register_meta_boxes' );
 function register_customizer_options( $wp_customize ) {
 	$panels = Config::$customizer_panels;
 	$sections = Config::$customizer_sections;
-	$settings = Config::$customizer_settings;
-	$controls = Config::$customizer_controls;
+	$fields = Config::$customizer_fields;
 
 	if ( !empty( $panels ) ) {
 		foreach ( $panels as $id => $panel ) {
@@ -1545,28 +1543,30 @@ function register_customizer_options( $wp_customize ) {
 		}
 	}
 
-	if ( !empty( $settings ) ) {
-		foreach ( $settings as $id => $setting ) {
-			$wp_customize->add_setting( $id, $setting );
-		}
-	}
+	if ( !empty( $fields ) ) {
+		foreach ( $fields as $id => $config ) {
+			$setting = $config['setting'];
+			$control = $config['control'];
 
-	if ( !empty( $controls ) ) {
-		foreach ( $controls as $key => $control ) {
-			// $wp_customize->add_control() will accept either a Control ID
-			// OR a WP_Customize_Control object as the 1st argument.
-			if ( is_array( $control ) ) {
-				$wp_customize->add_control( $key, $control );
+			if ( isset( $setting ) ) {
+				$wp_customize->add_setting( $id, $setting );
 			}
-			else if ( is_object( $control ) && ( is_subclass_of( $control, 'WP_Customize_Control' ) ) || get_class( $control ) == 'WP_Customize_Control' ) {
-				// TODO: this returns "Fatal error: Call to a member function check_capabilities()
-				// on null" in /wp-includes/class-wp-customize-control.php on line 281 -- why?
-				$wp_customize->add_control( $control );
+
+			if ( isset( $control ) ) {
+				// $wp_customize->add_control() will accept either a Control ID
+				// OR a WP_Customize_Control object as the 1st argument.
+				if ( is_array( $control ) ) {
+					$wp_customize->add_control( $id, $control );
+				}
+				else if ( is_object( $control ) && ( is_subclass_of( $control, 'WP_Customize_Control' ) ) || get_class( $control ) == 'WP_Customize_Control' ) {
+					// TODO: this returns "Fatal error: Call to a member function check_capabilities()
+					// on null" in /wp-includes/class-wp-customize-control.php on line 281 -- why?
+					$wp_customize->add_control( $control );
+				}
 			}
 		}
 	}
 }
-// add_action( 'customize_register', 'register_customizer_options' );
 
 
 

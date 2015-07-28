@@ -150,11 +150,23 @@ Config::$body_classes = array( 'default', );
  * Configure the WP Customizer with panels, sections, settings and
  * controls.
  *
- * Config::$customizer_panels, sections, settings and controls accepts
+ * Config::$customizer_panels and Config::$customizer_sections accept
  * an array of key/value pairs.
  * The key for each item should be the item's ID; the value should
  * be an array of configuration settings to pass to that item's
  * $wp_customizer->add_<item>() method.
+ *
+ * Config::$customizer_fields accepts key/value pairs using the following
+ * structure:
+ *
+ * Config::$customizer_fields = array(
+ * 		'setting_id' => array(
+ * 			'setting' => array(...), # $args array for $wp_customize->add_setting()
+ * 			'control' => array(...)  # $args array for $wp_customize->add_control() OR WP_Customize_Control object
+ * 		),
+ *      ...
+ * )
+ *
  *
  * See developer docs for more info:
  * https://developer.wordpress.org/themes/advanced-topics/customizer-api/
@@ -184,184 +196,184 @@ function define_customizer_options( $wp_customize ) {
 	);
 
 
-	/**
-	 * In most cases, settings in Config::$customizer_settings would have
-	 * a 'type' of 'theme_mod', but for the sake of staying backward-compatible
-	 * with the original theme, we use 'option' here to save these settings as
-	 * site options.  (You would also want to use an ID naming schema that does
-	 * not use a serialized array of values).
-	 **/
-	Config::$customizer_settings = array(
+	Config::$customizer_fields = array(
+
 		// Analytics
 		THEME_OPTIONS_NAME . '[gw_verify]' => array(
-			'type'        => 'option',
+			'setting' => array(
+				'type'        => 'option',
+			),
+			'control' => array(
+				'type'        => 'text',
+				'label'       => 'Google WebMaster Verification',
+				'description' => 'Example: <em>9Wsa3fspoaoRE8zx8COo48-GCMdi5Kd-1qFpQTTXSIw</em>',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'analytics',
+			)
 		),
 		THEME_OPTIONS_NAME . '[ga_account]' => array(
-			'type'        => 'option'
+			'setting' => array(
+				'type'        => 'option'
+			),
+			'control' => array(
+				'type'        => 'text',
+				'label'       => 'Google Analytics Account',
+				'description' => 'Example: <em>UA-9876543-21</em>. Leave blank for development.',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'analytics'
+			)
 		),
 
 		// News
 		THEME_OPTIONS_NAME . '[news_max_items]' => array(
-			'default'     => 2,
-			'type'        => 'option'
-		),
-		THEME_OPTIONS_NAME . '[news_url]' => array(
-			'default'     => 'http://today.ucf.edu/feed/',
-			'type'        => 'option'
-		),
-
-		// Search
-		THEME_OPTIONS_NAME . '[enable_google]' => array(
-			'default'     => 1,
-			'type'        => 'option'
-		),
-		THEME_OPTIONS_NAME . '[search_domain]' => array(
-			'type'        => 'option'
-		),
-		THEME_OPTIONS_NAME . '[search_per_page]' => array(
-			'default'     => 10,
-			'type'        => 'option'
-		),
-
-		// Contact Info
-		THEME_OPTIONS_NAME . '[site_contact]' => array(
-			'type'        => 'option'
-		),
-
-		// Social Media
-		THEME_OPTIONS_NAME . '[facebook_url]' => array(
-			'type'        => 'option'
-		),
-		THEME_OPTIONS_NAME . '[twitter_url]' => array(
-			'type'        => 'option'
-		),
-	);
-
-
-	/**
-	 * If adding controls via an ID and an array of arguments, Control IDs should
-	 * match their respective Setting IDs.
-	 **/
-	Config::$customizer_controls = array(
-		// Analytics
-		THEME_OPTIONS_NAME . '[gw_verify]' => array(
-			'type'        => 'text',
-			'label'       => 'Google WebMaster Verification',
-			'description' => 'Example: <em>9Wsa3fspoaoRE8zx8COo48-GCMdi5Kd-1qFpQTTXSIw</em>',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'analytics',
-		),
-		THEME_OPTIONS_NAME . '[ga_account]' => array(
-			'type'        => 'text',
-			'label'       => 'Google Analytics Account',
-			'description' => 'Example: <em>UA-9876543-21</em>. Leave blank for development.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'analytics'
-		),
-
-		// News
-		THEME_OPTIONS_NAME . '[news_max_items]' => array(
-			'type'        => 'select',
-			'label'       => 'News Max Items',
-			'description' => 'Maximum number of articles to display when outputting news information.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'news',
-			'choices'     => array(
-				1 => 1,
-				2 => 2,
-				3 => 3,
-				4 => 4,
-				5 => 5
+			'setting' => array(
+				'default'     => 2,
+				'type'        => 'option'
+			),
+			'control' => array(
+				'type'        => 'select',
+				'label'       => 'News Max Items',
+				'description' => 'Maximum number of articles to display when outputting news information.',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'news',
+				'choices'     => array(
+					1 => 1,
+					2 => 2,
+					3 => 3,
+					4 => 4,
+					5 => 5
+				)
 			)
 		),
 		THEME_OPTIONS_NAME . '[news_url]' => array(
-			'type'        => 'text',
-			'label'       => 'News Feed',
-			'description' => 'Use the following URL for the news RSS feed <br>Example: <em>http://today.ucf.edu/feed/</em>',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'news'
+			'setting' => array(
+				'default'     => 'http://today.ucf.edu/feed/',
+				'type'        => 'option'
+			),
+			'control' => array(
+				'type'        => 'text',
+				'label'       => 'News Feed',
+				'description' => 'Use the following URL for the news RSS feed <br>Example: <em>http://today.ucf.edu/feed/</em>',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'news'
+			)
 		),
 
 		// Search
 		THEME_OPTIONS_NAME . '[enable_google]' => array(
-			'type'        => 'checkbox',
-			'label'       => 'Enable Google Search',
-			'description' => 'Enable to use the google search appliance to power the search functionality.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'search'
+			'setting' => array(
+				'default'     => 1,
+				'type'        => 'option'
+			),
+			'control' => array(
+				'type'        => 'checkbox',
+				'label'       => 'Enable Google Search',
+				'description' => 'Enable to use the google search appliance to power the search functionality.',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'search'
+			)
 		),
 		THEME_OPTIONS_NAME . '[search_domain]' => array(
-			'type'        => 'text',
-			'label'       => 'Search Domain',
-			'description' => 'Domain to use for the built-in google search.  Useful for development or if the site needs to search a domain other than the one it occupies. Example: <em>some.domain.com</em>',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'search'
+			'setting' => array(
+				'type'        => 'option'
+			),
+			'control' => array(
+				'type'        => 'text',
+				'label'       => 'Search Domain',
+				'description' => 'Domain to use for the built-in google search.  Useful for development or if the site needs to search a domain other than the one it occupies. Example: <em>some.domain.com</em>',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'search'
+			)
 		),
 		THEME_OPTIONS_NAME . '[search_per_page]' => array(
-			'type'        => 'number',
-			'label'       => 'Search Results Per Page',
-			'description' => 'Number of search results to show per page of results',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'search',
-			'input_attrs' => array(
-				'min'  => 1,
-				'max'  => 50,
-				'step' => 1
+			'setting' => array(
+				'default'     => 10,
+				'type'        => 'option'
+			),
+			'control' => array(
+				'type'        => 'number',
+				'label'       => 'Search Results Per Page',
+				'description' => 'Number of search results to show per page of results',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'search',
+				'input_attrs' => array(
+					'min'  => 1,
+					'max'  => 50,
+					'step' => 1
+				)
 			)
 		),
 
 		// Contact Info
 		THEME_OPTIONS_NAME . '[site_contact]' => array(
-			'type'        => 'email',
-			'label'       => 'Contact Email',
-			'description' => 'Contact email address that visitors to your site can use to contact you.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'contact_info'
+			'setting' => array(
+				'type'        => 'option'
+			),
+			'control' => array(
+				'type'        => 'email',
+				'label'       => 'Contact Email',
+				'description' => 'Contact email address that visitors to your site can use to contact you.',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'contact_info'
+			)
 		),
 
 		// Social Media
 		THEME_OPTIONS_NAME . '[facebook_url]' => array(
-			'type'        => 'url',
-			'label'       => 'Facebook URL',
-			'description' => 'URL to the Facebook page you would like to direct visitors to.  Example: <em>https://www.facebook.com/UCF</em>',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'social'
+			'setting' => array(
+				'type'        => 'option'
+			),
+			'control' => array(
+				'type'        => 'url',
+				'label'       => 'Facebook URL',
+				'description' => 'URL to the Facebook page you would like to direct visitors to.  Example: <em>https://www.facebook.com/UCF</em>',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'social'
+			)
 		),
 		THEME_OPTIONS_NAME . '[twitter_url]' => array(
-			'type'        => 'url',
-			'label'       => 'Twitter URL',
-			'description' => 'URL to the Twitter user account you would like to direct visitors to.  Example: <em>http://twitter.com/UCF</em>',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'social'
+			'setting' => array(
+				'type'        => 'option'
+			),
+			'control' => array(
+				'type'        => 'url',
+				'label'       => 'Twitter URL',
+				'description' => 'URL to the Twitter user account you would like to direct visitors to.  Example: <em>http://twitter.com/UCF</em>',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'social'
+			)
 		),
+
 	);
+
+
+	/**
+	 * If Yoast SEO is activated, assume we're handling ALL SEO-related
+	 * modifications with it.  Don't add Facebook Opengraph theme options.
+	 **/
+	include_once ABSPATH . 'wp-admin/includes/plugin.php';
+
+	if ( !is_plugin_active( 'wordpress-seo/wp-seo.php' ) ) {
+		Config::$customizer_fields[THEME_OPTIONS_NAME . '[enable_og]'] = array(
+			'setting' => array(
+				'default' => 1,
+				'type' => 'option'
+			),
+			'control' => array(
+				'type'        => 'checkbox',
+				'label'       => 'Enable Opengraph',
+				'description' => 'Turn on the Opengraph meta information used by Facebook.',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'social'
+			)
+		);
+		Config::$customizer_fields[THEME_OPTIONS_NAME . '[fb_admins]'] = array(
+			'setting' => array(
+				'type' => 'option'
+			),
+			'control' => array(
+				'type'        => 'textarea',
+				'label'       => 'Facebook Admins',
+				'description' => 'Comma separated facebook usernames or user ids of those responsible for administrating any facebook pages created from pages on this site. Example: <em>592952074, abe.lincoln</em>',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'social'
+			)
+		);
+	}
 
 
 	// Function defined in functions/base.php
 	register_customizer_options( $wp_customize );
 }
 add_action( 'customize_register', 'define_customizer_options' );
-
-
-
-/**
- * If Yoast SEO is activated, assume we're handling ALL SEO-related
- * modifications with it.  Don't add Facebook Opengraph theme options.
- **/
-include_once ABSPATH . 'wp-admin/includes/plugin.php';
-
-if ( !is_plugin_active( 'wordpress-seo/wp-seo.php' ) ) {
-	Config::$customizer_settings[THEME_OPTIONS_NAME . '[enable_og]'] = array(
-		'default' => 1,
-		'type' => 'option'
-	);
-	Config::$customizer_settings[THEME_OPTIONS_NAME . '[fb_admins]'] = array(
-		'type' => 'option'
-	);
-
-	Config::$customizer_controls[THEME_OPTIONS_NAME . '[enable_og]'] = array(
-		'type'        => 'checkbox',
-		'label'       => 'Enable Opengraph',
-		'description' => 'Turn on the Opengraph meta information used by Facebook.',
-		'section'     => THEME_CUSTOMIZER_PREFIX . 'social'
-	);
-	Config::$customizer_controls[THEME_OPTIONS_NAME . '[fb_admins]'] = array(
-		'type'        => 'textarea',
-		'label'       => 'Facebook Admins',
-		'description' => 'Comma separated facebook usernames or user ids of those responsible for administrating any facebook pages created from pages on this site. Example: <em>592952074, abe.lincoln</em>',
-		'section'     => THEME_CUSTOMIZER_PREFIX . 'social'
-	);
-}
 
 
 Config::$links = array(
