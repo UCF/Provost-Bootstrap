@@ -12,14 +12,17 @@
 class ArgumentException extends Exception{}
 class Config {
 	static
-		$body_classes      = array(), // Body classes
-		$theme_settings    = array(), // Theme settings
-		$custom_post_types = array(), // Custom post types to register
-		$custom_taxonomies = array(), // Custom taxonomies to register
-		$styles            = array(), // Stylesheets to register
-		$scripts           = array(), // Scripts to register
-		$links             = array(), // <link>s to include in <head>
-		$metas             = array(); // <meta>s to include in <head>
+		$body_classes        = array(), // Body classes
+		$customizer_panels   = array(), // WP Customizer panels to register
+		$customizer_sections = array(), // WP Customizer sections to register
+		$customizer_settings = array(), // WP Customizer settings to register
+		$customizer_controls = array(), // WP Customizer controls to register
+		$custom_post_types   = array(), // Custom post types to register
+		$custom_taxonomies   = array(), // Custom taxonomies to register
+		$styles              = array(), // Stylesheets to register
+		$scripts             = array(), // Scripts to register
+		$links               = array(), // <link>s to include in <head>
+		$metas               = array(); // <meta>s to include in <head>
 
 
 	/**
@@ -443,7 +446,6 @@ class Timer {
 		return $timer_instance;
 	}
 }
-
 
 
 
@@ -1145,42 +1147,6 @@ function sc_object_list( $attrs, $options = array() ) {
 
 
 /**
- * Sets the default values for any theme options that are not currently stored.
- *
- * @return void
- * @author Jared Lang
- * */
-function set_defaults_for_options() {
-	$values  = get_option( THEME_OPTIONS_NAME );
-	if ( $values === False or is_string( $values ) ) {
-		add_option( THEME_OPTIONS_NAME );
-		$values = array();
-	}
-
-	$options = array();
-	foreach ( Config::$theme_settings as $option ) {
-		if ( is_array( $option ) ) {
-			$options = array_merge( $option, $options );
-		} else {
-			$options[] = $option;
-		}
-	}
-
-	foreach ( $options as $option ) {
-		$key = str_replace(
-			array( THEME_OPTIONS_NAME, '[', ']' ),
-			array( '', '', '' ),
-			$option->id
-		);
-		if ( $option->default !== null and !isset( $values[$key] ) ) {
-			$values[$key] = $option->default;
-			update_option( THEME_OPTIONS_NAME, $values );
-		}
-	}
-}
-
-
-/**
  * Runs as wordpress is shutting down.
  *
  * @return void
@@ -1557,6 +1523,50 @@ function register_meta_boxes() {
 }
 add_action( 'do_meta_boxes', 'register_meta_boxes' );
 
+
+/**
+ * Registers Customizer panels, sections, settings and controls.
+ **/
+function register_customizer_options( $wp_customize ) {
+	$panels = Config::$customizer_panels;
+	$sections = Config::$customizer_sections;
+	$settings = Config::$customizer_settings;
+	$controls = Config::$customizer_controls;
+
+	if ( !empty( $panels ) ) {
+		foreach ( $panels as $id => $panel ) {
+			$wp_customize->add_panel( $id, $panel );
+		}
+	}
+
+	if ( !empty( $sections ) ) {
+		foreach ( $sections as $id => $section ) {
+			$wp_customize->add_section( $id, $section );
+		}
+	}
+
+	if ( !empty( $settings ) ) {
+		foreach ( $settings as $id => $setting ) {
+			$wp_customize->add_setting( $id, $setting );
+		}
+	}
+
+	if ( !empty( $controls ) ) {
+		foreach ( $controls as $key => $control ) {
+			// $wp_customize->add_control() will accept either a Control ID
+			// OR a WP_Customize_Control object as the 1st argument.
+			if ( is_array( $control ) ) {
+				$wp_customize->add_control( $key, $control );
+			}
+			else if ( is_object( $control ) && ( is_subclass_of( $control, 'WP_Customize_Control' ) ) || get_class( $control ) == 'WP_Customize_Control' ) {
+				// TODO: this returns "Fatal error: Call to a member function check_capabilities()
+				// on null" in /wp-includes/class-wp-customize-control.php on line 281 -- why?
+				$wp_customize->add_control( $control );
+			}
+		}
+	}
+}
+// add_action( 'customize_register', 'register_customizer_options' );
 
 
 
