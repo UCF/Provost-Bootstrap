@@ -182,14 +182,14 @@ function define_customizer_sections( $wp_customize ) {
 	$wp_customize->add_section(
 		THEME_CUSTOMIZER_PREFIX . 'home_image',
 		array(
-			'title' => 'Home Page Feature Image',
+			'title' => 'Feature Image',
 			'panel' => THEME_CUSTOMIZER_PREFIX . 'home'
 		)
 	);
 	$wp_customize->add_section(
-		THEME_CUSTOMIZER_PREFIX . 'home_quote',
+		THEME_CUSTOMIZER_PREFIX . 'home_feature_content',
 		array(
-			'title' => 'Home Page Feature Quote',
+			'title' => 'Feature Content',
 			'panel' => THEME_CUSTOMIZER_PREFIX . 'home'
 		)
 	);
@@ -244,12 +244,31 @@ add_action( 'customize_register', 'define_customizer_sections' );
 
 function define_customizer_fields( $wp_customize ) {
 
+	// Colors
+	$wp_customize->add_setting(
+		'primary_color',
+		array(
+			'default'           => '#ffc904',
+			'sanitize_callback' => 'sanitize_hex_color'
+		)
+	);
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'primary_color',
+			array(
+				'label'       => 'Primary Color',
+				'section'     => 'colors'
+			)
+		)
+	);
+
+
 	// Home Page Navigation Styles
 	$wp_customize->add_setting(
 		'home_nav_color',
 		array(
 			'default'           => '#000',
-			'capability'        => 'edit_theme_options',
 			'sanitize_callback' => 'sanitize_hex_color'
 		)
 	);
@@ -260,8 +279,108 @@ function define_customizer_fields( $wp_customize ) {
 			array(
 				'label'       => 'Main Navigation Color',
 				'description' => 'Modifies the color of the Header Nav menu on the Home Page.  Update this color when black text is not legible against the Home Page Feature Image.',
-				'section'     => THEME_CUSTOMIZER_PREFIX . 'home_nav',
-				'settings'    => 'home_nav_color'
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'home_nav'
+			)
+		)
+	);
+
+
+	// Home Page Featured Image
+	$wp_customize->add_setting(
+		'home_img_lg',
+		array()
+	);
+	$wp_customize->add_control(
+		new WP_Customize_Image_Control(
+			$wp_customize,
+			'home_img_lg',
+			array(
+				'label'       => 'Home Page Featured Image (large)',
+				'description' => 'Featured image shown on desktop and tablet-sized devices.',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'home_image'
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'home_img_xs',
+		array()
+	);
+	$wp_customize->add_control(
+		new WP_Customize_Image_Control(
+			$wp_customize,
+			'home_img_xs',
+			array(
+				'label'       => 'Home Page Featured Image (x-small)',
+				'description' => 'Featured image shown on mobile devices.',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'home_image'
+			)
+		)
+	);
+
+
+	// Home Page Feature Content
+	$wp_customize->add_setting(
+		'home_feature_content',
+		array()
+	);
+	$wp_customize->add_control(
+		'home_feature_content',
+		array(
+			'type'        => 'textarea',
+			'label'       => 'Feature Content',
+			'description' => 'Accepts HTML and shortcode content.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'home_feature_content'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'home_feature_content_color',
+		array(
+			'default'     => '#fff'
+		)
+	);
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'home_feature_content_color',
+			array(
+				'label'       => 'Featured Content Color',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'home_feature_content'
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'home_feature_content_shadow',
+		array(
+			'default' => 1
+		)
+	);
+	$wp_customize->add_control(
+		'home_feature_content_shadow',
+		array(
+			'type'        => 'checkbox',
+			'label'       => 'Apply shadow on featured content',
+			'description' => 'Recommended when the Featured Content Color is light or pure white.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'home_feature_content'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'home_feature_content_bgcolor',
+		array(
+			'default'     => '#dbb630'
+		)
+	);
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'home_feature_content_bgcolor',
+			array(
+				'label'       => 'Featured Content Background Color',
+				'description' => 'Used behind the Featured Content when displayed on mobile devices.',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'home_feature_content'
 			)
 		)
 	);
@@ -515,7 +634,7 @@ Config::$styles = array(
 // Scripts (output in footer)
 Config::$scripts = array(
 	array( 'admin' => True, 'src' => THEME_JS_URL.'/admin.js', ),
-	array( 'name' => 'ucfhb-script', 'src' => '//universityheader.ucf.edu/bar/js/university-header.js', ),
+	array( 'name' => 'ucfhb-script', 'src' => '//universityheader.ucf.edu/bar/js/university-header.js?use-1200-breakpoint=true', ),
 	array( 'name' => 'theme-script', 'src' => THEME_JS_URL.'/script.min.js', ),
 );
 
