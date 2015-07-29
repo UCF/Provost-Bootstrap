@@ -150,190 +150,306 @@ Config::$body_classes = array( 'default', );
  * Configure the WP Customizer with panels, sections, settings and
  * controls.
  *
- * Config::$customizer_panels and Config::$customizer_sections accept
- * an array of key/value pairs.
- * The key for each item should be the item's ID; the value should
- * be an array of configuration settings to pass to that item's
- * $wp_customizer->add_<item>() method.
+ * Serves as a replacement for Config::$theme_options in this theme.
  *
- * Config::$customizer_fields accepts key/value pairs using the following
- * structure:
- *
- * Config::$customizer_fields = array(
- * 		'setting_id' => array(
- * 			'setting' => array(...), # $args array for $wp_customize->add_setting()
- * 			'control' => array(...)  # $args array for $wp_customize->add_control() OR WP_Customize_Control object
- * 		),
- *      ...
- * )
- *
+ * NOTE: Panel and Section IDs should be prefixed with THEME_CUSTOMIZER_PREFIX
+ * to avoid conflicts with plugins that may add their own panels/sections to
+ * the Customizer.
  *
  * See developer docs for more info:
  * https://developer.wordpress.org/themes/advanced-topics/customizer-api/
  **/
-function define_customizer_options( $wp_customize ) {
 
-	Config::$customizer_panels = array();
+function define_customizer_panels( $wp_customize ) {
+	$wp_customize->add_panel(
+		THEME_CUSTOMIZER_PREFIX . 'home',
+		array(
+			'title' => 'Home Page'
+		)
+	);
+}
+add_action( 'customize_register', 'define_customizer_panels' );
 
 
-	Config::$customizer_sections = array(
-		THEME_CUSTOMIZER_PREFIX . 'analytics' => array(
+function define_customizer_sections( $wp_customize ) {
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'home_nav',
+		array(
+			'title' => 'Main Navigation Styles',
+			'panel' => THEME_CUSTOMIZER_PREFIX . 'home'
+		)
+	);
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'home_image',
+		array(
+			'title' => 'Home Page Feature Image',
+			'panel' => THEME_CUSTOMIZER_PREFIX . 'home'
+		)
+	);
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'home_quote',
+		array(
+			'title' => 'Home Page Feature Quote',
+			'panel' => THEME_CUSTOMIZER_PREFIX . 'home'
+		)
+	);
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'analytics',
+		array(
 			'title' => 'Analytics'
-		),
-		THEME_CUSTOMIZER_PREFIX . 'news' => array(
+		)
+	);
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'news',
+		array(
 			'title'       => 'News',
 			'description' => 'Settings for news feeds used throughout the site.'
-		),
-		THEME_CUSTOMIZER_PREFIX . 'search' => array(
-			'title'       => 'Search'
-		),
-		THEME_CUSTOMIZER_PREFIX . 'contact_info' => array(
-			'title'       => 'Contact Information'
-		),
-		THEME_CUSTOMIZER_PREFIX . 'social' => array(
-			'title'       => 'Social Media'
+		)
+	);
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'search',
+		array(
+			'title' => 'Search'
+		)
+	);
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'contact_info',
+		array(
+			'title' => 'Contact Information'
+		)
+	);
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'social',
+		array(
+			'title' => 'Social Media'
+		)
+	);
+
+	// Move 'Static Front Page' section to new 'Home Page' panel
+	$wp_customize->get_section( 'static_front_page' )->panel = THEME_CUSTOMIZER_PREFIX . 'home';
+}
+add_action( 'customize_register', 'define_customizer_sections' );
+
+
+/**
+ * Register Customizer Controls and Settings here.
+ *
+ * NOTE: theme options carried over from the old version of this theme are
+ * registered as type 'option', NOT 'theme_mod', to preserve their existing
+ * values.
+ *
+ * Any new settings should be registered here with type 'theme_mod' (and NOT
+ * use an array key structure for ID names).
+ **/
+
+function define_customizer_fields( $wp_customize ) {
+
+	// Home Page Navigation Styles
+	$wp_customize->add_setting(
+		'home_nav_color',
+		array(
+			'default'           => '#000',
+			'capability'        => 'edit_theme_options',
+			'sanitize_callback' => 'sanitize_hex_color'
+		)
+	);
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'home_nav_color',
+			array(
+				'label'       => 'Main Navigation Color',
+				'description' => 'Modifies the color of the Header Nav menu on the Home Page.  Update this color when black text is not legible against the Home Page Feature Image.',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'home_nav',
+				'settings'    => 'home_nav_color'
+			)
 		)
 	);
 
 
-	Config::$customizer_fields = array(
+	// Analytics
+	$wp_customize->add_setting(
+		THEME_OPTIONS_NAME . '[gw_verify]',
+		array(
+			'type'        => 'option',
+		)
+	);
+	$wp_customize->add_control(
+		THEME_OPTIONS_NAME . '[gw_verify]',
+		array(
+			'type'        => 'text',
+			'label'       => 'Google WebMaster Verification',
+			'description' => 'Example: <em>9Wsa3fspoaoRE8zx8COo48-GCMdi5Kd-1qFpQTTXSIw</em>',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'analytics',
+		)
+	);
 
-		// Analytics
-		THEME_OPTIONS_NAME . '[gw_verify]' => array(
-			'setting' => array(
-				'type'        => 'option',
-			),
-			'control' => array(
-				'type'        => 'text',
-				'label'       => 'Google WebMaster Verification',
-				'description' => 'Example: <em>9Wsa3fspoaoRE8zx8COo48-GCMdi5Kd-1qFpQTTXSIw</em>',
-				'section'     => THEME_CUSTOMIZER_PREFIX . 'analytics',
-			)
-		),
-		THEME_OPTIONS_NAME . '[ga_account]' => array(
-			'setting' => array(
-				'type'        => 'option'
-			),
-			'control' => array(
-				'type'        => 'text',
-				'label'       => 'Google Analytics Account',
-				'description' => 'Example: <em>UA-9876543-21</em>. Leave blank for development.',
-				'section'     => THEME_CUSTOMIZER_PREFIX . 'analytics'
-			)
-		),
+	$wp_customize->add_setting(
+		THEME_OPTIONS_NAME . '[gw_account]',
+		array(
+			'type'        => 'option',
+		)
+	);
+	$wp_customize->add_control(
+		THEME_OPTIONS_NAME . '[gw_account]',
+		array(
+			'type'        => 'text',
+			'label'       => 'Google Analytics Account',
+			'description' => 'Example: <em>UA-9876543-21</em>. Leave blank for development.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'analytics'
+		)
+	);
 
-		// News
-		THEME_OPTIONS_NAME . '[news_max_items]' => array(
-			'setting' => array(
-				'default'     => 2,
-				'type'        => 'option'
-			),
-			'control' => array(
-				'type'        => 'select',
-				'label'       => 'News Max Items',
-				'description' => 'Maximum number of articles to display when outputting news information.',
-				'section'     => THEME_CUSTOMIZER_PREFIX . 'news',
-				'choices'     => array(
-					1 => 1,
-					2 => 2,
-					3 => 3,
-					4 => 4,
-					5 => 5
-				)
-			)
-		),
-		THEME_OPTIONS_NAME . '[news_url]' => array(
-			'setting' => array(
-				'default'     => 'http://today.ucf.edu/feed/',
-				'type'        => 'option'
-			),
-			'control' => array(
-				'type'        => 'text',
-				'label'       => 'News Feed',
-				'description' => 'Use the following URL for the news RSS feed <br>Example: <em>http://today.ucf.edu/feed/</em>',
-				'section'     => THEME_CUSTOMIZER_PREFIX . 'news'
-			)
-		),
 
-		// Search
-		THEME_OPTIONS_NAME . '[enable_google]' => array(
-			'setting' => array(
-				'default'     => 1,
-				'type'        => 'option'
-			),
-			'control' => array(
-				'type'        => 'checkbox',
-				'label'       => 'Enable Google Search',
-				'description' => 'Enable to use the google search appliance to power the search functionality.',
-				'section'     => THEME_CUSTOMIZER_PREFIX . 'search'
+	// News
+	$wp_customize->add_setting(
+		THEME_OPTIONS_NAME . '[news_max_items]',
+		array(
+			'default'     => 2,
+			'type'        => 'option'
+		)
+	);
+	$wp_customize->add_control(
+		THEME_OPTIONS_NAME . '[news_max_items]',
+		array(
+			'type'        => 'select',
+			'label'       => 'News Max Items',
+			'description' => 'Maximum number of articles to display when outputting news information.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'news',
+			'choices'     => array(
+				1 => 1,
+				2 => 2,
+				3 => 3,
+				4 => 4,
+				5 => 5
 			)
-		),
-		THEME_OPTIONS_NAME . '[search_domain]' => array(
-			'setting' => array(
-				'type'        => 'option'
-			),
-			'control' => array(
-				'type'        => 'text',
-				'label'       => 'Search Domain',
-				'description' => 'Domain to use for the built-in google search.  Useful for development or if the site needs to search a domain other than the one it occupies. Example: <em>some.domain.com</em>',
-				'section'     => THEME_CUSTOMIZER_PREFIX . 'search'
-			)
-		),
-		THEME_OPTIONS_NAME . '[search_per_page]' => array(
-			'setting' => array(
-				'default'     => 10,
-				'type'        => 'option'
-			),
-			'control' => array(
-				'type'        => 'number',
-				'label'       => 'Search Results Per Page',
-				'description' => 'Number of search results to show per page of results',
-				'section'     => THEME_CUSTOMIZER_PREFIX . 'search',
-				'input_attrs' => array(
-					'min'  => 1,
-					'max'  => 50,
-					'step' => 1
-				)
-			)
-		),
+		)
+	);
 
-		// Contact Info
-		THEME_OPTIONS_NAME . '[site_contact]' => array(
-			'setting' => array(
-				'type'        => 'option'
-			),
-			'control' => array(
-				'type'        => 'email',
-				'label'       => 'Contact Email',
-				'description' => 'Contact email address that visitors to your site can use to contact you.',
-				'section'     => THEME_CUSTOMIZER_PREFIX . 'contact_info'
-			)
-		),
+	$wp_customize->add_setting(
+		THEME_OPTIONS_NAME . '[news_url]',
+		array(
+			'default'     => 'http://today.ucf.edu/feed/',
+			'type'        => 'option'
+		)
+	);
+	$wp_customize->add_control(
+		THEME_OPTIONS_NAME . '[news_url]',
+		array(
+			'type'        => 'text',
+			'label'       => 'News Feed',
+			'description' => 'Use the following URL for the news RSS feed <br>Example: <em>http://today.ucf.edu/feed/</em>',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'news'
+		)
+	);
 
-		// Social Media
-		THEME_OPTIONS_NAME . '[facebook_url]' => array(
-			'setting' => array(
-				'type'        => 'option'
-			),
-			'control' => array(
-				'type'        => 'url',
-				'label'       => 'Facebook URL',
-				'description' => 'URL to the Facebook page you would like to direct visitors to.  Example: <em>https://www.facebook.com/UCF</em>',
-				'section'     => THEME_CUSTOMIZER_PREFIX . 'social'
-			)
-		),
-		THEME_OPTIONS_NAME . '[twitter_url]' => array(
-			'setting' => array(
-				'type'        => 'option'
-			),
-			'control' => array(
-				'type'        => 'url',
-				'label'       => 'Twitter URL',
-				'description' => 'URL to the Twitter user account you would like to direct visitors to.  Example: <em>http://twitter.com/UCF</em>',
-				'section'     => THEME_CUSTOMIZER_PREFIX . 'social'
-			)
-		),
 
+	// Search
+	$wp_customize->add_setting(
+		THEME_OPTIONS_NAME . '[enable_google]',
+		array(
+			'default'     => 1,
+			'type'        => 'option'
+		)
+	);
+	$wp_customize->add_control(
+		THEME_OPTIONS_NAME . '[enable_google]',
+		array(
+			'type'        => 'checkbox',
+			'label'       => 'Enable Google Search',
+			'description' => 'Enable to use the google search appliance to power the search functionality.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'search'
+		)
+	);
+
+	$wp_customize->add_setting(
+		THEME_OPTIONS_NAME . '[search_domain]',
+		array(
+			'type'        => 'option'
+		)
+	);
+	$wp_customize->add_control(
+		THEME_OPTIONS_NAME . '[search_domain]',
+		array(
+			'type'        => 'text',
+			'label'       => 'Search Domain',
+			'description' => 'Domain to use for the built-in google search.  Useful for development or if the site needs to search a domain other than the one it occupies. Example: <em>some.domain.com</em>',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'search'
+		)
+	);
+
+	$wp_customize->add_setting(
+		THEME_OPTIONS_NAME . '[search_per_page]',
+		array(
+			'default'     => 10,
+			'type'        => 'option'
+		)
+	);
+	$wp_customize->add_control(
+		THEME_OPTIONS_NAME . '[search_per_page]',
+		array(
+			'type'        => 'number',
+			'label'       => 'Search Results Per Page',
+			'description' => 'Number of search results to show per page of results',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'search',
+			'input_attrs' => array(
+				'min'  => 1,
+				'max'  => 50,
+				'step' => 1
+			)
+		)
+	);
+
+
+	// Contact Info
+	$wp_customize->add_setting(
+		THEME_OPTIONS_NAME . '[site_contact]',
+		array(
+			'type'        => 'option'
+		)
+	);
+	$wp_customize->add_control(
+		THEME_OPTIONS_NAME . '[site_contact]',
+		array(
+			'type'        => 'email',
+			'label'       => 'Contact Email',
+			'description' => 'Contact email address that visitors to your site can use to contact you.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'contact_info'
+		)
+	);
+
+
+	// Social Media
+	$wp_customize->add_setting(
+		THEME_OPTIONS_NAME . '[facebook_url]',
+		array(
+			'type'        => 'option'
+		)
+	);
+	$wp_customize->add_control(
+		THEME_OPTIONS_NAME . '[facebook_url]',
+		array(
+			'type'        => 'url',
+			'label'       => 'Facebook URL',
+			'description' => 'URL to the Facebook page you would like to direct visitors to.  Example: <em>https://www.facebook.com/UCF</em>',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'social'
+		)
+	);
+
+	$wp_customize->add_setting(
+		THEME_OPTIONS_NAME . '[twitter_url]',
+		array(
+			'type'        => 'option'
+		)
+	);
+	$wp_customize->add_control(
+		THEME_OPTIONS_NAME . '[twitter_url]',
+		array(
+			'type'        => 'url',
+			'label'       => 'Twitter URL',
+			'description' => 'URL to the Twitter user account you would like to direct visitors to.  Example: <em>http://twitter.com/UCF</em>',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'social'
+		)
 	);
 
 
@@ -344,23 +460,33 @@ function define_customizer_options( $wp_customize ) {
 	include_once ABSPATH . 'wp-admin/includes/plugin.php';
 
 	if ( !is_plugin_active( 'wordpress-seo/wp-seo.php' ) ) {
-		Config::$customizer_fields[THEME_OPTIONS_NAME . '[enable_og]'] = array(
-			'setting' => array(
-				'default' => 1,
-				'type' => 'option'
-			),
-			'control' => array(
+
+		$wp_customize->add_setting(
+			THEME_OPTIONS_NAME . '[enable_og]',
+			array(
+				'default'     => 1,
+				'type'        => 'option'
+			)
+		);
+		$wp_customize->add_control(
+			THEME_OPTIONS_NAME . '[enable_og]',
+			array(
 				'type'        => 'checkbox',
 				'label'       => 'Enable Opengraph',
 				'description' => 'Turn on the Opengraph meta information used by Facebook.',
 				'section'     => THEME_CUSTOMIZER_PREFIX . 'social'
 			)
 		);
-		Config::$customizer_fields[THEME_OPTIONS_NAME . '[fb_admins]'] = array(
-			'setting' => array(
-				'type' => 'option'
-			),
-			'control' => array(
+
+		$wp_customize->add_setting(
+			THEME_OPTIONS_NAME . '[fb_admins]',
+			array(
+				'type'        => 'option'
+			)
+		);
+		$wp_customize->add_control(
+			THEME_OPTIONS_NAME . '[fb_admins]',
+			array(
 				'type'        => 'textarea',
 				'label'       => 'Facebook Admins',
 				'description' => 'Comma separated facebook usernames or user ids of those responsible for administrating any facebook pages created from pages on this site. Example: <em>592952074, abe.lincoln</em>',
@@ -369,11 +495,9 @@ function define_customizer_options( $wp_customize ) {
 		);
 	}
 
-
-	// Function defined in functions/base.php
-	register_customizer_options( $wp_customize );
 }
-add_action( 'customize_register', 'define_customizer_options' );
+add_action( 'customize_register', 'define_customizer_fields' );
+
 
 
 Config::$links = array(
