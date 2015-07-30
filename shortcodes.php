@@ -320,6 +320,7 @@ add_shortcode( 'post-type-search', 'sc_post_type_search' );
 
 function sc_faculty_award_programs($attrs) {
 	$provost_award_program = new AwardProgram();
+	$orderby = isset( $attrs['orderby'] ) ? $attrs['orderby'] : '';
 	$programs = get_posts(array(
 		'numberposts' => -1,
 		'orderby'     => $orderby,
@@ -662,5 +663,36 @@ function sc_all_proposals( $attrs ) {
 	return ob_get_clean();
 }
 add_shortcode( 'sc-all-proposals', 'sc_all_proposals' );
+
+
+function sc_blockquote( $attr, $content='' ) {
+	$attr = shortcode_atts( array(
+		'cite_name'     => null,
+		'cite_subtitle' => null
+	), $attr, 'blockquote' );
+
+	ob_start();
+?>
+	<blockquote>
+		<?php echo wptexturize( do_shortcode( $content ) ); ?>
+
+		<?php if ( $attr['cite_name'] ): ?>
+		<cite>
+			<span class="cite-name">
+				<?php echo wptexturize( $attr['cite_name'] ); ?>
+			</span>
+			<?php if ( $attr['cite_subtitle'] ): ?>
+			<span class="cite-comma">,</span>
+			<span class="cite-subtitle">
+				<?php echo wptexturize( $attr['cite_subtitle'] ); ?>
+			</span>
+			<?php endif; ?>
+		</cite>
+		<?php endif; ?>
+	</blockquote>
+<?php
+	return ob_get_clean();
+}
+add_shortcode( 'blockquote', 'sc_blockquote' );
 
 ?>

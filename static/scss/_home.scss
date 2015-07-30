@@ -1,0 +1,88 @@
+#home-feature {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 585px; // Should match height of 'home_feature_lg' thumbnail size
+  margin-bottom: -$site-header-height;
+  position: relative;
+  top: -$site-header-height;
+  z-index: 1;
+
+  @media (min-width: $screen-lg-min) {
+    height: 645px;
+  }
+
+  @media (max-width: $screen-sm-max) {
+    height: 500px;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    height: auto;
+  }
+
+  h1 {
+    font-size: 24px;
+    font-weight: 800;
+    margin-top: $site-header-height + 20;
+    text-transform: uppercase;
+
+    @media (max-width: $screen-sm-max) {
+      font-size: 18px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      font-size: 15px;
+    }
+  }
+
+  blockquote {
+    @include font-smoothing();
+    border: 0;
+    font-family: $font-family-serif;
+    font-size: 42px;
+    font-style: italic;
+    line-height: 1.18;
+    margin-top: 20px;
+    padding: 0;
+
+    @media (min-width: $screen-lg-min) {
+      font-size: 50px;
+    }
+
+    @media (max-width: $screen-sm-max) {
+      font-size: 34px;
+      line-height: 1.22;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      font-size: 26px;
+      line-height: 1.22;
+    }
+  }
+
+  .cite-name,
+  .cite-subtitle {
+    display: block;
+    font-family: $font-family-sans-serif;
+    font-size: 22px;
+    font-style: normal;
+
+    @media (max-width: $screen-sm-max) {
+      font-size: 18px;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      font-size: 15px;
+    }
+  }
+
+  .cite-name {
+    font-weight: bold;
+    margin-top: 20px;
+  }
+
+  .cite-comma {
+    @include sr-only();
+  }
+}

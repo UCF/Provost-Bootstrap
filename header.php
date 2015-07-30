@@ -60,30 +60,31 @@
 	</head>
 	<body ontouchstart class="<?php echo body_classes(); ?>">
 		<header class="site-header">
-			<?php if ( is_home() || is_front_page() ): ?>
-				<h1 class="site-title">
-					<a href="<?php echo home_url(); ?>">
-						<?php echo bloginfo( 'name' ); ?>
-					</a>
-				</h1>
-			<?php else: ?>
-				<span class="site-title">
-					<a href="<?php echo home_url(); ?>">
-						<?php echo bloginfo( 'name' ); ?>
-					</a>
-				</span>
-			<?php endif; ?>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<nav>
+							<?php if ( !is_home() && !is_front_page() ): ?>
+							<span class="site-title"><?php echo bloginfo( 'name' ); ?></span>
+							<?php endif; ?>
 
-			<nav>
-				<?php
-				wp_nav_menu( array(
-					'theme_location' => 'header-menu',
-					'container' => false,
-					'menu_class' => 'list-inline',
-					'menu_id' => 'header-menu',
-					'walker' => new Bootstrap_Walker_Nav_Menu()
-				) );
-				?>
-			</nav>
+							<a id="header-pulldown-toggle" href="#">
+								<span class="hamburger-helper">Navigation</span>
+								<span class="hamburger"></span>
+							</a>
+
+							<?php
+							wp_nav_menu( array(
+								'theme_location' => 'header-menu',
+								'container' => false,
+								'menu_class' => 'list-inline',
+								'menu_id' => 'header-menu',
+								'walker' => new Bootstrap_Walker_Nav_Menu()
+							) );
+							?>
+						</nav>
+					</div>
+				</div>
+			</div>
 		</header>
 		<main class="site-main">

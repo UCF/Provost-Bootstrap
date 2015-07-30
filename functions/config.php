@@ -13,6 +13,9 @@ function __init__() {
 	add_theme_support( 'post-thumbnails' );
 	add_theme_support( 'title-tag' );
 
+	add_image_size( 'home_feature_lg', 1600, 645, true ); // Crops
+	add_image_size( 'home_feature_xs', 767, 730 );
+
 	register_nav_menu( 'header-menu', __( 'Header Menu' ) );
 	register_nav_menu( 'footer-menu', __( 'Footer Menu' ) );
 

@@ -41,3 +41,9 @@
     background-size: $width $height;
   }
 }
+
+// Mixin for .sr-only styles.  Not sure why Bootstrap didn't just make this
+// a mixin to begin with, but at least this way we'll reduce linter warnings
+@mixin sr-only() {
+  @extend .sr-only;
+}
