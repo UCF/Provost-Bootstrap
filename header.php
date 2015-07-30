@@ -58,14 +58,24 @@
 		?>
 
 	</head>
-	<body ontouchstart class="<?php echo body_classes(); ?>">
+	<body ontouchstart <?php body_class( body_classes() ); ?>>
 		<header class="site-header">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
 						<nav>
-							<?php if ( !is_home() && !is_front_page() ): ?>
-							<span class="site-title"><?php echo bloginfo( 'name' ); ?></span>
+							<?php if ( is_home() || is_front_page() ): ?>
+							<h1 class="site-title">
+								<a href="<?php echo get_home_url(); ?>">
+									<?php echo bloginfo( 'name' ); ?>
+								</a>
+							</h1>
+							<?php else: ?>
+							<span class="site-title">
+								<a href="<?php echo get_home_url(); ?>">
+									<?php echo bloginfo( 'name' ); ?>
+								</a>
+							</span>
 							<?php endif; ?>
 
 							<a id="header-pulldown-toggle" href="#">

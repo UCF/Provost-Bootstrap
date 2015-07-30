@@ -1,5 +1,5 @@
 .site-header {
-  height: $site-header-height;
+  height: $site-header-height; // must be set so that #home-feature can be positioned exactly underneath the header nav
   position: relative;
   text-align: center;
   z-index: 2;
@@ -11,11 +11,20 @@
 
 .site-title {
   display: none;
-  left: 0;
-  position: absolute;
+  font-size: 18px;
+  font-weight: 800;
+  margin: 0;
+  text-transform: uppercase;
 
   @media (max-width: $screen-sm-max) {
     display: block;
+    left: 0;
+    margin-top: 20px;
+    position: absolute;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    font-size: 15px;
   }
 }
 
@@ -25,7 +34,8 @@
   display: none;
   float: right;
   font-weight: bold;
-  margin-top: 20px;
+  line-height: 1;
+  margin-top: 22px;
   padding-right: 32px; // .hamburger width + extra pad
   position: relative;
   text-transform: uppercase;
@@ -36,7 +46,7 @@
 
   @media (max-width: $screen-xs-max) {
     height: 24px;
-    margin-top: 18px;
+    margin-top: 17px;
     padding-right: 0;
     width: 24px;
   }

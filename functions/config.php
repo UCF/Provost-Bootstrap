@@ -149,6 +149,7 @@ Config::$custom_taxonomies = array(
 Config::$body_classes = array( 'default', );
 
 
+
 /**
  * Configure the WP Customizer with panels, sections, settings and
  * controls.
@@ -167,7 +168,8 @@ function define_customizer_panels( $wp_customize ) {
 	$wp_customize->add_panel(
 		THEME_CUSTOMIZER_PREFIX . 'home',
 		array(
-			'title' => 'Home Page'
+			'title'           => 'Home Page',
+			'active_callback' => function() { return is_home() || is_front_page(); }
 		)
 	);
 }
@@ -212,7 +214,7 @@ function define_customizer_sections( $wp_customize ) {
 	$wp_customize->add_section(
 		THEME_CUSTOMIZER_PREFIX . 'search',
 		array(
-			'title' => 'Search'
+			'title'       => 'Search',
 		)
 	);
 	$wp_customize->add_section(
@@ -225,6 +227,12 @@ function define_customizer_sections( $wp_customize ) {
 		THEME_CUSTOMIZER_PREFIX . 'social',
 		array(
 			'title' => 'Social Media'
+		)
+	);
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'webfonts',
+		array(
+			'title' => 'Web Fonts'
 		)
 	);
 
@@ -325,7 +333,9 @@ function define_customizer_fields( $wp_customize ) {
 	// Home Page Feature Content
 	$wp_customize->add_setting(
 		'home_feature_content',
-		array()
+		array(
+			'default'     => '[blockquote cite_name="Dale Whittaker" cite_subtitle="Provost and Executive Vice President"]"UCF is a place where academic curiosity and excellence thrive, and I am very excited about what the future holds for us."[/blockquote]'
+		)
 	);
 	$wp_customize->add_control(
 		'home_feature_content',
@@ -575,6 +585,27 @@ function define_customizer_fields( $wp_customize ) {
 	);
 
 
+	// Web Fonts
+	$wp_customize->add_setting(
+		'cloud_typography_key',
+		array(
+			'default'     => '//cloud.typography.com/730568/675644/css/fonts.css'
+		)
+	);
+	$wp_customize->add_control(
+		'cloud_typography_key',
+		array(
+			'type'        => 'text',
+			'label'       => 'Cloud.Typography CSS Key URL',
+			'description' => 'The CSS Key provided by Cloud.Typography for this project.  <strong>Only include the value in the "href" portion of the link
+								tag provided; e.g. "//cloud.typography.com/000000/000000/css/fonts.css".</strong><br><br>NOTE: Make sure the Cloud.Typography
+								project has been configured to deliver fonts to this site\'s domain.<br>
+								See the <a target="_blank" href="http://www.typography.com/cloud/user-guide/managing-domains">Cloud.Typography docs on managing domains</a> for more info.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'webfonts'
+		)
+	);
+
+
 	/**
 	 * If Yoast SEO is activated, assume we're handling ALL SEO-related
 	 * modifications with it.  Don't add Facebook Opengraph theme options.
@@ -630,8 +661,13 @@ Config::$links = array(
 
 Config::$styles = array(
 	array( 'admin' => True, 'src' => THEME_CSS_URL.'/admin.css', ),
-	THEME_CSS_URL . '/style.min.css'
 );
+
+if ( get_theme_mod( 'cloud_typography_key' ) ) {
+	Config::$styles[] = array( 'name' => 'font-cloudtypography', 'src' => get_theme_mod( 'cloud_typography_key' ) );
+}
+
+Config::$styles[] = THEME_CSS_URL . '/style.min.css';
 
 
 // Scripts (output in footer)

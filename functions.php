@@ -117,6 +117,12 @@ function home_feature_css() {
 		}
 		<?php endif; ?>
 
+		#home-feature {
+			background-color: <?php echo $home_feature_content_bgcolor; ?>;
+		}
+
+
+		.site-title,
 		.home-feature-content,
 		.home-feature-content a {
 			color: <?php echo $home_feature_content_color; ?>;
@@ -125,19 +131,28 @@ function home_feature_css() {
 			<?php endif; ?>
 		}
 
-		@media (max-width: 767px) {
-			.home-feature-content {
-				background-color: <?php echo $home_feature_content_bgcolor; ?>;
-			}
+		.site-title {
+			display: none;
 		}
 
-
 		@media (max-width: 991px) {
-			.home-feature-content h1 {
+			.site-title {
 				color: <?php echo $home_nav_color; ?>;
+				display: block;
 				text-shadow: 0 0 0 transparent;
 			}
 		}
+
+
+		<?php if ( $home_img_xs_sized ): ?>
+		.home-feature-mobile-placeholder {
+			width: <?php echo $home_img_xs_sized[1]; ?>px;
+		}
+
+		.home-feature-mobile-placeholder div {
+			padding-top: <?php echo ( $home_img_xs_sized[2] / $home_img_xs_sized[1] ) * 100; ?>%;
+		}
+		<?php endif; ?>
 	</style>
 <?php
 	echo ob_get_clean();
@@ -154,11 +169,12 @@ function get_home_feature() {
 	ob_start();
 ?>
 	<div id="home-feature">
+		<div class="home-feature-mobile-placeholder"><div></div></div>
 		<div class="home-feature-content">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-7 col-sm-7">
-						<h1><?php echo bloginfo( 'name' ); ?></h1>
+						<h1 class="site-title" id="home-site-title"><?php echo bloginfo( 'name' ); ?></h1>
 						<?php echo $home_feature_content; ?>
 					</div>
 				</div>

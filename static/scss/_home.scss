@@ -1,9 +1,20 @@
+#home-site-title {
+  display: block;
+  font-size: 24px;
+  font-weight: 800;
+
+  @media (max-width: $screen-sm-max) {
+    display: none;
+  }
+}
+
 #home-feature {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
   height: 585px; // Should match height of 'home_feature_lg' thumbnail size
   margin-bottom: -$site-header-height;
+  padding-top: $site-header-height + 20px;
   position: relative;
   top: -$site-header-height;
   z-index: 1;
@@ -13,27 +24,15 @@
   }
 
   @media (max-width: $screen-sm-max) {
-    height: 500px;
+    height: 475px;
+    padding-top: $site-header-height - 10px;
   }
 
   @media (max-width: $screen-xs-max) {
+    background-position: top center;
+    background-size: 100% auto;
     height: auto;
-  }
-
-  h1 {
-    font-size: 24px;
-    font-weight: 800;
-    margin-top: $site-header-height + 20;
-    text-transform: uppercase;
-
-    @media (max-width: $screen-sm-max) {
-      font-size: 18px;
-      margin-top: 20px;
-    }
-
-    @media (max-width: $screen-xs-max) {
-      font-size: 15px;
-    }
+    padding-top: 0;
   }
 
   blockquote {
@@ -84,5 +83,18 @@
 
   .cite-comma {
     @include sr-only();
+  }
+}
+
+.home-feature-mobile-placeholder {
+  display: none;
+
+  @media (max-width: $screen-xs-max) {
+    display: block;
+    max-width: 100%;
+
+    div {
+      width: 100%;
+    }
   }
 }
