@@ -11,36 +11,42 @@
 	?>
 
 	<article class="page search-results">
-		<h1>Search Results</h1>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h1 class="article-title">Search Results</h1>
 
-		<?php if ( count( $results['items'] ) ):?>
-			<ul class="result-list">
-				<?php foreach ( $results['items'] as $result ):?>
-				<li class="item">
-					<h2>
-						<a class="<?php echo mimetype_to_application( ( $result['mime'] ) ? $result['mime'] : 'text/html' ); ?>" href="<?php echo $result['url']; ?>">
-							<?php if ( $result['title'] ):?>
-							<?php echo $result['title']; ?>
-							<?php else: ?>
-							<?php echo substr( $result['url'], 0, 45 ); ?>...
-							<?php endif; ?>
-						</a>
-					</h2>
-					<a href="<?php echo $result['url']; ?>" class="ignore-external url sans"><?php echo $result['url']; ?></a>
-					<div class="snippet">
-						<?php echo str_replace( '<br>', '', $result['snippet'] ); ?>
-					</div>
-				</li>
-			<?php endforeach; ?>
-			</ul>
+					<?php if ( count( $results['items'] ) ):?>
+						<ul class="result-list">
+							<?php foreach ( $results['items'] as $result ):?>
+							<li class="item">
+								<h2>
+									<a class="<?php echo mimetype_to_application( ( $result['mime'] ) ? $result['mime'] : 'text/html' ); ?>" href="<?php echo $result['url']; ?>">
+										<?php if ( $result['title'] ):?>
+										<?php echo $result['title']; ?>
+										<?php else: ?>
+										<?php echo substr( $result['url'], 0, 45 ); ?>...
+										<?php endif; ?>
+									</a>
+								</h2>
+								<a href="<?php echo $result['url']; ?>" class="ignore-external url sans"><?php echo $result['url']; ?></a>
+								<div class="snippet">
+									<?php echo str_replace( '<br>', '', $result['snippet'] ); ?>
+								</div>
+							</li>
+						<?php endforeach; ?>
+						</ul>
 
-			<?php if ( $start + $limit < $results['number'] ): ?>
-			<a class="button more" href="./?s=<?php echo $_GET['s']; ?>&amp;start=<?php echo $start + $limit; ?>">More Results</a>
-			<?php endif; ?>
+						<?php if ( $start + $limit < $results['number'] ): ?>
+						<a class="button more" href="./?s=<?php echo $_GET['s']; ?>&amp;start=<?php echo $start + $limit; ?>">More Results</a>
+						<?php endif; ?>
 
-		<?php else: ?>
-			<p>No results found for "<?php echo htmlentities( $_GET['s'] ); ?>".</p>
-		<?php endif;?>
+					<?php else: ?>
+						<p>No results found for "<?php echo htmlentities( $_GET['s'] ); ?>".</p>
+					<?php endif;?>
+				</div>
+			</div>
+		</div>
 	</article>
 
 <?php else: ?>
@@ -48,24 +54,30 @@
 	<?php the_post(); ?>
 
 	<article class="page search-results">
-		<h1>Search Results</h1>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h1 class="article-title">Search Results</h1>
 
-		<?php if ( have_posts() ):?>
-			<ul class="result-list">
-				<?php while ( have_posts() ): the_post(); ?>
-				<li class="item">
-					<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-					<a href="<?php the_permalink(); ?>"><?php the_permalink(); ?></a>
-					<div class="snippet">
-						<?php the_excerpt(); ?>
-					</div>
-				</li>
-				<?php endwhile; ?>
-			</ul>
+					<?php if ( have_posts() ):?>
+						<ul class="result-list">
+							<?php while ( have_posts() ): the_post(); ?>
+							<li class="item">
+								<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+								<a href="<?php the_permalink(); ?>"><?php the_permalink(); ?></a>
+								<div class="snippet">
+									<?php the_excerpt(); ?>
+								</div>
+							</li>
+							<?php endwhile; ?>
+						</ul>
 
-		<?php else: ?>
-			<p>No results found for "<?php echo htmlentities( $_GET['s'] )?>".</p>
-		<?php endif;?>
+					<?php else: ?>
+						<p>No results found for "<?php echo htmlentities( $_GET['s'] )?>".</p>
+					<?php endif;?>
+				</div>
+			</div>
+		</div>
 	</article>
 
 <?php endif; ?>

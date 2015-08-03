@@ -12,6 +12,7 @@ function __init__() {
 	add_theme_support( 'menus' );
 	add_theme_support( 'post-thumbnails' );
 	add_theme_support( 'title-tag' );
+	add_theme_support( 'html5' );
 
 	add_image_size( 'home_feature_lg', 1600, 645, true ); // Crops
 	add_image_size( 'home_feature_xs', 767, 730 );
@@ -23,6 +24,10 @@ function __init__() {
 		'name'          => __( 'Sidebar' ),
 		'id'            => 'sidebar',
 		'description'   => 'Sidebar found on two column page templates and search pages.',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</aside>',
+		'before_title'  => '<h2 class="widget-title">',
+		'after_title'   => '</h2>',
 	) );
 
 	global $timer;

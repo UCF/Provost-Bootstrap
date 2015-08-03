@@ -12,10 +12,10 @@ if ( is_front_page() ) {
 }
 ?>
 
-<div class="container">
-	<div class="row">
-		<div class="col-md-12">
-			<article>
+<article class="page">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
 				<?php if ( !is_front_page() ): ?>
 				<h1 class="article-title">
 					<?php the_title(); ?>
@@ -23,10 +23,10 @@ if ( is_front_page() ) {
 				<?php endif; ?>
 
 				<?php the_content(); ?>
-			</article>
+			</div>
 		</div>
 	</div>
-</div>
+</article>
 
 
 <?php get_footer(); ?>

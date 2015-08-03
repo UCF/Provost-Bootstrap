@@ -7,6 +7,12 @@ if ( is_front_page() ) {
 }
 ?>
 
-TODO: what goes here when no static front page has been set?
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			TODO: what goes here when no static front page has been set?
+		</div>
+	</div>
+</div>
 
 <?php get_footer(); ?>
