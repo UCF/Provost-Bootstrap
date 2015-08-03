@@ -1,4 +1,6 @@
 .site-header {
+  @include no-font-smoothing();
+  font-family: $font-family-sans-serif;
   height: $site-header-height; // must be set so that #home-feature can be positioned exactly underneath the header nav
   position: relative;
   text-align: center;

@@ -1,0 +1,26 @@
+// Recent News
+.widget_recent_entries {
+  font-family: $font-family-sans-serif;
+
+  ul {
+    @include list-unstyled();
+  }
+
+  li {
+    font-size: 18px;
+    line-height: 1.25;
+    margin-bottom: 15px;
+  }
+
+  a {
+    color: #000;
+    font-weight: bold;
+  }
+
+  .post-date {
+    color: #999;
+    display: block;
+    font-family: $font-family-serif;
+    font-style: italic;
+  }
+}

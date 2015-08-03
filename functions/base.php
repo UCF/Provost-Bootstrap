@@ -15,6 +15,7 @@ class Config {
 		$body_classes        = array(), // Body classes
 		$custom_post_types   = array(), // Custom post types to register
 		$custom_taxonomies   = array(), // Custom taxonomies to register
+		$setting_defaults    = array(), // Default settings for theme mods/site options
 		$styles              = array(), // Stylesheets to register
 		$scripts             = array(), // Scripts to register
 		$links               = array(), // <link>s to include in <head>

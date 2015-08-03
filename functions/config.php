@@ -248,6 +248,30 @@ add_action( 'customize_register', 'define_customizer_sections' );
 
 
 /**
+ * Define customizer setting defaults here to make them accessible when calling
+ * get_theme_mod().
+ **/
+
+Config::$setting_defaults = array(
+	'primary_color' => '#ffc904',
+	'home_nav_color' => '#000',
+	'home_feature_content' => '[blockquote cite_name="Dale Whittaker" cite_subtitle="Provost and Executive Vice President"]"UCF is a place where academic curiosity and excellence thrive, and I am very excited about what the future holds for us."[/blockquote]',
+	'home_feature_content_color' => '#fff',
+	'home_feature_content_shadow' => 1,
+	'home_feature_content_bgcolor' => '#dbb630',
+	THEME_OPTIONS_NAME . '[news_max_items]' => 2,
+	THEME_OPTIONS_NAME . '[news_url]' => 'http://today.ucf.edu/feed/',
+	THEME_OPTIONS_NAME . '[enable_google]' => 1,
+	THEME_OPTIONS_NAME . '[search_per_page]' => 10,
+	'cloud_typography_key' => '//cloud.typography.com/730568/675644/css/fonts.css'
+);
+
+function get_setting_default( $setting, $fallback=null ) {
+	return isset( Config::$setting_defaults[$setting] ) ? Config::$setting_defaults[$setting] : $fallback;
+}
+
+
+/**
  * Register Customizer Controls and Settings here.
  *
  * NOTE: theme options carried over from the old version of this theme are
@@ -264,7 +288,7 @@ function define_customizer_fields( $wp_customize ) {
 	$wp_customize->add_setting(
 		'primary_color',
 		array(
-			'default'           => '#ffc904',
+			'default'           => get_setting_default( 'primary_color' ),
 			'sanitize_callback' => 'sanitize_hex_color'
 		)
 	);
@@ -284,7 +308,7 @@ function define_customizer_fields( $wp_customize ) {
 	$wp_customize->add_setting(
 		'home_nav_color',
 		array(
-			'default'           => '#000',
+			'default'           => get_setting_default( 'home_nav_color' ),
 			'sanitize_callback' => 'sanitize_hex_color'
 		)
 	);
@@ -339,7 +363,7 @@ function define_customizer_fields( $wp_customize ) {
 	$wp_customize->add_setting(
 		'home_feature_content',
 		array(
-			'default'     => '[blockquote cite_name="Dale Whittaker" cite_subtitle="Provost and Executive Vice President"]"UCF is a place where academic curiosity and excellence thrive, and I am very excited about what the future holds for us."[/blockquote]'
+			'default'     => get_setting_default( 'home_feature_content' )
 		)
 	);
 	$wp_customize->add_control(
@@ -355,7 +379,7 @@ function define_customizer_fields( $wp_customize ) {
 	$wp_customize->add_setting(
 		'home_feature_content_color',
 		array(
-			'default'     => '#fff'
+			'default'     => get_setting_default( 'home_feature_content_color' )
 		)
 	);
 	$wp_customize->add_control(
@@ -372,7 +396,7 @@ function define_customizer_fields( $wp_customize ) {
 	$wp_customize->add_setting(
 		'home_feature_content_shadow',
 		array(
-			'default' => 1
+			'default' => get_setting_default( 'home_feautre_content_shadow' )
 		)
 	);
 	$wp_customize->add_control(
@@ -388,7 +412,7 @@ function define_customizer_fields( $wp_customize ) {
 	$wp_customize->add_setting(
 		'home_feature_content_bgcolor',
 		array(
-			'default'     => '#dbb630'
+			'default'     => get_setting_default( 'home_feature_content_bgcolor' )
 		)
 	);
 	$wp_customize->add_control(
@@ -442,7 +466,7 @@ function define_customizer_fields( $wp_customize ) {
 	$wp_customize->add_setting(
 		THEME_OPTIONS_NAME . '[news_max_items]',
 		array(
-			'default'     => 2,
+			'default'     => get_setting_default( THEME_OPTIONS_NAME . '[news_max_items]' ),
 			'type'        => 'option'
 		)
 	);
@@ -466,7 +490,7 @@ function define_customizer_fields( $wp_customize ) {
 	$wp_customize->add_setting(
 		THEME_OPTIONS_NAME . '[news_url]',
 		array(
-			'default'     => 'http://today.ucf.edu/feed/',
+			'default'     => get_setting_default( THEME_OPTIONS_NAME . '[news_url]' ),
 			'type'        => 'option'
 		)
 	);
@@ -485,7 +509,7 @@ function define_customizer_fields( $wp_customize ) {
 	$wp_customize->add_setting(
 		THEME_OPTIONS_NAME . '[enable_google]',
 		array(
-			'default'     => 1,
+			'default'     => get_setting_default( THEME_OPTIONS_NAME . '[enable_google]' ),
 			'type'        => 'option'
 		)
 	);
@@ -518,7 +542,7 @@ function define_customizer_fields( $wp_customize ) {
 	$wp_customize->add_setting(
 		THEME_OPTIONS_NAME . '[search_per_page]',
 		array(
-			'default'     => 10,
+			'default'     => get_setting_default( THEME_OPTIONS_NAME . '[search_per_page]' ),
 			'type'        => 'option'
 		)
 	);
@@ -594,7 +618,7 @@ function define_customizer_fields( $wp_customize ) {
 	$wp_customize->add_setting(
 		'cloud_typography_key',
 		array(
-			'default'     => '//cloud.typography.com/730568/675644/css/fonts.css'
+			'default'     => get_setting_default( 'cloud_typography_key' )
 		)
 	);
 	$wp_customize->add_control(

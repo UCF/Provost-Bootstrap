@@ -27,10 +27,19 @@ add_filter( 'post_thumbnail_html', 'remove_thumbnail_dimensions', 10, 3 );
  * Adds styles set in the Customizer to the frontend.
  **/
 function frontend_customizer_css() {
+	$home_nav_color = get_theme_mod_or_default( 'home_nav_color' ); // TODO: rename theme mod
+	$primary_color  = get_theme_mod_or_default( 'primary_color' );
+
 	ob_start();
 ?>
 	<style>
-		/* TODO */
+		.site-header {
+			background-color: <?php echo $primary_color; ?>;
+		}
+
+		.site-header a {
+			color: <?php echo $home_nav_color; ?>;
+		}
 	</style>
 <?php
 	echo ob_get_clean();
@@ -42,13 +51,13 @@ add_action( 'wp_head', 'frontend_customizer_css' );
  * Sets up home page Feature Image/Content CSS for the site head.
  **/
 function home_feature_css() {
-	$home_nav_color = get_theme_mod( 'home_nav_color', '#000' );
+	$home_nav_color = get_theme_mod_or_default( 'home_nav_color' );
 	$home_img_lg = get_theme_mod( 'home_img_lg' ); // TODO: add default
 	$home_img_xs = get_theme_mod( 'home_img_xs' ); // TODO: add default
-	$home_feature_content = get_theme_mod( 'home_feature_content' );
-	$home_feature_content_color = get_theme_mod( 'home_feature_content_color', '#fff' );
-	$home_feature_content_shadow = get_theme_mod( 'home_feature_content_shadow', true );
-	$home_feature_content_bgcolor = get_theme_mod( 'home_feature_content_bgcolor', '#dbb630' );
+	$home_feature_content = get_theme_mod_or_default( 'home_feature_content' );
+	$home_feature_content_color = get_theme_mod_or_default( 'home_feature_content_color' );
+	$home_feature_content_shadow = get_theme_mod_or_default( 'home_feature_content_shadow' );
+	$home_feature_content_bgcolor = get_theme_mod_or_default( 'home_feature_content_bgcolor' );
 
 
 	// The Customizer saves uploaded image theme mods as the full-size URL
@@ -75,10 +84,9 @@ function home_feature_css() {
 	ob_start();
 ?>
 	<style>
-		.site-header a {
-			color: <?php echo $home_nav_color; ?>;
+		.home .site-header {
+			background-color: transparent;
 		}
-
 
 		#header-pulldown-toggle.active,
 		#header-pulldown-toggle:hover,
@@ -122,6 +130,17 @@ function home_feature_css() {
 		}
 
 
+		<?php if ( $home_img_xs_sized ): ?>
+		.home-feature-mobile-placeholder {
+			width: <?php echo $home_img_xs_sized[1]; ?>px;
+		}
+
+		.home-feature-mobile-placeholder div {
+			padding-top: <?php echo ( $home_img_xs_sized[2] / $home_img_xs_sized[1] ) * 100; ?>%;
+		}
+		<?php endif; ?>
+
+
 		.site-title,
 		.home-feature-content,
 		.home-feature-content a {
@@ -142,17 +161,6 @@ function home_feature_css() {
 				text-shadow: 0 0 0 transparent;
 			}
 		}
-
-
-		<?php if ( $home_img_xs_sized ): ?>
-		.home-feature-mobile-placeholder {
-			width: <?php echo $home_img_xs_sized[1]; ?>px;
-		}
-
-		.home-feature-mobile-placeholder div {
-			padding-top: <?php echo ( $home_img_xs_sized[2] / $home_img_xs_sized[1] ) * 100; ?>%;
-		}
-		<?php endif; ?>
 	</style>
 <?php
 	echo ob_get_clean();
@@ -164,7 +172,7 @@ add_action( 'wp_head', 'home_feature_css' );
  * Returns markup for the home page Feature Image/Content.
  **/
 function get_home_feature() {
-	$home_feature_content = wptexturize( do_shortcode( get_theme_mod( 'home_feature_content' ) ) );
+	$home_feature_content = wptexturize( do_shortcode( get_theme_mod_or_default( 'home_feature_content' ) ) );
 
 	ob_start();
 ?>
@@ -183,6 +191,24 @@ function get_home_feature() {
 	</div>
 <?php
 	return ob_get_clean();
+}
+
+
+/**
+ * Returns a theme option, the option's default defined in
+ * Config::$setting_defaults, or $fallback.
+ **/
+function get_option_or_default( $option, $fallback='' ) {
+	return get_option( $option, get_setting_default( $option, $fallback ) );
+}
+
+
+/**
+ * Returns a theme mod, the theme mod's default defined in
+ * Config::$setting_defaults, or $fallback.
+ **/
+function get_theme_mod_or_default( $mod, $fallback='' ) {
+	return get_theme_mod( $mod, get_setting_default( $mod, $fallback ) );
 }
 
 ?>

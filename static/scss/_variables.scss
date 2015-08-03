@@ -6,4 +6,12 @@ $site-header-height: 65px; // height of .site-header, NOT UCF header (blackbar)
 // Bootstrap overrides:
 
 $icon-font-path: '../fonts/bootstrap/';
+
+$font-family-serif: Georgia, 'Times New Roman', Times, serif !default;
 $font-family-sans-serif: 'Gotham SSm A', 'Gotham SSm B', "Helvetica Neue", Helvetica, Arial, sans-serif !default; // NOTE: not ie8 ready--may not display optimally
+$font-family-base: $font-family-serif;
+
+$font-size-base: 16px !default;
+
+$headings-font-family: $font-family-sans-serif;
+$headings-font-weight: 800;
