@@ -27,7 +27,7 @@ add_filter( 'post_thumbnail_html', 'remove_thumbnail_dimensions', 10, 3 );
  * Adds styles set in the Customizer to the frontend.
  **/
 function frontend_customizer_css() {
-	$home_nav_color = get_theme_mod_or_default( 'home_nav_color' ); // TODO: rename theme mod
+	$nav_color = get_theme_mod_or_default( 'nav_color' );
 	$primary_color  = get_theme_mod_or_default( 'primary_color' );
 
 	ob_start();
@@ -38,7 +38,11 @@ function frontend_customizer_css() {
 		}
 
 		.site-header a {
-			color: <?php echo $home_nav_color; ?>;
+			color: <?php echo $nav_color; ?>;
+		}
+
+		.primary-color {
+			color: <?php echo $primary_color; ?>;
 		}
 	</style>
 <?php
@@ -51,7 +55,7 @@ add_action( 'wp_head', 'frontend_customizer_css' );
  * Sets up home page Feature Image/Content CSS for the site head.
  **/
 function home_feature_css() {
-	$home_nav_color = get_theme_mod_or_default( 'home_nav_color' );
+	$nav_color = get_theme_mod_or_default( 'nav_color' );
 	$home_img_lg = get_theme_mod( 'home_img_lg' ); // TODO: add default
 	$home_img_xs = get_theme_mod( 'home_img_xs' ); // TODO: add default
 	$home_feature_content = get_theme_mod_or_default( 'home_feature_content' );
@@ -156,7 +160,7 @@ function home_feature_css() {
 
 		@media (max-width: 991px) {
 			.site-title {
-				color: <?php echo $home_nav_color; ?>;
+				color: <?php echo $nav_color; ?>;
 				display: block;
 				text-shadow: 0 0 0 transparent;
 			}

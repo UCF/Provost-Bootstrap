@@ -1,5 +1,9 @@
 body {
   @include font-smoothing();
+
+  @media (max-width: $screen-xs-max) {
+    font-size: floor(($font-size-base * .9));
+  }
 }
 
 .lead {

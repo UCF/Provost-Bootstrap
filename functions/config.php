@@ -183,13 +183,6 @@ add_action( 'customize_register', 'define_customizer_panels' );
 
 function define_customizer_sections( $wp_customize ) {
 	$wp_customize->add_section(
-		THEME_CUSTOMIZER_PREFIX . 'home_nav',
-		array(
-			'title' => 'Main Navigation Styles',
-			'panel' => THEME_CUSTOMIZER_PREFIX . 'home'
-		)
-	);
-	$wp_customize->add_section(
 		THEME_CUSTOMIZER_PREFIX . 'home_image',
 		array(
 			'title' => 'Feature Image',
@@ -254,7 +247,7 @@ add_action( 'customize_register', 'define_customizer_sections' );
 
 Config::$setting_defaults = array(
 	'primary_color' => '#ffc904',
-	'home_nav_color' => '#000',
+	'nav_color' => '#000',
 	'home_feature_content' => '[blockquote cite_name="Dale Whittaker" cite_subtitle="Provost and Executive Vice President"]"UCF is a place where academic curiosity and excellence thrive, and I am very excited about what the future holds for us."[/blockquote]',
 	'home_feature_content_color' => '#fff',
 	'home_feature_content_shadow' => 1,
@@ -298,28 +291,27 @@ function define_customizer_fields( $wp_customize ) {
 			'primary_color',
 			array(
 				'label'       => 'Primary Color',
+				'description' => 'Color used site-wide on various components and the background color for the Header Nav on subpages.',
 				'section'     => 'colors'
 			)
 		)
 	);
 
-
-	// Home Page Navigation Styles
 	$wp_customize->add_setting(
-		'home_nav_color',
+		'nav_color',
 		array(
-			'default'           => get_setting_default( 'home_nav_color' ),
+			'default'           => get_setting_default( 'nav_color' ),
 			'sanitize_callback' => 'sanitize_hex_color'
 		)
 	);
 	$wp_customize->add_control(
 		new WP_Customize_Color_Control(
 			$wp_customize,
-			'home_nav_color',
+			'nav_color',
 			array(
-				'label'       => 'Main Navigation Color',
-				'description' => 'Modifies the color of the Header Nav menu on the Home Page.  Update this color when black text is not legible against the Home Page Feature Image.',
-				'section'     => THEME_CUSTOMIZER_PREFIX . 'home_nav'
+				'label'       => 'Header Navigation Color',
+				'description' => 'Modifies the color of the Header Nav menu links site-wide.  Update this color when black text is not legible against the Home Page Feature Image and/or the Primary Color.',
+				'section'     => 'colors'
 			)
 		)
 	);

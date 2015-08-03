@@ -64,6 +64,12 @@
 }
 
 
+// Breadcrumbs
+.breadcrumb > li + li:before {
+  content: '/'; // Fix https://github.com/twbs/bootstrap-sass/pull/911
+}
+
+
 // Social Buttons
 .share-twitter,
 .share-facebook,
