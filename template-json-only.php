@@ -11,7 +11,7 @@ if ( $post ):
 	?>
 
 	<div class="row" id="<?php echo $post->post_name; ?>">
-		<div class="span-10">
+		<div class="span10">
 			<h2><?php echo the_title(); ?></h2>
 			<?php echo the_content(); ?>
 		</div>
