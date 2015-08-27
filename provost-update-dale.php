@@ -187,7 +187,9 @@ the_post();
 										</tr>
 										<tr>
 											<td class="ccollapse100pb" style="padding-bottom: 40px;">
-												<span style="font-weight: bold;">Dale Whittaker, Ph.D.</span><br />Provost and Vice President
+												<span style="font-weight: bold;">A. Dale Whittaker, Ph.D.</span><br>
+												Provost and Executive Vice President<br>
+												Professor, Department of Civil, Environmental, and Construction Engineering
 											</td>
 										</tr>
 										<tr>
