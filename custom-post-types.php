@@ -327,6 +327,19 @@ class Document extends CustomPostType{
 		return ($x) ? $x : $y;
 	}
 
+	static function is_file( $form ) {
+		if ( is_numeric( $form ) ) {
+			$form = get_post( $form );
+		}
+
+		$prefix = post_type( $form );
+
+		$url = get_post_meta( $form->ID, $prefix.'_url', True );
+		$file = wp_get_attachment_url( get_post_meta( $form->ID, $prefix.'_file', True ) );
+
+		return ( $file && ! $url ) ? true : false;
+	}
+
 
 	/**
 	 * Handles output for a list of objects, can be overridden for descendants.
@@ -360,7 +373,7 @@ class Document extends CustomPostType{
 	 **/
 	public function toHTML($object){
 		$title = Document::get_title($object);
-		$url   = Document::get_url($object);
+		$url   = ( Document::is_file( $object ) ) ? get_permalink( $object ) : Document::get_url( $object );
 		$html = "<a href='{$url}'>{$title}</a>";
 		return $html;
 	}
@@ -381,7 +394,7 @@ class Page extends CustomPostType {
 		$use_title      = True,
 		$use_metabox    = True,
 		$built_in       = True,
-		$taxonomies     = array('category', 'post_tag');		
+		$taxonomies     = array('category', 'post_tag');
 
 	public function fields() {
 		$prefix = $this->options('name').'_';
