@@ -298,4 +298,23 @@ function get_search_results(
 
 	return $results;
 }
-?>
+
+
+/**
+ * Makes single document (provost_form) templates functional
+ */
+function document_redirect() {
+	global $post;
+
+	if ( $post && $post->post_type === 'provost_form' ) {
+		$url = Document::get_url( $post );
+		if ( $url === '#' ) {
+			// Absolute fallback to home page
+			$url = get_site_url();
+		}
+		wp_redirect( $url );
+		die;
+	}
+}
+
+add_action( 'template_redirect', 'document_redirect' );
