@@ -646,7 +646,7 @@ class HomeImage extends CustomPostType {
 			),
 			array(
 				'name' => 'Link Open in New Tab',
-				'desc' => 'If a Link URL is provided above, checking this checkbox will open the link in a new tab when the image is clicked.',
+				'desc' => 'If a Link URL is provided above, checking this checkbox will cause the link to be opened in a new tab when the image is clicked.',
 				'id'   => $this->options('name').'_url_new_tab',
 				'type' => 'checkbox',
 			),
