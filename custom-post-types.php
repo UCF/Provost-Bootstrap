@@ -627,13 +627,31 @@ class HomeImage extends CustomPostType {
 	public
 		$name           = 'provost_home_images',
 		$plural_name    = 'Home Images',
-		$singular_name  = 'Home Imge',
+		$singular_name  = 'Home Image',
 		$add_new_item   = 'Add New Home Image',
 		$edit_item      = 'Edit Home Image',
 		$new_item       = 'New Home Image',
 		$use_thumbnails = True,
 		$use_editor		= False,
+		$use_metabox    = True,
 		$taxonomies		= array();
+
+	public function fields(){
+		return array(
+			array(
+				'name' => 'Link URL',
+				'desc' => 'If provided, the home image will be linked to this URL when displayed on the home page.',
+				'id'   => $this->options('name').'_url',
+				'type' => 'text',
+			),
+			array(
+				'name' => 'Link Open in New Tab',
+				'desc' => 'If a Link URL is provided above, checking this checkbox will open the link in a new tab when the image is clicked.',
+				'id'   => $this->options('name').'_url_new_tab',
+				'type' => 'checkbox',
+			),
+		);
+	}
 }
 
 class Unit extends CustomPostType {
