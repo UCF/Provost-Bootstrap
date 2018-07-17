@@ -24,8 +24,25 @@ function get_home_images($limit=null, $orderby='menu_order'){
 	));
 	if ($images){
 		$html = '';
-		foreach($images as $image){
-			$html .= '<div class="'.($html == '' ? 'active ' : '').'item">'.get_the_post_thumbnail($image->ID, 'full').'</div>';
+		foreach ( $images as $image ) {
+			$url    = get_post_meta( $image->ID, $home_images->options( 'name' ) . '_url', true );
+			$newtab = filter_var( get_post_meta( $image->ID, $home_images->options( 'name' ) . '_url_new_tab', true ), FILTER_VALIDATE_BOOLEAN );
+
+			ob_start();
+		?>
+			<div class="<?php echo ( $html === '' ? 'active ' : '' ); ?> item">
+				<?php if ( $url ): ?>
+				<a href="<?php echo $url; ?>" <?php echo ( $newtab === true ) ? 'target="blank"' : ''; ?>>
+				<?php endif; ?>
+
+				<?php echo get_the_post_thumbnail( $image->ID, 'full' ); ?>
+
+				<?php if ( $url ): ?>
+				</a>
+				<?php endif; ?>
+			</div>
+		<?php
+			$html .= ob_get_clean();
 		}
 		return $html;
 	}else{
