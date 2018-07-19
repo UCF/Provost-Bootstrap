@@ -181,7 +181,7 @@ the_post();
 										</tr>
 										<tr>
 											<td class="ccollapse100pb" style="padding-bottom: 10px;">
-												<img src="<?=THEME_IMG_URL?>/ElizabethDooley.jpg" alt="Dr. Elizabeth A. Dooley" align="left" width="87" height="87" />
+												<img src="<?=THEME_IMG_URL?>/ElizabethDooley-circle.jpg" alt="Dr. Elizabeth A. Dooley" align="left" width="87" height="87" />
 											</td>
 										</tr>
 										<tr>
