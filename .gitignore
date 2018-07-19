@@ -1,5 +1,6 @@
 # osx noise
 profile
+.DS_Store
 
 # xcode noise
 build/*
